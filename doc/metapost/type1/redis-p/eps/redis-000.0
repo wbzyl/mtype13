@@ -1,0 +1,259 @@
+%!PS
+%%BoundingBox: 9 -2 151 122 
+%%Creator: MetaPost
+%%CreationDate: 2002.02.01:1808
+%%Pages: 1
+%*Font: cmr10 7.47198 9.96265 30:ffc0000000000801
+%%EndProlog
+%%Page: 1 1
+ 0 0.5 0.5 setrgbcolor 0.25
+ 0 dtransform exch truncate exch idtransform pop setlinewidth [] 0 setdash
+ 1 setlinecap 1 setlinejoin 10 setmiterlimit
+newpath 20 0 moveto
+20 120 lineto stroke
+newpath 30 0 moveto
+30 120 lineto stroke
+newpath 40 0 moveto
+40 120 lineto stroke
+newpath 50 0 moveto
+50 120 lineto stroke
+newpath 60 0 moveto
+60 120 lineto stroke
+newpath 70 0 moveto
+70 120 lineto stroke
+newpath 80 0 moveto
+80 120 lineto stroke
+newpath 90 0 moveto
+90 120 lineto stroke
+newpath 100 0 moveto
+100 120 lineto stroke
+newpath 110 0 moveto
+110 120 lineto stroke
+newpath 120 0 moveto
+120 120 lineto stroke
+newpath 130 0 moveto
+130 120 lineto stroke
+newpath 140 0 moveto
+140 120 lineto stroke
+ 0 0.25 dtransform truncate idtransform setlinewidth pop
+newpath 20 0 moveto
+140 0 lineto stroke
+newpath 20 10 moveto
+140 10 lineto stroke
+newpath 20 20 moveto
+140 20 lineto stroke
+newpath 20 30 moveto
+140 30 lineto stroke
+newpath 20 40 moveto
+140 40 lineto stroke
+newpath 20 50 moveto
+140 50 lineto stroke
+newpath 20 60 moveto
+140 60 lineto stroke
+newpath 20 70 moveto
+140 70 lineto stroke
+newpath 20 80 moveto
+140 80 lineto stroke
+newpath 20 90 moveto
+140 90 lineto stroke
+newpath 20 100 moveto
+140 100 lineto stroke
+newpath 20 110 moveto
+140 110 lineto stroke
+newpath 20 120 moveto
+140 120 lineto stroke
+ 0 setgray
+25.632 8.74995 moveto
+(0) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor 0 1.5 dtransform truncate idtransform setlinewidth pop
+newpath 27.5 6.74995 moveto 0 0 rlineto stroke
+ 0 setgray
+130.632 8.74995 moveto
+(1) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 6.74995 moveto 0 0 rlineto stroke
+ 0 setgray
+74.396 64.5 moveto
+(5oo) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 62.5 moveto 0 0 rlineto stroke
+ 0 setgray
+78.132 8.74995 moveto
+(6) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 6.74995 moveto 0 0 rlineto stroke
+ 0 setgray
+126.896 64.5 moveto
+(7oo) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 62.5 moveto 0 0 rlineto stroke
+ 0 setgray
+21.896 64.5 moveto
+(9oo) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 27.5 62.5 moveto 0 0 rlineto stroke
+ 0 setgray
+50.01399 8.74995 moveto
+(10) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 6.74995 moveto 0 0 rlineto stroke
+ 0 setgray
+102.51399 8.74995 moveto
+(11) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 6.74995 moveto 0 0 rlineto stroke
+ 0 setgray
+46.278 64.5 moveto
+(14oo) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 62.5 moveto 0 0 rlineto stroke
+ 0 setgray
+98.778 64.5 moveto
+(15oo) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 62.5 moveto 0 0 rlineto stroke
+ 0 setgray
+130.632 106.43477 moveto
+(2) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 113.25005 moveto 0 0 rlineto stroke
+ 0 setgray
+25.632 106.43477 moveto
+(3) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 27.5 113.25005 moveto 0 0 rlineto stroke
+ 0 setgray
+78.132 106.43477 moveto
+(8) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 113.25005 moveto 0 0 rlineto stroke
+ 0 setgray
+102.51399 106.43477 moveto
+(12) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 113.25005 moveto 0 0 rlineto stroke
+ 0 setgray
+50.01399 106.43477 moveto
+(13) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 113.25005 moveto 0 0 rlineto stroke
+ 0 setgray
+128.76399 116.75005 moveto
+(2o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 114.75005 moveto 0 0 rlineto stroke
+ 0 setgray
+23.76399 116.75005 moveto
+(3o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 27.5 114.75005 moveto 0 0 rlineto stroke
+ 0 setgray
+76.26399 116.75005 moveto
+(8o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 114.75005 moveto 0 0 rlineto stroke
+ 0 setgray
+100.646 116.75005 moveto
+(12o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 114.75005 moveto 0 0 rlineto stroke
+ 0 setgray
+48.146 116.75005 moveto
+(13o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 114.75005 moveto 0 0 rlineto stroke
+ 0 setgray
+23.76399 -1.56532 moveto
+(0o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 27.5 5.24995 moveto 0 0 rlineto stroke
+ 0 setgray
+128.76399 -1.56532 moveto
+(1o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 5.24995 moveto 0 0 rlineto stroke
+ 0 setgray
+76.26399 -1.56532 moveto
+(6o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 5.24995 moveto 0 0 rlineto stroke
+ 0 setgray
+48.146 -1.56532 moveto
+(10o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 5.24995 moveto 0 0 rlineto stroke
+ 0 setgray
+100.646 -1.56532 moveto
+(11o) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 5.24995 moveto 0 0 rlineto stroke
+ 0 setgray
+21.68845 37.81113 moveto
+(9od) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 27.5 45 moveto 0 0 rlineto stroke
+ 0 setgray
+74.18845 37.81113 moveto
+(5od) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 45 moveto 0 0 rlineto stroke
+ 0 setgray
+126.68845 37.81113 moveto
+(7od) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 45 moveto 0 0 rlineto stroke
+ 0 setgray
+46.07043 37.81113 moveto
+(14od) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 45 moveto 0 0 rlineto stroke
+ 0 setgray
+98.57043 37.81113 moveto
+(15od) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 45 moveto 0 0 rlineto stroke
+ 0 setgray
+82 57.59236 moveto
+(5) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 80 60 moveto 0 0 rlineto stroke
+ 0 setgray
+134.5 57.59236 moveto
+(7) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 132.5 60 moveto 0 0 rlineto stroke
+ 0 setgray
+29.5 57.59236 moveto
+(9) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 27.5 60 moveto 0 0 rlineto stroke
+ 0 setgray
+55.75 57.59236 moveto
+(14) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 53.75 60 moveto 0 0 rlineto stroke
+ 0 setgray
+108.25 57.59236 moveto
+(15) cmr10 7.47198 fshow
+ 0.77 0 0 setrgbcolor
+newpath 106.25 60 moveto 0 0 rlineto stroke
+ 0 setgray 0 0.5 dtransform truncate idtransform setlinewidth pop 2 setlinecap
+newpath 10 0 moveto
+150 0 lineto stroke
+newpath 10 120 moveto
+150 120 lineto stroke
+newpath 10 -1.5 moveto
+150 -1.5 lineto stroke
+newpath 10 120 moveto
+150 120 lineto stroke
+ 0.5 0 dtransform exch truncate exch idtransform pop setlinewidth
+newpath 10 0 moveto
+10 120 lineto stroke
+newpath 20 0 moveto
+20 120 lineto stroke
+newpath 140 0 moveto
+140 120 lineto stroke
+newpath 150 0 moveto
+150 120 lineto stroke
+showpage
+%%EOF

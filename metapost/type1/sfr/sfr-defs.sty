@@ -1,0 +1,50 @@
+%%% --- MACROS FOR ``KEYBOARD KEYS'' ---
+%%% !!! active char: |
+%%% usage: |Enter|
+%
+\def\fch{33}
+\def\lch{207}
+\font\framefont sfr at 40pt
+\font\inframefont plssbx10 at 8pt
+%
+\newbox\tmpbox \newcount\tmpnum \newdimen\tmpdim
+\newcount\lframe \newcount\mframe \newcount\rframe % for binary search
+%
+\newdimen\frameswi % frame stroke width
+\newdimen\framesba % frame side bar
+%
+\tmpnum\lch
+\advance\tmpnum1 % frame width incr.
+\advance\tmpnum1 \setbox\tmpbox\hbox{\framefont\char\tmpnum}\frameswi\wd\tmpbox
+\advance\tmpnum1 \setbox\tmpbox\hbox{\framefont\char\tmpnum}\framesba\wd\tmpbox
+%
+\def\framebinary{% \tmpdim = text width
+  \lframe\fch \rframe\lch
+  \loop % \char\lframe width < text width <= \char\rframe width
+    \tmpnum\rframe \advance\tmpnum-\lframe
+  \ifnum\tmpnum>1\relax
+    \mframe\lframe \advance\mframe\rframe \divide\mframe2\relax
+    \setbox\tmpbox\hbox{\framefont\char\mframe}%
+    \ifdim\tmpdim>\wd\tmpbox \lframe\mframe \else \rframe\mframe \fi
+  \repeat
+}
+%
+\catcode`\|13
+\def|#1|{%
+  \setbox\tmpbox\hbox{\inframefont #1}% the text
+  \tmpdim\wd\tmpbox \advance\tmpdim2\frameswi \advance\tmpdim4\framesba
+  \setbox\tmpbox\hbox{\framefont\char\lch}% max frame width
+  \ifdim\tmpdim>\wd\tmpbox
+    \errhelp{Proceed, I'll ignore frame.}\errmessage{TOO LONG TEXT: #1}%
+    \rframe0\relax \leavevmode\hbox{\inframefont #1}%
+  \else
+    \setbox\tmpbox\hbox{\framefont\char\fch}% min frame width
+    \ifdim\tmpdim>\wd\tmpbox \framebinary \else \rframe\fch\relax \fi
+  \fi
+  \ifnum\rframe>0
+    \setbox\tmpbox\hbox{\framefont \char\rframe}%
+    \leavevmode\copy\tmpbox\llap{\hbox to \wd\tmpbox{\hss\inframefont#1\hss}}%
+  \fi
+}
+\endinput
+

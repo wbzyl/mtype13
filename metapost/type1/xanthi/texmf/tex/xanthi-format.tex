@@ -1,0 +1,28 @@
+%
+% $Revision: 1.1.1.1 $
+% $Date: 2004/08/23 09:35:44 $
+%
+
+\ifx\xanthiformat\undefined\let\xanthiformat\relax\else
+ \expandafter\endinput
+\fi
+
+\def\PICT#1{\LINE{\SETPICT{\jobname}{#1}{\hsize}{75mm}}}
+
+\raggedbottom
+\font\titlef=plssbx10 at 17pt
+\font\sectionf=plssbx10 at 13pt
+\def\title#1#2{\vglue\baselineskip
+  \centerline{\titlef #1}\vskip3\baselineskip}
+\def\section#1{\bigskip
+  \centerline{\sectionf #1}\vskip\baselineskip}
+
+\font\te = cmtex10
+\def\email#1{{\te#1}}
+\def\http#1{{\te http://#1}}
+\def\prog#1{{\te#1}}
+\def\file#1{{\te#1}}
+\def\newline{\hfil\break}
+\def\newpage{\vfil\break}
+
+\endinput

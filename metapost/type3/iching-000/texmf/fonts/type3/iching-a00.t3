@@ -1,0 +1,4084 @@
+%!PS-AdobeFont-1.0: I-Ching-a00 1.0a
+%%Creator: mkfont3 v1.4
+%%CreationDate: Sat Jan  1 18:51:53 2005
+%%EndComments
+11 dict
+begin
+   /FontType 3 def
+   /LanguageLevel 2 def
+   /FontMatrix [ 0.00429 0 0 0.00429 0 0 ] def
+   /FontBBox [ 0 0 0 0 ] def 
+
+   /FontInfo <<
+      /FamilyName (I-Ching)
+      /FullName (I-Ching-a00)
+      /Notice (Type 3 Font. (C) 2002 Anonymous. All Rights Reserved.)
+      /Weight (Medium)
+      /version (1.0a)
+      /ItalicAngle 0
+      /isFixedPitch true
+      /UnderlinePosition 0.0
+      /UnderlineThickness 1.0
+   >> def
+
+   /Encoding 256 array def
+   0 1 255 { Encoding exch /.notdef put } for
+
+   Encoding 8 /ch8 put
+   Encoding 51 /ch51 put
+   Encoding 20 /ch20 put
+   Encoding 39 /ch39 put
+   Encoding 48 /ch48 put
+   Encoding 64 /ch64 put
+   Encoding 27 /ch27 put
+   Encoding 66 /ch66 put
+   Encoding 29 /ch29 put
+   Encoding 49 /ch49 put
+   Encoding 22 /ch22 put
+   Encoding 65 /ch65 put
+   Encoding 46 /ch46 put
+   Encoding 26 /ch26 put
+   Encoding 7 /ch7 put
+   Encoding 24 /ch24 put
+   Encoding 25 /ch25 put
+   Encoding 3 /ch3 put
+   Encoding 36 /ch36 put
+   Encoding 14 /ch14 put
+   Encoding 13 /ch13 put
+   Encoding 55 /ch55 put
+   Encoding 70 /ch70 put
+   Encoding 6 /ch6 put
+   Encoding 56 /ch56 put
+   Encoding 31 /ch31 put
+   Encoding 19 /ch19 put
+   Encoding 62 /ch62 put
+   Encoding 45 /ch45 put
+   Encoding 16 /ch16 put
+   Encoding 9 /ch9 put
+   Encoding 67 /ch67 put
+   Encoding 69 /ch69 put
+   Encoding 15 /ch15 put
+   Encoding 59 /ch59 put
+   Encoding 43 /ch43 put
+   Encoding 72 /ch72 put
+   Encoding 17 /ch17 put
+   Encoding 18 /ch18 put
+   Encoding 34 /ch34 put
+   Encoding 4 /ch4 put
+   Encoding 30 /ch30 put
+   Encoding 5 /ch5 put
+   Encoding 50 /ch50 put
+   Encoding 28 /ch28 put
+   Encoding 23 /ch23 put
+   Encoding 38 /ch38 put
+   Encoding 52 /ch52 put
+   Encoding 2 /ch2 put
+   Encoding 60 /ch60 put
+   Encoding 61 /ch61 put
+   Encoding 68 /ch68 put
+   Encoding 40 /ch40 put
+   Encoding 12 /ch12 put
+   Encoding 53 /ch53 put
+   Encoding 35 /ch35 put
+   Encoding 63 /ch63 put
+   Encoding 41 /ch41 put
+   Encoding 37 /ch37 put
+   Encoding 33 /ch33 put
+   Encoding 58 /ch58 put
+   Encoding 10 /ch10 put
+   Encoding 47 /ch47 put
+   Encoding 54 /ch54 put
+   Encoding 44 /ch44 put
+   Encoding 71 /ch71 put
+   Encoding 57 /ch57 put
+   Encoding 11 /ch11 put
+   Encoding 1 /ch1 put
+   Encoding 42 /ch42 put
+   Encoding 32 /ch32 put
+   Encoding 21 /ch21 put
+
+   /CharacterProcedures 73 dict def
+
+   CharacterProcedures begin
+
+      /.notdef {
+         1000 0 setcharwidth
+         1 0 0 setrgbcolor
+         0 0 1000 1000 rectfill
+      } bind def
+
+      /ch1 {
+         180 0 setcharwidth
+          0.86859 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.98679 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.59084 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.86047 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.65865 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.62976 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch2 {
+         180 0 setcharwidth
+          0 0 0.95955 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.96834 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.62929 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.30869 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.71585 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.31613 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.35991 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.72975 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.615 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.87738 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.45462 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.88245 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch3 {
+         180 0 setcharwidth
+          0.82082 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.99252 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.60007 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.99953 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.71886 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.80153 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.40752 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.42912 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.64542 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.67961 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch4 {
+         180 0 setcharwidth
+          0 0 0.79385 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.62419 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.3181 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.93475 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.61162 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.72769 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.59904 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.55328 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.9516 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.40147 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch5 {
+         180 0 setcharwidth
+          0.45502 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.3247 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.79143 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.42905 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.31937 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.93999 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.56482 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.3284 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch6 {
+         180 0 setcharwidth
+          0 0 0.37341 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.43016 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.50833 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.7262 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.86867 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.461 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.48607 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.6094 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch7 {
+         180 0 setcharwidth
+          0 0 0.78099 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.55275 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.43149 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.37675 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.31987 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.67871 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.69617 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.46046 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.78084 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.88618 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.50423 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch8 {
+         180 0 setcharwidth
+          0 0 0.39694 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.38412 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.71213 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.46782 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.67915 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.96649 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.45895 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.65646 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.63231 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.81306 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.4016 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch9 {
+         180 0 setcharwidth
+          0.49527 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.58725 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.3389 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.4266 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.52374 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.76927 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.81868 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch10 {
+         180 0 setcharwidth
+          0.60732 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.73364 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.33864 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.78952 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.60925 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.99634 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.95879 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch11 {
+         180 0 setcharwidth
+          0.66843 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.87962 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.9591 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.60893 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.75014 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.3149 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.63113 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.48851 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.47946 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch12 {
+         180 0 setcharwidth
+          0 0 0.49849 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.80424 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.43161 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.76263 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.98091 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.90538 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.87614 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.86093 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.48654 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch13 {
+         180 0 setcharwidth
+          0.89055 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.97946 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.44524 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.30237 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.73135 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.64026 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.88486 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch14 {
+         180 0 setcharwidth
+          0.37198 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.44237 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.84608 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.57457 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.77654 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.7979 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.83084 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch15 {
+         180 0 setcharwidth
+          0 0 0.76053 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.36635 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.52414 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.9418 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.66753 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.52742 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.6062 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.51453 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.31035 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.60623 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.64731 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch16 {
+         180 0 setcharwidth
+          0 0 0.9289 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.34196 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.95065 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.70619 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.35933 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.61606 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.43034 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.39809 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.77089 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.83063 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.33426 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch17 {
+         180 0 setcharwidth
+          0.43721 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.3909 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.54128 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.85538 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.55237 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.78482 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.5347 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.79202 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.3261 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch18 {
+         180 0 setcharwidth
+          0 0 0.59854 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.39125 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.88904 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.93994 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.41 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.38464 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.57307 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.36308 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.75935 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch19 {
+         180 0 setcharwidth
+          0.99127 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.6033 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.94057 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.31863 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.77864 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.96208 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.82158 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.57753 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.63835 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.40373 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch20 {
+         180 0 setcharwidth
+          0 0 0.35657 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.96532 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.7802 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.83911 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.46242 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.8809 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.40724 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.9152 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.49167 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.65263 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch21 {
+         180 0 setcharwidth
+          0.89629 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.65163 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.5556 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.47096 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.38005 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.41422 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.93681 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.36159 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.98378 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch22 {
+         180 0 setcharwidth
+          0.85764 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.61034 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.93103 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.47437 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.38641 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.79424 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.30264 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.77835 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.67497 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch23 {
+         180 0 setcharwidth
+          0 0 0.42943 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.33328 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.84973 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.9667 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.65013 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.78876 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.39012 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.95459 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.95891 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.83939 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.52618 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch24 {
+         180 0 setcharwidth
+          0.5331 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.99208 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.98038 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.96687 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.84856 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.74901 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.68503 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.95598 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.31168 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.97667 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.82797 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch25 {
+         180 0 setcharwidth
+          0.55591 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.76225 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.96147 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.50801 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.30565 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.58566 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.4347 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.74594 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch26 {
+         180 0 setcharwidth
+          0.7019 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.37152 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.63963 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.55186 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.66284 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.70685 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.41794 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.40425 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch27 {
+         180 0 setcharwidth
+          0.63913 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.90305 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.3337 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.55 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.93782 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.57393 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.39532 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.66853 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.5647 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.33229 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch28 {
+         180 0 setcharwidth
+          0 0 0.62604 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.6326 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.31157 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.87915 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.45845 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.3801 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.52306 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.39897 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch29 {
+         180 0 setcharwidth
+          0 0 0.99963 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.9305 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.47527 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.5181 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.82117 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.36319 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.31248 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.65256 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.43727 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.83005 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch30 {
+         180 0 setcharwidth
+          0.4764 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.6629 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.96625 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.61525 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.59294 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.57805 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.60498 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.84177 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch31 {
+         180 0 setcharwidth
+          0 0 0.37485 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.91508 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.8442 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.69827 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.45192 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.33046 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.33365 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.91924 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.79144 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch32 {
+         180 0 setcharwidth
+          0 0 0.43205 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.96759 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.32693 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.9421 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.60635 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.70212 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.69615 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.3567 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.62918 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch33 {
+         180 0 setcharwidth
+          0 0 0.31413 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.46977 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.85722 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.66805 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.94086 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.60005 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.71904 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.38002 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch34 {
+         180 0 setcharwidth
+          0.69241 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.8748 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.78793 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.57106 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.72865 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.51064 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.35939 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.98279 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch35 {
+         180 0 setcharwidth
+          0 0 0.94652 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.40341 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.69455 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.59859 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.32283 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.56296 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.5445 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.93365 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.5593 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.46936 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch36 {
+         180 0 setcharwidth
+          0.34584 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.66565 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.60915 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.63777 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.85487 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.31532 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.97612 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.6899 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.54436 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.35498 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch37 {
+         180 0 setcharwidth
+          0.90395 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.80092 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.81975 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.47566 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.43358 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.41963 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.70442 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.70105 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch38 {
+         180 0 setcharwidth
+          0.90767 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.9123 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.9736 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.8875 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.8039 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.84314 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.60672 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.77162 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch39 {
+         180 0 setcharwidth
+          0 0 0.52089 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.83862 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.80801 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.95094 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.449 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.81952 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.75117 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.58965 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.55641 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.73853 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch40 {
+         180 0 setcharwidth
+          0 0 0.75633 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.88606 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.34212 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.9116 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.45694 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.42474 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.42876 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.61964 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.49953 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.68773 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch41 {
+         180 0 setcharwidth
+          0.77171 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.56119 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.62619 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.6258 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.71005 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.55368 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.99268 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.85883 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.32077 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch42 {
+         180 0 setcharwidth
+          0.3377 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.91687 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.65121 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.34364 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.98053 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.62367 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.80635 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.83267 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.87631 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch43 {
+         180 0 setcharwidth
+          0.41412 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.6039 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.38188 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.73975 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.78325 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.55878 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.63171 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch44 {
+         180 0 setcharwidth
+          0 0 0.43335 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.9724 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.69704 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.8529 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.99081 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.941 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.70049 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch45 {
+         180 0 setcharwidth
+          0 0 0.4486 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.30814 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.74878 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.95793 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.59413 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.87436 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.69164 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.31563 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.46376 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.95729 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch46 {
+         180 0 setcharwidth
+          0 0 0.4863 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.55322 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.63968 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.96548 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.52873 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.32896 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.78647 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.63246 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.37726 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.7854 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch47 {
+         180 0 setcharwidth
+          0 0 0.63625 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.60234 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.47107 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.35162 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.58478 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.77853 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.35753 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.4768 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.76239 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch48 {
+         180 0 setcharwidth
+          0 0 0.73943 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.93005 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.43338 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.65576 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.79388 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.40335 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.30319 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.39885 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.79086 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch49 {
+         180 0 setcharwidth
+          0.65733 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.31316 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.42516 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.82448 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.34749 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.64336 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.9834 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.89719 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch50 {
+         180 0 setcharwidth
+          0 0 0.51666 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.7201 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.97641 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.84766 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.56827 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.53326 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.79129 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.55325 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch51 {
+         180 0 setcharwidth
+          0.92877 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.88739 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.68195 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.42299 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.54787 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.34045 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.88168 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.83282 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.48485 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.71143 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch52 {
+         180 0 setcharwidth
+          0 0 0.52888 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.45401 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.82808 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.68309 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.37738 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.88701 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.47957 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0 0 0.6186 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.99428 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.583 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch53 {
+         180 0 setcharwidth
+          0 0 0.78171 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.61832 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.93388 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.98337 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.41798 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.94083 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.30815 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.57466 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.57979 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch54 {
+         180 0 setcharwidth
+          0.57346 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.65723 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.3529 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.83078 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.75235 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.72841 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.33228 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.72514 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.95659 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch55 {
+         180 0 setcharwidth
+          0.88809 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.64172 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.8494 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.46785 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.63818 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.79427 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.3037 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.31793 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.66846 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch56 {
+         180 0 setcharwidth
+          0 0 0.4877 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.93362 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.64395 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.7704 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.78287 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.897 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.48894 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.38219 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.87715 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch57 {
+         180 0 setcharwidth
+          0 0 0.60262 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.90341 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.36546 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.37108 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.57806 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.44226 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.90276 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.31586 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch58 {
+         180 0 setcharwidth
+          0.85434 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.59128 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.91301 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.40755 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.51154 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0.33916 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.73015 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.3416 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch59 {
+         180 0 setcharwidth
+          0 0 0.67964 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.8101 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.6168 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.4611 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.67778 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.45244 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.97522 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.80296 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.59117 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch60 {
+         180 0 setcharwidth
+          0.82074 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.57349 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.3011 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.3184 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.5584 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.59373 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.469 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.85709 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.9376 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch61 {
+         180 0 setcharwidth
+          0.541 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.72054 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.47156 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.33824 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0 0 0.45686 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.43797 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.93898 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0.48418 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch62 {
+         180 0 setcharwidth
+          0 0 0.96619 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.6206 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.94054 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.78145 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.30814 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0.61502 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.64967 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.48741 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0 0 0.30116 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.57869 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch63 {
+         180 0 setcharwidth
+          0.55505 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.39883 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.75917 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.66177 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+          0 0 0.89526 setrgbcolor
+         newpath 18 121.5 moveto
+         66 121.5 lineto
+         66 152 lineto
+         18 152 lineto
+          closepath fill
+          0 0 0.79082 setrgbcolor
+         newpath 114 121.5 moveto
+         162 121.5 lineto
+         162 152 lineto
+         114 152 lineto
+          closepath fill
+          0.79128 0 0 setrgbcolor
+         newpath 18 162 moveto
+         65.99927 162 114.00073 162 162 162 curveto
+         162 192.5 lineto
+         114.00073 192.5 65.99927 192.5 18 192.5 curveto
+          closepath fill
+          0 0 0.30461 setrgbcolor
+         newpath 18 202.5 moveto
+         66 202.5 lineto
+         66 233 lineto
+         18 233 lineto
+          closepath fill
+          0 0 0.78503 setrgbcolor
+         newpath 114 202.5 moveto
+         162 202.5 lineto
+         162 233 lineto
+         114 233 lineto
+          closepath fill
+      } bind def
+
+      /ch64 {
+         180 0 setcharwidth
+          0 0 0.84987 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.91747 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.3718 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.87099 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.46217 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+          0.67322 0 0 setrgbcolor
+         newpath 18 121.5 moveto
+         65.99927 121.5 114.00073 121.5 162 121.5 curveto
+         162 152 lineto
+         114.00073 152 65.99927 152 18 152 curveto
+          closepath fill
+          0 0 0.56662 setrgbcolor
+         newpath 18 162 moveto
+         66 162 lineto
+         66 192.5 lineto
+         18 192.5 lineto
+          closepath fill
+          0 0 0.55705 setrgbcolor
+         newpath 114 162 moveto
+         162 162 lineto
+         162 192.5 lineto
+         114 192.5 lineto
+          closepath fill
+          0.58913 0 0 setrgbcolor
+         newpath 18 202.5 moveto
+         65.99927 202.5 114.00073 202.5 162 202.5 curveto
+         162 233 lineto
+         114.00073 233 65.99927 233 18 233 curveto
+          closepath fill
+      } bind def
+
+      /ch65 {
+         180 0 setcharwidth
+          0.9325 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.8649 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.32791 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+      } bind def
+
+      /ch66 {
+         180 0 setcharwidth
+          0.79227 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.93169 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.61584 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.85532 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.51407 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+      } bind def
+
+      /ch67 {
+         180 0 setcharwidth
+          0 0 0.8406 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.97992 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.9336 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.79909 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.4875 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+      } bind def
+
+      /ch68 {
+         180 0 setcharwidth
+          0 0 0.7431 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.80444 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.61891 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.93199 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.64777 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+      } bind def
+
+      /ch69 {
+         180 0 setcharwidth
+          0 0 0.56194 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.93585 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0 0 0.91089 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.99567 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0 0 0.52599 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.40349 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+      } bind def
+
+      /ch70 {
+         180 0 setcharwidth
+          0 0 0.65211 setrgbcolor
+         newpath 18 0 moveto
+         66 0 lineto
+         66 30.5 lineto
+         18 30.5 lineto
+          closepath fill
+          0 0 0.73264 setrgbcolor
+         newpath 114 0 moveto
+         162 0 lineto
+         162 30.5 lineto
+         114 30.5 lineto
+          closepath fill
+          0.70755 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0.3399 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+      } bind def
+
+      /ch71 {
+         180 0 setcharwidth
+          0.58911 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0 0 0.86479 setrgbcolor
+         newpath 18 40.5 moveto
+         66 40.5 lineto
+         66 71 lineto
+         18 71 lineto
+          closepath fill
+          0 0 0.56638 setrgbcolor
+         newpath 114 40.5 moveto
+         162 40.5 lineto
+         162 71 lineto
+         114 71 lineto
+          closepath fill
+          0.80116 0 0 setrgbcolor
+         newpath 18 81 moveto
+         65.99927 81 114.00073 81 162 81 curveto
+         162 111.5 lineto
+         114.00073 111.5 65.99927 111.5 18 111.5 curveto
+          closepath fill
+      } bind def
+
+      /ch72 {
+         180 0 setcharwidth
+          0.3259 0 0 setrgbcolor
+         newpath 18 0 moveto
+         65.99927 0 114.00073 0 162 0 curveto
+         162 30.5 lineto
+         114.00073 30.5 65.99927 30.5 18 30.5 curveto
+          closepath fill
+          0.51398 0 0 setrgbcolor
+         newpath 18 40.5 moveto
+         65.99927 40.5 114.00073 40.5 162 40.5 curveto
+         162 71 lineto
+         114.00073 71 65.99927 71 18 71 curveto
+          closepath fill
+          0 0 0.40167 setrgbcolor
+         newpath 18 81 moveto
+         66 81 lineto
+         66 111.5 lineto
+         18 111.5 lineto
+          closepath fill
+          0 0 0.71266 setrgbcolor
+         newpath 114 81 moveto
+         162 81 lineto
+         162 111.5 lineto
+         114 111.5 lineto
+          closepath fill
+      } bind def
+
+   end
+
+   /BuildGlyph { % stack: font character_name
+      exch 
+      begin 
+        CharacterProcedures exch get exec
+      end
+   } bind def
+
+currentdict
+end % of font dictionary
+
+/I-Ching-a00 exch definefont pop
+
+%EOF

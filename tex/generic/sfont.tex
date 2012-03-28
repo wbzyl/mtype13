@@ -1,0 +1,60 @@
+%
+% This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+%
+
+%\newlinechar `^^J
+\raggedbottom
+\overfullrule=0pt
+\openin1 \F.t1
+\ifeof1 %\message{TYPE 3: I cannot find a file `\F.t1' }
+\else \closein1 \special{psfile=\F.t1}
+\fi
+\newskip\lettervskip \lettervskip=6pt plus 2pt
+\def\at{ at }
+\advance\vsize by 1in
+\tracinglostchars=0
+\nopagenumbers
+\input mimulcol \columnsep 4pt
+\newdimen\textwidth \textwidth\hsize
+\newcount\c 
+\font\d \F \at \AT
+\ifx\HEADLINE\undefined
+ \headline{\hskip\textwidth\llap{\tt\uppercase\expandafter{\fontname\d}}\hss}
+\else
+ \headline{\HEADLINE}
+\fi
+\lineskiplimit\maxdimen \parskip1pt plus2pt
+\newcount\wasnullchar
+\newcount\isnullchar
+\ifnum\C>1
+\beginmulticols\C
+\fi
+\loop
+ \setbox0\hbox{\d\char\c}
+ \setbox1\hbox{\d\char\c\/}
+ \isnullchar0
+ \ifdim\wd0=0pt\else\advance\isnullchar1 \fi
+ \ifdim\ht0=0pt\else\advance\isnullchar1 \fi
+ \ifdim\dp0=0pt\else\advance\isnullchar1 \fi
+ \ifnum\isnullchar=0
+  \ifnum\wasnullchar=0 \medskip\hrule width 1cm \medskip\fi
+  \global\wasnullchar1
+ \else
+  \global\wasnullchar0
+  \item{\tt \the\c}
+  \kern-.2pt\vrule\kern-.2pt\d\char\c\kern-.2pt\vrule\kern-.2pt
+  \ifdim\wd0<\wd1\relax \kern\wd1 \kern-\wd0
+    \vrule width .2pt height 1.5ex depth -1ex
+  \fi
+  \endgraf
+  \vskip\lettervskip  
+ \fi
+ \ifnum\c<255
+\advance\c1
+\repeat
+\vfill
+\ifnum\C>1
+\endmulticols
+\fi
+
+\end

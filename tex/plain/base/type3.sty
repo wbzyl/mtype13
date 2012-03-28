@@ -1,0 +1,147 @@
+%
+% This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl> 
+%
+
+\ifx\typethreeVersion\undefined
+  \chardef\typethreeVersion=1
+  \chardef\typethreeRevision=13
+\else
+  \expandafter\endinput
+\fi
+
+\catcode`\@=11
+
+\def\newwrite{\alloc@7\write\chardef\sixt@@n}
+
+\ifx\prefixing\undefined 
+  \def\fontprefix{cm}% assume English language and plain format
+\else
+  \def\fontprefix{pl}% assume Polish language and MeX format
+\fi
+
+%% Use appropriate font for used language
+
+\font\tentex=\fontprefix tex10 \hyphenchar\tentex=-1 % font used for strings
+\font\sevenit=\fontprefix ti7  \scriptfont\itfam=\sevenit
+
+%% `mftmac.tex' sets parindent to 0pt
+\def\item{\par\noindent\hskip1em\hangindent1em\textindent}
+\def\itemitem{\par\noindent\hskip2em\hangindent2em\textindent}
+
+\def\MeX{M\kern-.111em\lower.5ex\hbox{E}\kern-.125emX}
+
+%% TeX hackery: redefinitions of `mftmac.tex' macros
+%% - comments are normally flush left, not flush right
+%% - comments starting with %\[ are set flush right
+%% - comments starting with %\  are set off by \qquad
+%% - comments ending with \] are also set flush left
+%%   (defined in mftmac.tex)
+
+\def\9{$\futurelet\next\doit}
+\let\[=\relax
+%\def\doit{\ifx\next\[\def\next{\hfill{\rm\%}}%
+%     \else\ifx\next\ \def\next{\qquad{\rm\%}}%
+%     \else\def\next{{\rm\%}}\fi\fi\next}
+\def\doit{\ifx\next\[\def\next{\hfill}%
+  \else\ifx\next\ \def\next{}%
+  \else\def\next{\qquad}\fi\fi\next$\triangleright$\enspace\ignorespaces}
+
+% Headline and footline.
+
+\newcount\hours \newcount\minutes
+\def\oktime{% format `hh:mm'
+\hours=\time \divide \hours by 60 %
+\minutes=-\hours \multiply \minutes by 60 \advance \minutes by \time
+\ifnum\hours>9 \the\hours \else 0\the\hours \fi
+:%
+\ifnum\minutes>9 \the\minutes \else 0\the\minutes \fi}
+\def\monthnazwa{\ifcase \month
+\or I\or II\or III\or IV\or V\or VI\or VII%
+\or VIII\or IX\or X\or XI\or XII%
+\fi}
+\def\makefootline{\baselineskip18pt\null\hrule\null\baselineskip12pt
+ \line{\it\oktime\quad \the\day\ \monthnazwa\ \the\year\ 
+ \hfill\llap{\it\the\pageno}}}
+
+% our headline:
+\font\TT \fontprefix ss12
+\headline{\vbox to 0pt{\vss
+  \rightline{\TT\uppercase\expandafter{\jobname.mp}}\vskip5mm}}
+
+% Title and sections.
+
+\font\titleF=\fontprefix ssbx10 at 17pt
+\font\stitleF=\fontprefix ssbx10 at 13pt
+\def\title#1{\centerline{\titleF #1}\bigskip}
+\def\section#1{\bigskip\centerline{\stitleF #1}\medskip}
+
+% Proofing.
+
+\def\setfontname #1 {\def\mftfontname{#1}}
+\def\glyph #1 {\trypagebreak\centerline{\epsfbox{\mftfontname.#1}}}
+
+% must be consistent with type3.mp
+
+\def\EPSNAMEandNUMBER{\begingroup%\def_{\string_}
+ \EPSNAMEandNUMBERcont}
+\def\EPSNAMEandNUMBERcont#1#2{%
+  \expandafter\gdef\csname type3:eps:#1\endcsname{#2}\endgroup}
+
+% #1 font name, #2 glyph name, #3 horizontal limit, #4 vertical limit
+\def\SETPICT#1#2#3#4{\hbox{\expandafter
+    \ifx\csname type3:eps:#2\endcsname\relax\message{PICTURE #2 UNKNOWN}%
+  \else
+    \setbox0\hbox{\epsfysize#4\relax
+      \epsfbox{#1.\csname type3:eps:#2\endcsname}}%
+    \ifdim\wd0>#3\relax \setbox0\hbox{\epsfxsize#3\relax
+      \epsfbox{#1.\csname type3:eps:#2\endcsname}}%
+    \fi
+    \box0\relax
+  \fi}}
+
+\newdimen\proofvsize \proofvsize=100mm
+
+\def\PICT#1{\centerline{%\def_{\string_}
+  \edef\towrite{\write\typhethreeCNT{\string\setcnt{#1}%
+    {\noexpand\the\pageno}}}%
+  \towrite
+  \SETPICT{\jobname}{#1}{\hsize}{\proofvsize}}}
+
+\newwrite\typhethreeCNT \immediate\openout\typhethreeCNT\jobname.cnt
+\def\setcnt#1#2{%
+  \\{#1}~{#2}\hskip1.5em\ignorespaces}
+\def\endproof{\immediate\closeout\typhethreeCNT
+  \rightskip0pt plus1fil \baselineskip14pt plus1pt
+  \input\jobname.cnt \endgraf}
+
+% `manmac.tex' macros
+
+\outer\def\begindisplay{\obeylines\startdisplay}
+{\obeylines\gdef\startdisplay#1
+  {\catcode`\^^M=5$$#1\halign\bgroup\hskip2em ##\hfil&&\qquad##\hfil\cr}}
+\outer\def\enddisplay{\crcr\egroup$$}
+\def\meta#1{\leavevmode\hbox{$\langle$#1\/$\rangle$}}
+\def\trypagebreak{\vfil\goodbreak\vfilneg}
+\raggedbottom
+
+% Input file if it exists
+
+\def\maybeinput #1 {%
+  \immediate\openin\maybefile#1\relax
+  \ifeof\maybefile
+    \immediate\closein\maybefile \let\maybenext\empty
+    \edef\maybefile{#1}\immediate\write16{! File \maybefile\space not found}%
+  \else \immediate\closein\maybefile \def\maybenext{\input #1 }\fi
+  \maybenext
+}
+\newread\maybefile
+
+\catcode`\@=12
+
+%% Load EPSF macros
+
+\input epsfx
+
+\def\includefonts#1{\special{psfile=#1}}
+
+\endinput

@@ -1,0 +1,345 @@
+#!/usr/bin/perl
+#
+# This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+#
+# Adapted to new TDS (31 Decc 2004)
+
+$mkfont3_version="1.4";
+$creation_date=localtime;
+$metapost="mpost";
+$metapost_opt="-mem=type3";
+$metapost_mode="";
+$tree_prefix="texmf";
+$vendor_name="";
+$install_font=0;
+$install_map="";
+
+use Getopt::Long;
+
+GetOptions( "help" => \$help,
+            "version" => \$version,
+            "vendor-name=s" => \$vendor_name,
+            "tree-prefix=s" => \$tree_prefix,
+            "install-font" => \$install_font,
+            "install-map=s" => \$install_map,
+            "change-mode=s" => \$metapost_mode,
+            "change-name=s" => \$new_name,
+            "keep-intermediate" => \$intermediate );
+
+if ($help) {
+Usage:
+    print STDERR <<HELP;
+Usage:   mkfont3 [OPTION]... FILE
+Example: mkfont3 dragon-000.mp
+Convert MTYPE13 source FILE into a Type 3 font.
+
+  --change-mode=FILE,NAME  set metapost mode to NAME, where
+                           NAME is defined in FILE
+  --change-name=NEW_FILE   change names of generated files by changing
+                           FILE to NEW_FILE 
+  --tree-prefix=DIR        default prefix is 'texmf'
+  --vendor-name=VENDOR     default is no vendor name
+  --install-font           move generated files into directories
+                             DIR/fonts/{type3,tfm}/VENDOR
+  --install-map=NAME       append map file onto DIR/fonts/map/NAME
+                           Note: If NAME is mentioned in dvips config file
+                             and above directories are mentioned in texmf.cnf
+                             then this step makes the font available to dvips
+  --keep-intermediate      preserve intermediate files
+  --help                   display this help and exit
+  --version                output version information and exit
+
+Report bugs to <matwb\@univ.gda.pl>.
+HELP
+    exit 0;
+} elsif ($version) {
+    print STDERR <<VERSION;
+mkfont3 (MTYPE13) $mkfont3_version
+Written by Wlodek Bzyl.
+
+Copyright (C) 2002 Wlodek Bzyl.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+VERSION
+    exit 0;
+}
+
+($mpname = shift) =~ s/\.mp$//;
+
+if (!$mpname) { 
+    printf "Try \`mkfont3 --help' for more information\n";
+    exit 1;
+}
+
+# Run metapost.
+
+if ($metapost_mode) {
+    ($metapost_arg1,$metapost_arg2)=split(/,/,$metapost_mode);
+    if ($metapost_arg1 eq "" or $metapost_arg2 eq "") {
+       printf STDERR "Malformed \`change-mode\' option: [$metapost_mode]\n";
+       exit 1;
+    }
+    $metapost_mode = 
+       "\\change_mode(\"$metapost_arg1\",\"$metapost_arg2\") ; input $mpname" ;
+#    printf STDERR "[$metapost_mode]\n";
+} else {
+    $metapost_mode = $mpname;
+}
+
+$status=system($metapost, $metapost_opt, $metapost_mode);
+die "$metapost error during compilation of $mpname: $?" unless $status==0;
+
+#if ($includeeps) {
+#    $status=system("sh", $shell_cmds);
+#    die "sh error during execution of $shell_cmds: $?" unless $status==0;
+#}
+
+if ($mpname) {
+    opendir DIR, ".";
+    @pictures=grep(/$mpname\.\d{1,3}$/, readdir(DIR));
+    closedir DIR;
+} else {
+    goto Usage;
+}
+
+$t3name="$mpname.t3";
+$parname="$mpname.par";
+$t1name="$mpname.t1"; # Type 1 fonts used
+$pcwname="$mpname.pcw"; # Character widths
+
+$x_pat='-?\d+(?:\.\d+)?'; # a pattern matching real number
+
+$knownFontName=0;
+$knownFamilyName=0;
+$knownFontMatrix=0;
+$knownisFixedPitch="false";
+$knownFontVersion=0;
+open PAR, "$parname" or die "Could not open $parname: $!";
+while (<PAR>) {
+   ($FontMatrix, $knownFontMatrix)=($1, 1)
+      if /^(FontMatrix +\[ +$x_pat +$x_pat +$x_pat +$x_pat +$x_pat +$x_pat +\])/o;
+   ($FontName, $knownFontName)=($1, 1) 
+      if /^FontName +(\S+)/io;
+   ($FamilyName, $knownFamilyName)=($1, 1) 
+      if /^FamilyName +(\S+)/io;
+   ($FontVersion, $knownFontVersion)=($1, 1) 
+      if /^FontVersion +(\S+)/io;
+   ($isFixedPitch, $knownisFixedPitch)=($1, 1) 
+      if /^isFixedPitch +(true|false)/io;
+}
+
+if (not $knownFontName or not $knownFontMatrix or 
+    not $knownisFixedPitch or not $knownFamilyName) {
+    printf STDERR "! Broken parameter file $parname\n";
+    printf STDERR "  One of the following parameters is missing:\n";
+    printf STDERR "\t FontName\n";
+    printf STDERR "\t FamilyName\n";
+    printf STDERR "\t FontMatrix\n";
+    printf STDERR "\t isFixedPitch\n";
+    printf STDERR "\t FontVersion\n";
+    exit 1;
+}
+
+open PCW, "$pcwname" or die "Could not open $pcwname: $!";
+while (<PCW>) {
+    ($charcode, $charwidth)=($1, $2) if /($x_pat):($x_pat)/o;
+    $pcw[$charcode]=$charwidth;
+#   print STDERR "$charcode:$pcw[$charcode]\n";
+}
+
+print STDERR "Building $FontName a Type 3 font $t3name.\n";
+
+open TYPE3, ">$t3name";
+
+print TYPE3 <<"HEADER";
+%!PS-AdobeFont-1.0: $FontName $FontVersion
+%%Creator: mkfont3 v$mkfont3_version
+%%CreationDate: $creation_date
+%%EndComments
+11 dict
+begin
+   /FontType 3 def
+   /LanguageLevel 2 def
+   /$FontMatrix def
+   /FontBBox [ 0 0 0 0 ] def 
+
+   /FontInfo <<
+      /FamilyName ($FamilyName)
+      /FullName ($FontName)
+      /Notice (Type 3 Font. \(C\) 2002 Anonymous. All Rights Reserved.)
+      /Weight (Medium)
+      /version ($FontVersion)
+      /ItalicAngle 0
+      /isFixedPitch $isFixedPitch
+      /UnderlinePosition 0.0
+      /UnderlineThickness 1.0
+   >> def
+
+   /Encoding 256 array def
+   0 1 255 { Encoding exch /.notdef put } for
+
+HEADER
+
+print STDERR "Generating characters:\n";
+$numchars = @pictures+1;  # include `.notdef' glyph
+$fonts = '';
+$allfonts = '';
+foreach $picture (@pictures) {
+    $picture =~ /\.(\d+)$/;
+    $charno = $1;
+    $pscode = '';
+    open PICTURE, "$picture";
+    $knowncharwidth=0;
+    while (<PICTURE>) {
+# Bug in MPOST?
+#        ($wx, $wy, $knowncharwidth) = ($1, $2, 1)
+#	    if /^%%setcharwidth +($x_pat) +($x_pat)/o;
+	$fonts .= $_ if /^%\*Font:/;
+	next if /^%[%!]/;
+	$pscode .= "      " . $_ ;
+    }
+    close PICTURE;
+# Bug in MPOST?
+#    die "No character width for character [$charno]\n" 
+#      unless $knowncharwidth;
+    print STDERR "[$charno]";
+    $pscode =~ s/showpage\n*//mg;
+    $pscode =~ s/\n/\n   /mg;
+    print TYPE3 "   Encoding $charno /ch$charno put\n";
+    $charprocs[$charno] = $pscode;
+#    $charprocs[$charno] = "         $wx $wy setcharwidth\n   " . $charprocs[$charno];
+    $charprocs[$charno] = "         $pcw[$charno] 0 setcharwidth\n   " 
+      . $charprocs[$charno];
+}
+print STDERR "\n";
+print TYPE3 "\n";
+print TYPE3 <<"BODY";
+   /CharacterProcedures $numchars dict def
+
+   CharacterProcedures begin
+
+      /.notdef {
+         1000 0 setcharwidth
+         1 0 0 setrgbcolor
+         0 0 1000 1000 rectfill
+      } bind def
+
+BODY
+
+for($i=0; $i<=256; $i++) {
+    next unless defined($charprocs[$i]);
+    $charprocs[$i] =~ s/\n +$//m;
+    print TYPE3 "      /ch$i {\n$charprocs[$i]\n      } bind def\n\n";
+}
+
+print TYPE3 <<"TRAILER";
+   end
+
+   /BuildGlyph { % stack: font character_name
+      exch 
+      begin 
+        CharacterProcedures exch get exec
+      end
+   } bind def
+
+currentdict
+end % of font dictionary
+
+/$FontName exch definefont pop
+
+%EOF
+TRAILER
+
+close TYPE3;
+
+if (!$intermediate) {
+  unlink(@pictures) == @pictures 
+    or die "Can't remove all files @pictures: $!\n";
+  unlink("$mpname.log", "$mpname.par", "$mpname.pcw") == 3
+   or die "Can't remove all files $mpname.{log,par,pcw}: $!\n";
+}
+
+open TYPE1, ">$t1name";
+print TYPE1 $fonts;
+close TYPE1;
+
+if ($new_name) {
+#    ($prefix_old,$prefix_new)=split(/,/,$change_name);
+#    if ($prefix_old eq "" or $prefix_new eq "") {
+    if ($new_name eq "") {
+       printf STDERR "No NAME in \`change-name\' option found.\n";
+       exit 1;
+    }
+#    $changed_mpname=$mpname;
+#    $changed_mpname =~ s/$prefix_old\b/$prefix_new/;
+    $changed_mpname=$new_name;
+    @suffixes=(".t3", ".t1", ".tfm");
+    foreach $ext (@suffixes) {
+       printf STDERR "Renaming: $mpname$ext -> $changed_mpname$ext\n";
+       rename ("$mpname$ext","$changed_mpname$ext") or
+         warn "Can't rename file `$mpname$ext' to `$changed_mpname$ext': $!\n";
+    }
+    $mpname=$changed_mpname;
+}
+
+$fontmap="$mpname.map";
+$t3name="$mpname.t3";
+$fontmap_entry="$mpname $FontName <$t3name";
+
+open FONTMAP, ">$fontmap";
+print FONTMAP "$fontmap_entry\n";
+close FONTMAP;
+
+if ($install_font) {
+    printf STDERR 
+	"Installing font and tfm files in tree rooted at $tree_prefix.\n";
+    $type3_dir="$tree_prefix/fonts/type3/$vendor_name";
+    $tfm_dir="$tree_prefix/fonts/tfm/$vendor_name";
+    $tex_dir="$tree_prefix/tex/$vendor_name";
+    $status=system("mkdir", "-p", $type3_dir, $tfm_dir, $tex_dir);
+    die "Can't create font directories: $!" unless $status==0;
+
+    $status=system("mv", "-f", "$mpname.t3",$type3_dir);
+    die "Can't move font files to $type3_dir: $!" unless $status==0;
+
+    $status=system("mv", "-f", "$mpname.tfm",$tfm_dir);
+    die "Can't move font files to $tfm_dir: $!" unless $status==0;
+
+    if (-z "$mpname.t1") { # remove empty files
+	unlink("$mpname.t1") == 1 or die "Can't remove $mpname.t1: $!\n";
+    } else {
+	$status=system("mv", "-f", "$mpname.t1",$tex_dir);
+	die "Can't move font files to $tex_dir: $!" unless $status==0;
+    }
+}
+
+if ($install_map) {
+    printf STDERR "Writing font info onto $install_map.\n";
+    $install_map =~ s/\.map\b//;
+    $install_map = $install_map . ".map";
+    $dvips_dir="$tree_prefix/fonts/map";
+    $status=system("mkdir", "-p", $dvips_dir);
+    die "Can't create font directories: $!" unless $status==0;
+    $t3_map=$dvips_dir . "/" . $install_map;
+    if (open T3_MAP, "$t3_map") {
+        @t3_map=<T3_MAP>; 
+	$fontmap_entry_qm=quotemeta($fontmap_entry);
+        if (grep /$fontmap_entry_qm/, @t3_map) {
+	    print "Font entry: $fontmap_entry\n\talready in $t3_map.\n";
+	} else {
+	    print "Appending entry:\n\t$fontmap_entry\nonto $t3_map.\n";
+	    push @t3_map, $fontmap_entry, "\n";
+	    rename($t3_map,"$t3_map.orig") or
+		die "Can't rename $t3_map to $t3_map.orig: $!";
+	    close(T3_MAP);
+	    open(T3_MAP, ">$t3_map") or
+		die "Can't open $t3_map for writing: $!";
+	    print T3_MAP @t3_map;
+	}
+	unlink("$fontmap") == 1 or die "Can't remove $fontmap: $!\n";
+    } else {
+	$status=system("mv", "-f", $fontmap, $t3_map);
+	die "Can't move $fontmap to $t3_map: $!" unless $status==0;
+	print "Renaming $fontmap to $t3_map\n";
+    }
+}

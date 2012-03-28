@@ -1,0 +1,338 @@
+%%%%
+%%%% This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl> 
+%%%% (adapted from the METATYPE1 package)
+%%%%
+%%%% THIS FILE BELONGS TO THE METATYPE1 PACKAGE
+%%%%
+%%%% Lines below
+%\ifx\mpformsty\undefined\let\mpformsty\relax\else
+% \errmessage{mt1form.sty must be input only once}\expandafter\endinput
+%\fi
+%%%% WB: are replaced by
+\ifx\typeonesty\undefined\let\typeonesty\relax\else
+ \errmessage{type1.sty must be input only once}\expandafter\endinput
+\fi
+%%%%
+% ---
+% Control sequence \- has special meaning here; original discretionary
+% is supposed to be unnecessary (hyphenation should be avoided if text
+% is ragged right)
+\let\oridiscret\-
+% Also, we'll use underscore character in bizarre ways
+\def\subscriptmark{_}
+% ---
+% Uncomment the the following if you are mono-lingual:
+% \let\onelanguage\relax
+% ---
+\input epsfx  % WB
+\input mftmac % must be input at the beginning (see end of this file)
+% ---
+\vsize=245mm
+\hoffset=-1in \advance\hoffset by 2cm
+\hsize=210mm  \advance\hsize by -4cm
+\newdimen\hhsize
+\hhsize=\ifx\onelanguage\undefined .5\fi \hsize \advance\hhsize by -6mm
+\ifx\prefixing\undefined
+  % define it appropriately for given languages
+  \def\nonelanguage{}
+  \def\firstlanguage{}
+  \def\secondlanguage{}
+  \def\fontprefix{cm}
+\else
+  % second language = Polish, to be used with MeX
+  \prefixing\def\nonelanguage{\nonprefixing\let/\normalslash}\nonprefixing
+  \def\firstlanguage{\prefixing \language\english \exhyphenpenalty100\relax}
+  \def\secondlanguage{\prefixing \language\polish}
+  \def\fontprefix{pl}
+\fi
+% ---
+\font\titfnt \fontprefix tt10 at 48 pt
+\font\PSnamefont=\fontprefix ssdc10 \newfam\PSfam \textfont\PSfam=\PSnamefont
+\font\commfont \fontprefix sltt10   % standard comment font
+\font\vispacefont \fontprefix tt10
+% ---
+\let\currlogo\tenlogo
+\font\bftenlogo logobf10
+\font\BFfont \fontprefix bx12
+\font\BFlogo logobf10 at 12.5pt
+\def\BF{\let\currlogo\BFlogo \BFfont}
+\def\bf{\let\currlogo\bftenlogo \fam\bffam\tenbf}
+\font\infott \fontprefix tt10
+\font\tentex \fontprefix tex10
+% ---
+\def\gobblesubscriptmark#1{%
+  \def\gobblesubscriptmarkparam{#1}%
+  \ifx\gobblesubscriptmarkparam\activesubscriptmark \,% replace _ by \,
+  \else \expandafter \gobblesubscriptmarkparam \fi
+}
+\def\PSnamemark{\fam\PSfam\PSnamefont\aftergroup\gobblesubscriptmark}
+\def\MeX{M\kern-.111em\lower.5ex\hbox{E}\kern-.125emX}
+\def\MF{{\currlogo META}\oridiscret{\currlogo FONT}}
+\def\MP{{\currlogo META}\oridiscret{\currlogo POST}}
+% ---
+\def\nobitmaprules{% dvips-oriented
+  \special{ps:
+    /v {/ruley exch def /rulex exch def V} def
+    /V {gsave newpath transform round exch round exch itransform
+       moveto rulex 0 rlineto 0 ruley neg rlineto rulex neg 0 rlineto
+       closepath fill grestore} def
+}}
+% ---
+%% our footline:
+\let\makefootline\empty
+%% our headline:
+\newcount\hours \newcount\minutes
+\def\oktime{% format `hh:mm'
+\hours=\time \divide \hours by 60 %
+\minutes=-\hours \multiply \minutes by 60 \advance \minutes by \time
+\ifnum\hours>9 \the\hours \else 0\the\hours \fi
+:%
+\ifnum\minutes>9 \the\minutes \else 0\the\minutes \fi}
+\def\monthroman{\uppercase\expandafter{\romannumeral\month}}
+\def\makeheadline{\vbox to 0pt{\nobitmaprules
+  \vss
+  \hrule
+  \line{\vrule height 10pt depth 4pt\kern3mm %
+    \ifodd\pageno \rlap{\it\oktime\quad \the\day\ \monthroman\ \the\year\/}%
+    \else \rlap{\tentex \the\pageno}\fi
+    \hfill \infott\uppercase\expandafter{\jobname}\hfill
+    \ifodd\pageno \llap{\tentex \the\pageno}%
+    \else \llap{\it\oktime\quad \the\day\ \monthroman\ \the\year\/}\fi
+    \kern3mm \vrule}
+  \hrule
+  \vskip30pt
+\vss}}
+% ---
+\let\tinyspace\, % \let\,_ % admittedly risky venture...
+\def\frac#1/#2{\leavevmode\kern.1em
+  \raise.5ex\hbox{\the\scriptfont0 #1}\kern-.1em
+  /\kern-.15em\lower.25ex\hbox{\the\scriptfont0 #2}%
+  \tinyspace}%%%% \tinyspace added
+\let\UL\_
+\def\_{\ifdim\fontdimen1\the\font=0pt \UL\kern0.01em\else\kern-0.08em\UL\kern0.04em\fi}
+% ---
+%% our comment treatment (sorry, but we admit bare underscores in comments):
+\catcode`\_\active \def\activesubscriptmark{_}
+\def_{\ifmmode\subscriptmark\else\_\fi}
+{\obeyspaces\gdef\prepsp{\obeyspaces\everymath{\catcode`\ 10\relax}\let \ }}
+% ---
+%% DIRTY TRICK---sorry, but we're also using the underscore in file names
+%% (presumption: \tt appears only as \hbox{\tt...})
+\def\tt{\nocats\namett}
+{\catcode`\}\other \catcode`\)2\gdef\namett#1}{\tentex#1\egroup))
+% ---
+% an innocent formatting trick: a single or double underscore character
+% that ends a name will be typeset as an superscript asterisk(s)
+\def\underscoreasasterisk{\let\oriunderscore\_\let\_\specunderscore}%
+\newif\ifbgroupopen
+\def\optegroup{\ifbgroupopen\expandafter\egroup\fi}
+\def\specunderscore#1{%
+  \ifx#1\relax \optegroup \ifmmode^*\else$^*$\fi
+  \else \ifx#1\/\optegroup \ifmmode^*\/\else$^*$\fi
+  \else \ifx#1\_\optegroup \ifmmode{^*}{^*}\else${^*}{^*}$\fi
+  \else\oriunderscore#1\fi\fi\fi
+}
+% ---
+\def\initialunderscore{%
+  \ifx\maybeunderscore\_\PSnamemark \else \expandafter \maybeunderscore\fi
+}
+\def\\#1{%
+  \bgroup\underscoreasasterisk\bgroupopentrue\it
+  \afterassignment\initialunderscore\let\maybeunderscore#1\relax \optegroup
+}% italic type for identifiers
+%
+\def\1#1{\mathop{\hbox{%
+  \rm \underscoreasasterisk #1\relax
+}}}% operator, in roman type
+%
+% in MFTMAC, \bf redefines \_
+\def\2#1{\mathop{\hbox{%
+  \bf \underscoreasasterisk #1\/\kern.05em%
+}}} % operator, in bold type
+%
+\def\3#1{\tinyspace\mathclose{\hbox{%
+  \bf\underscoreasasterisk #1\/%
+}}} % `fi' and `endgroup'
+%
+\def\5#1{\hbox{%
+  \bf \underscoreasasterisk #1\/%
+}}% `true' and `nullpicture'
+%
+\def\6#1{\mathbin{%
+  \rm \underscoreasasterisk #1\relax
+}}% `++' and `scaled'
+%
+%% our favorite form of strings:
+\def\vispace{{\vispacefont\char32}}
+%% strings may be broken in a *.TeX file:
+{\obeyspaces\obeylines%
+\gdef\prepspnl{\obeyspaces\obeylines\let \vispace\let^^M\vispace}}
+\def\7{\hbox\bgroup\prepspnl\nocats\frenchspacing\finstring} % string token
+%
+\def\dblhyph{--}
+\def\8#1{%
+  \def\eightparm{#1}\mathrel{\mathcode`\.="8000 \mathcode`\-="8000
+  \ifx\eightparm\dblhyph\setbox\shorthyf\hbox{\bf -\kern-.05em}\fi%
+  #1\unkern
+}}% `..' and `--'
+%
+\def\normalcomments{%
+ \def\9{$\bgroup\def\par{\endgraf\egroup}\hfill\commfont\%\prepsp
+}}
+\def\specialcomments{\def\9{$\bgroup\firstlanguage %
+  \def\par{\endgraf\egroup}\commfont\%\prepsp%
+  \everymath\expandafter{\the\everymath\nonelanguage}%
+  \everydisplay\expandafter{\the\everydisplay\nonelanguage}%
+}}
+\specialcomments % our favorite form of comments
+% ---
+% PLAIN: \mathcode`\|="026A, MFTMAC: \mathcode`\|="326A
+\def\vbar{{\mathcode`\|="026A|}}% for referencing in comments
+\let\SH\# % sharp sign for sharped units is just a sharp sign
+% ---
+\def\item{\par\noindent\hskip1em\hangindent1em\textindent}
+\def\itemitem{\par\noindent\hskip2em\hangindent2em\textindent}
+\def\bull{\item{$\bullet$}}
+% ---
+\def\gobbletospace#1 {}
+% In descriptions it is convenient to have an access to mft formatting
+\def\descriptioncomments{\def\9{\unskip$\ignorespaces}\def\par{ }%
+  \everymath\expandafter{\the\everymath\nonelanguage}%
+  \everydisplay\expandafter{\the\everydisplay\nonelanguage}%
+}
+\newbox\firstlanguagebox
+\newbox\secondlanguagebox
+\def\toprule{\medskip\hrule\nobreak\smallskip}
+\def\botrule{\nobreak\smallskip\hrule\medskip}
+\def\centering{\leftskip\rightskip}
+\def\descenv{\hsize\hhsize \parindent0mm \rightskip0ptplus1fill\relax}
+\def\begindesc{%
+  \toprule \partialbegindesc
+  % gobble non-spaces and one space following the 1st occurence of \-
+  \gobbletospace
+}
+\def\enddesc{%
+  \partialenddesc \botrule
+  % gobble non-spaces and one space following the 3rd occurrence of \-
+  \gobbletospace
+}
+\def\partialbegindesc{%
+  \begingroup
+    \ifx\onelanguage\undefined \let\-\startsecondlanguage
+    \else \let\-\ignoresecondlanguage \fi
+    \startfirstlanguage
+}
+\def\partialenddesc{%
+  \par\egroup
+  \ifdim\wd\firstlanguagebox>0mm \typesetdesc
+  \else \ifdim\wd\secondlanguagebox>0mm \typesetdesc \fi
+  \fi \endgroup
+}
+\def\typesetdesc{\line{%
+  \hss \hbox to\hhsize{\hss\box\firstlanguagebox\hss}\hss
+  \ifx\onelanguage\undefined
+    \vrule \hss \hbox to\hhsize{\hss\box\secondlanguagebox\hss}\hss
+  \fi
+}}
+\def\startfirstlanguage{%
+  \setbox\firstlanguagebox\vtop\bgroup \descenv \firstlanguage
+}
+\def\startsecondlanguage{%
+  \par\egroup \let\-\enddesc \setbox\secondlanguagebox\vtop\bgroup
+  \descenv \secondlanguage
+}
+%
+% PSt partial solution (?):
+% \def\ignoresecondlanguage#1\-{\relax\findline#1\LINE\relax}
+% \def\sthcs{\relax}
+% \let\e\expandafter
+% \def\getline#1{\def\fpar{#1}%
+%   \ifx\fpar\sthcs\e\enddesc
+%   \else\e\e\e\e\e\e\e\LINE\e\e\e\e\e\e\e{\e\e\e\fpar\e\e\e}\e\findlinex\fi}
+% \def\findlinex#1\LINE\relax{#1\-}
+% \def\findline#1\LINE{\getline}
+%
+\def\ignoresecondlanguage{%
+  \afterassignment\ignoresecondlanguagecont \let\ignoresecondlanguagetoken
+}
+\def\ignoresecondlanguagecont{%
+  \ifx\ignoresecondlanguagetoken\-\def\ignoresecondlanguageend{\enddesc}\else
+  \ifx\ignoresecondlanguagetoken\LINE\def\ignoresecondlanguageend{\LINE}\else
+  \ifx\ignoresecondlanguagetoken\PICT\def\ignoresecondlanguageend{\PICT}\else
+    \def\ignoresecondlanguageend{\ignoresecondlanguage}%
+  \fi\fi\fi
+  \ignoresecondlanguageend
+}
+% ---
+\let\-\begindesc % notational idiosyncrasy
+% ---
+\def\discretcs{\-}
+\long\def\LINE#1#2{\partialenddesc \unskip
+  \def\inssecpar{#2}%
+  \medskip\hbox to\hsize{\hss#1\hss}\medskip
+  \ifx\discretcs\inssecpar \botrule \expandafter \gobbletospace
+  \else \partialbegindesc #2\fi
+}
+% ---
+% must be consistent with fontbase.mp and mp2pf.awk
+%\def\EPSNAMEandNUMBER#1#2{\expandafter\def\csname pict:#1\endcsname{#2}}
+\def\EPSNAMEandNUMBER{\begingroup\def_{\string_}\EPSNAMEandNUMBERcont}
+\def\EPSNAMEandNUMBERcont#1#2{%
+  \expandafter\gdef\csname pict:#1\endcsname{#2}\endgroup
+}
+% ---
+\def\SETPICT#1#2#3#4{%
+% #1 font name, #2 glyph name, #3 horizontal limit, #4 vertical limit
+ \hbox{%
+  \def_{\string_}%
+  \expandafter\ifx\csname pict:#2\endcsname\relax\message{PICTURE #2 UNKNOWN}%
+  \else
+    \setbox0\hbox{\epsfysize#4\relax
+      \epsfbox{#1.\csname pict:#2\endcsname}}%
+    \ifdim\wd0>#3\relax \setbox0\hbox{\epsfxsize#3\relax
+      \epsfbox{#1.\csname pict:#2\endcsname}}%
+    \fi
+    \box0\relax
+  \fi
+}}
+\def\PICT#1{\LINE{%
+  \def_{\string_}%
+  \edef\towrite{\write\CNT{\string\setcnt{#1}{\noexpand\the\pageno}}}%
+  \towrite
+  \SETPICT{\jobname}{#1}{\hsize}{100mm}}}
+% ---
+\def\maybeinput #1 {%
+  \immediate\openin\maybefile#1\relax
+  \ifeof\maybefile
+    \immediate\closein\maybefile \let\maybenext\empty
+    \edef\maybefile{#1}\immediate\write16{File \maybefile\space not found}%
+  \else \immediate\closein\maybefile \def\maybenext{\input #1 }\fi
+  \maybenext
+}
+\newread\maybefile
+% ---
+% Typeset title page:
+{\let\makefootline\empty \let\makeheadline\empty
+\vglue0ptplus1fill
+\centerline{\titfnt \uppercase\expandafter{\jobname}}
+\bigskip
+\vfill\vfill\eject}
+% ---
+\newwrite\CNT \immediate\openout\CNT\jobname.cnt
+\def\setcnt#1#2{%
+  {#1}~{\PSnamefont #2}\hskip1.5em\ignorespaces
+}
+\def\endproof{%
+  \closeout\CNT\vfil\eject
+  {\noindent{\bf GLYPH LIST:\enspace}%
+   \rightskip0pt plus1fil \baselineskip14pt plus1pt
+   \input\jobname.cnt \endgraf}
+  \csname end\endcsname
+}
+% ---
+\let\oriinput\input
+\def\gobbleoneinput #1 {\let\input\oriinput}
+\let\input\gobbleoneinput % ignore forthcoming `\input mftform'
+% ---
+\endinput
+

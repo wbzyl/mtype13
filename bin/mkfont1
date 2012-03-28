@@ -1,0 +1,1119 @@
+#!/bin/bash
+#
+# This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+#
+# CONVERTER: Metapost to Type 1 font
+# AUTHORS: JNS team, JNSteam@gust.org.pl
+#          Converted to a shell script by Wlodek Bzyl <matwb@univ.gda.pl>
+
+script_name=$(basename $0)
+version=1.3
+
+# Error codes
+
+exitwith() {
+    exec 1>&2  # write stdout on stderr instead
+    case "$1" in
+	ErrMkDir)
+	    echo "Can't create directory: $2."
+	    exit 1;;
+	ErrNoWrite)
+	    echo "File not writable: '$2'."
+	    exit 2;;
+	ErrBinary)
+	    echo "Program '$2' not found. Please install it."
+	    exit 3;;
+	*)
+	    echo "Error: exitwith() was called with illegal error code '$1'."
+	    exit 10;;
+    esac
+}
+
+if ! type -p gawk > /dev/null ; then exitwith ErrBinary "gawk" ; fi
+if ! type -p t1asm > /dev/null ; then exitwith ErrBinary "t1asm" ; fi
+
+vendor_name=""
+tree_prefix="texmf"
+install_font_opt=0
+map_filename="t1fonts.map"
+skip_subroutines_opt=0
+delete_opt=1
+help_opt=0
+version_opt=0
+
+# Note that we use `"$@"' to let each command-line parameter expand to a 
+# separate word. The quotes around `$@' are essential!
+# We need TEMP as the `eval set --' would nuke the return value of getopt.
+TEMP=`getopt -o a:t:id:skhv --long vendor-name:,tree-prefix:,install-font,install-dvips:,skip-subroutine-packing,keep-intermediate,help,version -a -n 'mptot1' -- "$@"`
+
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
+
+if [ $? != 0 ] ; then 
+    printf "Try \`$script_name --help' for more information\n" >&2
+    printf "Terminating...\n" >&2
+    exit 1
+fi
+
+while true ; do
+    case "$1" in
+        -a|--vendor-name) vendor_name=$2 ; shift 2 ;;
+        -t|--tree-prefix) tree_prefix=$2 ; shift 2 ;;    
+        -d|--install-dvips) map_filename=$2 ; shift 2 ;;
+        -i|--install-font) install_font_opt=1 ; shift ;;
+        -s|--skip-subroutine-packing) skip_subroutines_opt=1 ; shift ;;
+        -k|--keep-intermediate) delete_opt=0 ; shift ;;
+        -h|--help) help_opt=1 ; shift ;;
+        -v|--version) version_opt=1 ; shift ;;
+        --) shift ; break ;;
+         *) echo "Getopt internal error!" ; exit 1 ;;
+    esac
+done
+
+if [ $version_opt != 0 ] ; then
+  printf "%s (MTYPE13) %s\n" $script_name $version >&2
+  printf "Original DOS batch file by JNS team.\n" >&2
+  printf "Bash script by Wlodek Bzyl.\n\n" >&2
+  printf "Copyright (C) 2002 Wlodek Bzyl.\n" >&2
+  printf "This is free software; see the source for copying conditions.  There is NO\n" >&2
+  printf "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n" >&2
+  exit 1
+fi
+
+font=$1
+fname=$(basename $font .mp)
+
+if [ $# -eq 0 -o $help_opt -gt 0 ] ; then
+  printf "Usage:   %s [OPTION]... FILE\n" $script_name
+  printf "Example: %s logo10.mp\n" $script_name >&2
+  printf "Convert METATYPE1 source FILE into a Type 1 font.\n\n" >&2
+  printf "  -t --tree-prefix=DIR     default prefix is \`texmf'\n" >&2
+  printf "  -a --vendor-name=VENDOR  default is no vendor name\n" >&2
+  printf "  -i --install-font        move generated files into directories\n" >&2
+  printf "                           DIR/fonts/{type1,afm,tfm,map,enc}/NAME\n" >&2
+  printf "  -d --install-dvips=NAME  append map file onto DIR/fonts/map/NAME\n" >&2
+  printf "  -s --skip-subroutine     skip subroutines packing\n" >&2
+  printf "  -k --keep-intermediate   preserve intermediate files\n" >&2
+  printf "  -h --help                display this help and exit\n" >&2
+  printf "  -v --version             output version information and exit\n\n" >&2
+  printf "Report bugs to <matwb@univ.gda.pl>.\n" >&2
+  exit 1
+fi
+
+trap 'rm -f $fname.{log,ps,pfb,afm,tfm,map,enc,pfi,kpx,p,pn,cnt,mlo,proof} \
+ $fname.{[0-9],[1-9][0-9],[1-9][0-9][0-9],[1-9][0-9][0-9][0-9]} \
+ piclist.tex ; exit' 1 2 15
+
+mpost "\generating:=0; input $fname"
+
+if [ $? != 0 ] ; then 
+  printf "! %s: mpost error when generating glyphs outlines\n" $script_name >&2
+  printf "! Terminating...\n\n" >&2
+  exit 1
+fi
+
+printf "Generating raw font %s.p\n" $fname >&2
+
+gawk -vNAME=$fname '\
+# File: mp2pf.awk 
+#
+# THIS FILE BELONGS TO THE METATYPE1 PACKAGE
+#
+# It is an AWK script that does the main job of convertion from
+# METAPOST output to (raw) Type 1 format
+# History:
+# 18.01.2003: ver. 0.34, normal round function introduced; old one
+#             renamed to fround (forced round); no more mess due
+#             ADL comment in PFB and Ascender and Descender ones in AFM;
+#             again fun. rational: superfluously robust ;-)
+# 06.01.2003: ver. 0.33, fun. rational: unlikely case included (as a comment)
+# 03.01.2003: ver. 0.32, fontdimens and headerbytes handled
+# 31.07.2002: banner added
+# 14.07.2002: comment (question) added in pickup_stem
+# 22.09.2001: ver. 0.31 (remarks moved to an informal readme.his file)
+# 26.01.2001: an empty set of KPX pairs admitted
+# 14.01.2001: functions rational and approx added
+#
+# WB:
+# 12.10.2002: (  i) banner removed
+#             ( ii) pfcommon.dat was moved to string;
+#                   this required change in get_data_files function
+#             (iii) "grave" character was replaced by "quotedbl"
+BEGIN {
+# File: pfcommon.dat 
+#
+#THIS FILE BELONGS TO THE METATYPE1 PACKAGE
+#
+#It is a template for preambles and postambles of *.AFM and *.PFB files
+#
+#Version 0.13, 16 I 2003
+#
+pfcommon = "\
+<PFB PROLOG>\n\
+%!PS-AdobeFont-1.0: ##FONT_NAME## ##VERSION##\n\
+%%CreationDate: ##CREATION_DATE##\n\
+% Generated by MetaType1 (a MetaPost-based engine)\n\
+% ##AUTHOR##\n\
+% ADL: ##ADL_ASCENDER## ##ADL_DESCENDER## ##ADL_LINESKIP##\n\
+%%EndComments\n\
+FontDirectory/##FONT_NAME## known{/##FONT_NAME## findfont dup/UniqueID known{dup\n\
+/UniqueID get 0 eq exch/FontType get 1 eq and}{pop false}ifelse\n\
+{save true}{false}ifelse}{false}ifelse\n\
+17 dict begin\n\
+/FontInfo 9 dict dup begin\n\
+/version(##VERSION##)readonly def\n\
+/Notice(##AUTHOR##)readonly def\n\
+/FullName(##FULL_NAME##)readonly def\n\
+/FamilyName(##FAMILY_NAME##)readonly def\n\
+/Weight(##WEIGHT##)readonly def\n\
+/isFixedPitch ##FIXED_PITCH## def\n\
+/ItalicAngle ##ITALIC_ANGLE## def\n\
+/UnderlinePosition ##UNDERLINE_POSITION## def\n\
+/UnderlineThickness ##UNDERLINE_THICKNESS## def\n\
+end readonly def\n\
+/FontName /##FONT_NAME## def\n\
+/Encoding 256 array\n\
+0 1 255 {1 index exch /.notdef put} for\n\
+##ENCODING##\n\
+readonly def\n\
+/PaintType 0 def\n\
+/FontType 1 def\n\
+/StrokeWidth 0 def\n\
+/FontMatrix[0.001 0 0 0.001 0 0]readonly def\n\
+%/UniqueID 0 def\n\
+/FontBBox{##FONT_BOUNDING_BOX##}readonly def\n\
+currentdict end\n\
+currentfile eexec\n\
+dup/Private 19 dict dup begin\n\
+/RD{string currentfile exch readstring pop}executeonly def\n\
+/ND{noaccess def}executeonly def\n\
+/NP{noaccess put}executeonly def\n\
+/BlueValues[##BLUE_VALUES##]def\n\
+/OtherBlues[##OTHER_BLUES##]def\n\
+/BlueScale ##BLUE_SCALE## def\n\
+/BlueShift ##BLUE_SHIFT## def\n\
+/BlueFuzz ##BLUE_FUZZ## def\n\
+/MinFeature{16 16}ND\n\
+%/UniqueID 0 def\n\
+/StdHW[##STDHW##]def\n\
+/StdVW[##STDVW##]def\n\
+/StemSnapH[##STEMSNAPH##]def\n\
+/StemSnapV[##STEMSNAPV##]def\n\
+/ForceBold ##FORCE_BOLD## def\n\
+/password 5839 def\n\
+% Copyright (c) 1987-1990 Adobe Systems Incorporated\n\
+% All Rights Reserved.\n\
+% This code to be used for hint replacement only\n\
+/OtherSubrs\n\
+[ { } { } { }\n\
+{\n\
+systemdict /internaldict known not\n\
+{ pop 3 }\n\
+{ 1183615869 systemdict /internaldict get exec\n\
+dup /startlock known\n\
+{ /startlock get exec }\n\
+{ dup /strtlck known\n\
+{ /strtlck get exec }\n\
+{ pop 3 }\n\
+ifelse }\n\
+ifelse }\n\
+ifelse\n\
+} executeonly\n\
+] noaccess def\n\
+/Subrs ##NUMBER_OF_SUBRS## array\n\
+dup 0 {\n\
+	3 0 callothersubr\n\
+	pop\n\
+	pop\n\
+	setcurrentpoint\n\
+	return\n\
+	} NP\n\
+dup 1 {\n\
+	0 1 callothersubr\n\
+	return\n\
+	} NP\n\
+dup 2 {\n\
+	0 2 callothersubr\n\
+	return\n\
+	} NP\n\
+dup 3 {\n\
+	return\n\
+	} NP\n\
+dup 4 {\n\
+	1 3 callothersubr\n\
+	pop\n\
+	callsubr\n\
+	return\n\
+	} NP\n\
+##SUBROUTINES##\n\
+ND\n\
+2 index\n\
+/CharStrings ##NUMBER_OF_CHARSTRINGS## dict dup begin\n\
+/.notdef {\n\
+	0 280 hsbw\n\
+	endchar\n\
+	} ND\n\
+</PFB PROLOG>\n\
+\n\
+<PFB TRAILER>\n\
+end end readonly put put\n\
+dup/FontName get exch definefont pop\n\
+mark currentfile closefile\n\
+cleartomark\n\
+{restore}if\n\
+</PFB TRAILER>\n\
+\n\
+<AFM PROLOG>\n\
+StartFontMetrics 2.0\n\
+Generated by MetaType1 (a MetaPost-based engine)\n\
+Comment Creation Date: ##CREATION_DATE##\n\
+Notice ##AUTHOR##\n\
+FontName ##FONT_NAME##\n\
+FullName ##FULL_NAME##\n\
+FamilyName ##FAMILY_NAME##\n\
+Weight ##WEIGHT##\n\
+ItalicAngle ##ITALIC_ANGLE##\n\
+IsFixedPitch ##FIXED_PITCH##\n\
+UnderlinePosition ##UNDERLINE_POSITION##\n\
+UnderlineThickness ##UNDERLINE_THICKNESS##\n\
+Version ##VERSION##\n\
+EncodingScheme ##ENCODING_SCHEME##\n\
+FontBBox ##FONT_BOUNDING_BOX##\n\
+CapHeight ##CAPHEIGHT##\n\
+XHeight ##XHEIGHT##\n\
+Descender ##DESCENDER##\n\
+Ascender ##ASCENDER##\n\
+Comment PFM parameters: ##PFM_NAME## ##PFM_BOLD## ##PFM_ITALIC##\n\
+Comment TFM designsize: ##DESIGN_SIZE##\n\
+StartCharMetrics ##NUMBER_OF_CHARNAMES##\n\
+</AFM PROLOG>\n\
+\n\
+<AFM KPX>\n\
+StartKernData\n\
+StartKernPairs ##NUMBER_OF_KPX##\n\
+##KPX_DATA##\n\
+EndKernPairs\n\
+EndKernData\n\
+</AFM KPX>\n\
+\n\
+<AFM TRAILER>\n\
+EndCharMetrics\n\
+##AFM_KPX##\n\
+EndFontMetrics\n\
+</AFM TRAILER>"
+
+#
+# now continue with mp2pf.awk
+#
+# HEAD
+CONSOLE="/dev/tty"
+# for MS-DOS you may use:
+#  CONSOLE="CON"
+  mess("This is mp2pf, ver. 0.34 (a converter from MP EPSes to PS Type 1 font)")
+  if (NAME=="") {mess("!NAME MUST NOT BE EMPTY"); exit(1);}
+  if (LOG=="") LOG=NAME ".clg" # converter log
+  if (AFM=="") AFM=NAME ".afm"
+  if (PFB=="") PFB=NAME ".p"
+  if (FD=="") FD=NAME ".pfi"
+  if (KD=="") KD=NAME ".kpx"
+####  WB: removed line (see get_data_files for further changes) 
+####  if (CD=="") CD="pfcommon.dat"
+  if (PL=="") PL="piclist.tex"
+  max_font_dimen=99; max_header_byte=99;
+  mllx=10000; mlly=10000; murx=-10000; mury=-10000
+  get_data_files()
+  # dominant stems chosen manually have the highest priority:
+  if ("STDVW" in font_data) vstem_stat[font_data["STDVW"]]=10000
+  if ("STDHW" in font_data) hstem_stat[font_data["STDHW"]]=10000
+  subrs_base=4; subrs[""]=-1 # standard empty subr has number 3==subrs_base-1
+  # the following code must be consistent with fontbase.mp and mpform.sty
+  while (getline < PL >0) if (/^\\EPSNAMEandNUMBER{.*}{[0-9]+}/) {
+    sub(/^\\EPSNAMEandNUMBER{.*}{/,""); sub(/} *$/,"")
+    file[++file[0]]=NAME "." $0
+  }
+# BODY
+  for (curr_file=1; curr_file<=file[0]; curr_file++)
+    while (getline < file[curr_file] >0) {
+      if (/^%%BoundingBox:/) {
+        if (++n%4==0) printf "#" > CONSOLE
+        clear_hints(2)
+        name=""; code=0; hsb=width=0; x0=y0=0; #sentinels
+        curr_path=acc_path=start_acc=0; hints_pos=0;
+        hsb=llx=$2; lly=$3; urx=$4; ury=$5
+        if (mllx>llx) mllx=llx; if (mlly>lly) mlly=lly
+        if (murx<urx) murx=urx; if (mury<ury) mury=ury
+      }
+      if (/^%GLYNFO:/) {
+        if ($2=="NAME") {name=$3; code=$4}
+        if ($2=="HSBW") {#hsb=$3; # obsolete
+          width=$4; # if (int(width)!=width) width=round(width*1000)/1000
+          x0=hsb; y0=0} # hsbw should precede hints
+        if ($2=="ACC") {acc_path=$3}
+        if ($2=="HHINT") {pickup_stem(hstem,hcov,hstem_stat,$3,$4,20.5)}
+        if ($2=="VHINT") {pickup_stem(vstem,vcov,vstem_stat,$3-hsb,$4,0)}
+        if ($2=="BEGINCHAR") {
+          find_stem3(hstem,hstem3,20.5); find_stem3(vstem,vstem3,0)
+          store_pfb("/" name " {\n\t" fround(hsb) " " approx(width) " hsbw")
+          hints0_pos=mark_pfb_pos()
+          store_afm("C " code " ; WX " width " ; N " name\
+            " ; B " llx " " lly " " urx " " ury " ;", code, name)
+        }
+      }
+      if (/lineto/) {
+        set_hints($1,$2)
+        make_lineto($1-x0,$2-y0)
+        x0=$1; y0=$2
+      } else
+      if (/curveto/) {
+        set_hints($5,$6)
+        make_curveto($1-x0,$2-y0,$3-$1,$4-$2,$5-$3,$6-$4)
+        x0=$5; y0=$6
+      } else
+      if (/moveto/) {
+        # $1=="newpath"
+        if (++curr_path==acc_path) {# we treat accent nearly as a new glyph
+          change_hints(); pfb_text[hints0_pos]=flush_hints(hints0)
+          clear_hints(1); hints_pos=mark_pfb_pos(); hints0_pos=mark_pfb_pos()
+          start_acc=1
+        }
+        set_hints($2,$3)
+        make_moveto($2-x0,$3-y0)
+        x0=$2; y0=$3; x_path0=x0; y_path0=y0
+      }
+      if (/closepath/) {
+        set_hints(x_path0,y_path0)
+        store_pfb("\tclosepath")
+      }
+      if (/showpage/) {
+        change_hints()
+        pfb_text[hints0_pos]=flush_hints(hints0)
+        store_pfb("\tendchar\n\t} ND")
+      }
+    } # end while, for
+# TAIL
+  print "" > CONSOLE
+  stdhw=make_stem_stat(hstem_stat,stemsnaph)
+  stdvw=make_stem_stat(vstem_stat,stemsnapv)
+  flush_afm(); flush_pfb()
+}
+
+# FUNCTIONS
+
+function make_stem_stat(stat,snap, m,d,i,j,t) {
+  while (snap[0]<12) { # 12 is max length of stemsnap array
+    m=0; d=0
+    for (i in stat) if (stat[i]>m) {m=stat[i]; d=i+0}
+    if (m>1) # ignore single stems
+      {snap[++snap[0]]=d; delete stat[d]} else break
+  }
+  d=snap[1]
+  for (i=1; i<snap[0]; ++i) {
+    m=i; for (j=i+1; j<=snap[0]; j++) if (snap[j]<snap[m]) m=j
+    if (m!=i) {t=snap[i]; snap[i]=snap[m]; snap[m]=t}
+  }
+  return d
+}
+
+function clear_hints(lev, i) {
+  # lev==0 at hints replacement (clears curr stems)
+  hints[0]=0
+  for (i in curr_hstem) delete curr_hstem[i]
+  for (i in curr_vstem) delete curr_vstem[i]
+  if (lev>0) hints0[0]=0 # lev==1 at the begin of accent
+  if (lev>1) {# lev==2 at the begin of a glyph (clears all stem info)
+    # i=i is a circumvention of a gawk bug (improper typing
+    # scalar vs. array)
+    for (i in curr0_hstem) {i=i; delete curr0_hstem[i]}
+    for (i in curr0_vstem) {i=i; delete curr0_vstem[i]}
+    for (i in hstem) {i=i; delete hstem[i]}
+    for (i in vstem) {i=i; delete vstem[i]}
+    for (i in hstem3) {i=i; delete hstem3[i]}
+    for (i in vstem3) {i=i; delete vstem3[i]}
+    for (i in hcov) {i=i; delete hcov[i]}
+    for (i in vcov) {i=i; delete vcov[i]}
+  }
+}
+
+function pickup_stem(stem,covering,stem_stat,b,d,ghost, i,a,b_,d_) {
+  b+=0; d+=0 # must be numbers; should be integers: to check or not to check?
+  for (i in stem) {
+    split(stem[i],a); b_=a[1]+0; d_=a[2]+0 # must also be a number
+    if ((b_+d_>=b) && (b_<=b+d)) if ((b_!=b) || (d_!=d)) {
+      covering[b_,d_,b,d]; covering[b,d,b_,d_]
+    }
+  }
+# We remember only the smallest hint for a given point (both
+# starting and ending positions are taken into account); because we
+# are not going to minimize the number of hint replacements, the complete
+# list of feasible hints for a given point is not needed. As a side-effect,
+# we obtain the following convenient behaviour: assume that, e.g., in
+# dieresis the distance between dots is equal to a dot diameter; METAPOST
+# likely will generate three vstems -- two for the dots and one for the gap;
+# the latter will be removed by pickup_stem.
+  fix_min_stem(stem,b,b,d); fix_min_stem(stem,b+d,b,d)
+  if (abs(d-ghost)>1) stem_stat[d]++
+}
+
+function fix_min_stem(stem,b0,b,d, a) {
+  if (stem[b0]=="") stem[b0]= b " " d
+  else {split(stem[b0],a); if (a[2]+0>d) stem[b0]= b " " d}
+}
+
+function find_stem3(stem,stem3,ghost, i,j,a,b1,b2,b3,d1,d2,d3,gap,found) {
+  for (i in stem) {
+    for (j in stem) {
+      if (i!=j) {
+          split(stem[i],a); b1=a[1]+0; d1=a[2]+0 # must be numbers
+          split(stem[j],a); b2=a[1]+0; d2=a[2]+0 # must be numbers
+          gap=b2-(b1+d1)
+          if ((gap>0) && (abs(d1-ghost)>1)) {# no ghost triple stems
+            b3=b2+d2+gap; d3=d1
+            if ((b3 in stem ? stem[b3]==(b3 " " d3) : 0) ||
+               ((b3+d3) in stem ? stem[b3+d3]==(b3 " " d3) : 0)) {
+                 stem3[b1]=stem3[b1+d1]=stem3[b2]=stem3[b2+d2]=\
+                   stem3[b3]=stem3[b3+d3]= b1 " " d1 " " d2 " " gap
+                 found=1
+            }
+          }
+        }
+      if (found) break
+    }
+    if (found) break
+  }
+  if (found) for (i in stem) delete stem[i] # Adobe documentation demands it
+}
+
+function set_hints(x,y, do_rep) {
+  x-=hsb; y+=0 # must be numbers
+  if (x in vstem3) set_hint3(x, vstem3, curr0_vstem, hints0, "v")
+  else if (x in vstem ? !hint_clash(x, vstem, curr0_vstem, vcov) : 0)
+    set_hint(x, vstem, curr0_vstem, hints0, "v")
+  if (y in hstem3) set_hint3(y, hstem3, curr0_hstem, hints0, "h")
+  else if (y in hstem ? !hint_clash(y, hstem, curr0_hstem, hcov) : 0)
+    set_hint(y, hstem, curr0_hstem, hints0, "h")
+#
+  if (x in vstem) do_rep+=hint_clash(x, vstem, curr_vstem, vcov)
+  if (y in hstem) do_rep+=hint_clash(y, hstem, curr_hstem, hcov)
+  if (do_rep) {change_hints(); clear_hints(0); hints_pos=mark_pfb_pos()}
+#
+  if (x in vstem3) set_hint3(x, vstem3, curr_vstem, hints, "v")
+  else if (x in vstem) set_hint(x, vstem, curr_vstem, hints, "v")
+  if (y in hstem3) set_hint3(y, hstem3, curr_hstem, hints, "h")
+  else if (y in hstem) set_hint(y, hstem, curr_hstem, hints, "h")
+}
+
+function hint_clash(p,stem,curr_stem,cov,  a,i,clash) {
+  if (!(p in curr_stem)) {
+    split(stem[p],a)
+    for (i in curr_stem) if (curr_stem[i]>0)
+      if ((i,curr_stem[i],a[1],a[2]) in cov) {clash=1; break}
+  }
+  return clash
+}
+
+function set_hint3(p,stem3,curr_stem,hints,pfx,  a) {
+  if (!(p in curr_stem)) {
+    split(stem3[p],a)
+    store_hint(hints,sprintf("%1s %4d %4d %4d %4d",pfx,a[1],a[2],a[3],a[4]))
+    curr_stem[a[1]]=curr_stem[a[1]+a[2]+a[3]+2*a[4]]=a[2]
+    curr_stem[a[1]+a[2]]=curr_stem[a[1]+2*a[2]+a[3]+2*a[4]]=-a[2]
+    curr_stem[a[1]+a[2]+a[4]]=a[3]; curr_stem[a[1]+a[2]+a[3]+a[4]]=-a[3]
+  }
+}
+
+function set_hint(p,stem,curr_stem,hints,pfx,  a) {
+  if (!(p in curr_stem)) {
+    split(stem[p],a)
+    store_hint(hints,sprintf("%1s %4d %4d",pfx,a[1],a[2]))
+    curr_stem[a[1]]=a[2]; curr_stem[a[1]+a[2]]=-a[2]
+  }
+}
+
+function store_hint(hints,hint_txt, i,t) {
+  hints[++hints[0]]=hint_txt
+  for (i=hints[0]; i>1; --i) if (hints[i]>hints[i-1]) {# trivial sort
+    t=hints[i]; hints[i]=hints[i-1]; hints[i-1]=t
+  } else break
+}
+
+function flush_hints(hints, i,a,r) {
+  for (i=1; i<=hints[0]; ++i)
+    if (i in hints) # in accent some hints are removed
+      if (split(hints[i],a)>3)
+        r=r (r==""?"":"\n") "\t" a[2] " " a[3] " " a[2]+a[3]+a[5] " " a[4] \
+          " " a[2]+a[3]+a[4]+2*a[5] " " a[3] " " a[1] "stem3"
+      else
+        r=r (r==""?"":"\n") "\t" a[2] " " a[3] " " a[1] "stem"
+  return r
+}
+
+function change_hints( i,j) {
+  if (start_acc==1) {
+    start_acc=0
+    i=j=1; while ((i<=hints[0]) && (j<=hints0[0])) {# do not put hints twice
+      if (hints[i]==hints0[j]) {delete hints[i]; j++}; i++
+    }
+  }
+  if (hints_pos!=0) {
+    i=flush_hints(hints)
+    if (!(i in subrs)) {xsubrs[++xsubrs[0]]=i; subrs[i]=xsubrs[0]}
+    pfb_text[hints_pos]="\t" subrs[i]+subrs_base " 4 callsubr"
+      # subr 4 performs hint replacement
+  }
+}
+
+function tab2str(t, s) {
+  for(i=1; i<=t[0]; ++i) s=s (s=="" ? "" : " ") t[i]
+  return s
+}
+
+function mark_pfb_pos() {return ++pfb_text[0]}
+
+function store_pfb(s) {pfb_text[++pfb_text[0]]=s}
+
+function store_afm(s,n,m) {
+  if (n==-1) afm_text_oth[++num_oth_chars] = s lig_data[m]
+  else if (!(n in afm_text)) {
+    ++num_enc_chars; afm_text[n]=s lig_data[m]; enc_name[n]=m
+  } else mess("!CHAR " n " ALREADY EXISTS")
+}
+
+function get_data_files( s,key,a) {
+#### WB: line
+#### WB:  while (getline s < CD >0) {
+#### WB: replaced by 
+  total_lines=split(pfcommon,pfcommon_lines,"\n")
+  for (i=1; i<=total_lines; i++) {
+    s=pfcommon_lines[i]
+#### WB: end of changes
+    if (s~/^<\//) key=""
+    if (key~/<PFB PROLOG>/)  PFB_PRO[++PFB_PRO[0]]=s
+    if (key~/<PFB TRAILER>/) PFB_TRA[++PFB_TRA[0]]=s
+    if (key~/<AFM PROLOG>/)  AFM_PRO[++AFM_PRO[0]]=s
+    if (key~/<AFM TRAILER>/) AFM_TRA[++AFM_TRA[0]]=s
+    if (key~/<AFM KPX>/)     AFM_KPX[++AFM_KPX[0]]=s
+    if (s~/^<[^\/]/) key=s
+  }
+#
+  while (getline s < FD >0) {
+    if (split(s,a,/ +: +/)==2) font_data[a[1]]=a[2]
+    else mess("!IMPROPER FONT INFO FILE")
+  }
+#
+  while (getline s < KD >0) {
+    if (s~/^KPX /) kpx_data[++kpx_data[0]]=s
+    if (s~/^L /) {
+      split(s,a); lig_data[a[2]]=lig_data[a[2]] " L " a[3] " " a[4] " ;"
+    }
+  }
+}
+
+function flush_pfb( s,i,n) {
+  for (n=1; n<=PFB_PRO[0]; n++) {
+    s=PFB_PRO[n]
+    for (i in font_data)
+      while (match(s,"##" i "##"))
+        s=substr(s,1,RSTART-1) font_data[i] substr(s,RSTART+RLENGTH)
+    if (match(s,"##OTHER_BLUES##")) s="" # no empty other blues
+#
+    if (match(s,"##ENCODING##")) {
+      s=""
+      for (i=0; i<=255; ++i) if (i in enc_name) {
+        s=s (s==""?"":"\n") "dup " i "/" enc_name[i] " put"
+      }
+    }
+    if (match(s,"##FONT_BOUNDING_BOX##"))
+      s=substr(s,1,RSTART-1) mllx " " mlly " " murx " " mury\
+        substr(s,RSTART+RLENGTH)
+    if (match(s,"##STDHW##"))
+      if (stdhw==0) s=""
+      else s=substr(s,1,RSTART-1) stdhw substr(s,RSTART+RLENGTH)
+    if (match(s,"##STDVW##"))
+      if (stdvw==0) s=""
+      else s=substr(s,1,RSTART-1) stdvw substr(s,RSTART+RLENGTH)
+    if (match(s,"##STEMSNAPH##"))
+      if (stdhw==0) s=""
+      else s=substr(s,1,RSTART-1) tab2str(stemsnaph) substr(s,RSTART+RLENGTH)
+    if (match(s,"##STEMSNAPV##"))
+      if (stdvw==0) s=""
+      else s=substr(s,1,RSTART-1) tab2str(stemsnapv) substr(s,RSTART+RLENGTH)
+    if (match(s,"##NUMBER_OF_SUBRS##"))
+      s=substr(s,1,RSTART-1) (1+subrs_base+xsubrs[0])\
+        substr(s,RSTART+RLENGTH) # 1+subrs_base = number of standard subrs
+    if (match(s,"##SUBROUTINES##")) {
+      s=""
+      for (i=1; i<=xsubrs[0]; ++i) {
+        s=s (s=="" ? "" : "\n")\
+          "dup " i+subrs_base " {\n" xsubrs[i] "\n\treturn\n\t} NP"
+      }
+    }
+    if (match(s,"##NUMBER_OF_CHARSTRINGS##"))
+      s=substr(s,1,RSTART-1) (num_enc_chars+num_oth_chars+1)\
+        substr(s,RSTART+RLENGTH) # +1 because of /.notdef
+    if (match(s,"##[^#]+##"))
+      mess("!EXTRA TAG: " substr(s,RSTART,RLENGTH))
+    if (s!="") print s > PFB
+  }
+#
+  for (i=1; i<=pfb_text[0]; ++i)
+    if (pfb_text[i]!="") # lines reserved for hints can be empty
+      print pfb_text[i] > PFB
+#
+  for (n=1; n<=PFB_TRA[0]; n++) print PFB_TRA[n] > PFB
+}
+
+function flush_afm( s,i,a,n,
+  font_dimen, dimen_name, header_byte, not_mathsy, not_mathex) {
+  not_mathsy=not_mathex=1;
+  for (n=0; n<=max_font_dimen; n++) for (i in font_data)
+    if (match(i, "FONT_DIMEN" n "$")) {
+      font_dimen[n]=font_data[i]; not_mathsy=(n>22); not_mathex=(n>13)
+    } else if (n>=8) {not_mathsy=(n<=22); not_mathex=(n<=13)}
+  prepare_fontdimen_names(!not_mathsy, !not_mathex)
+  for (n=0; n<=max_font_dimen; n++) for (i in font_data)
+    if (match(i, "DIMEN_NAME" n "$")) {
+      dimen_name[n]=font_data[i]
+      if (n in dimen_name_dft)
+        sub(/\(default\)/, "(" dimen_name_dft[n] ")", dimen_name[n])
+    }
+  for (n=0; n<=max_header_byte; n++) {
+    for (i in font_data)
+      if (match(i, "HEADER_BYTE" n "$")) header_byte[n]=font_data[i]
+  }
+  for (n=1; n<=AFM_PRO[0]; n++) {
+    s=AFM_PRO[n]
+    if (match(s,"##FONT_BOUNDING_BOX##"))
+      s=substr(s,1,RSTART-1) mllx " " mlly " " murx " " mury\
+        substr(s,RSTART+RLENGTH)
+    for (i in font_data)
+      while (match(s,"##" i "##"))
+        s=substr(s,1,RSTART-1) font_data[i] substr(s,RSTART+RLENGTH)
+    if (match(s,"##PFM_NAME##")) s="" # no empty PFM data
+    if (match(s,"TFM designsize")) {# append remaining TFM data:
+      for (i=0; i<=max_font_dimen; ++i) if (i in font_dimen)
+        s=s "\nComment TFM fontdimen " sprintf("%2d", i) ": "\
+          sprintf("%-11s", font_dimen[i]) dimen_name[i]
+      for (i=0; i<=max_header_byte; ++i) if (i in header_byte)
+        s=s "\nComment TFM headerbyte " sprintf("%2d", i) ": " header_byte[i]
+    }
+    if (match(s,"##NUMBER_OF_CHARNAMES##"))
+      s=substr(s,1,RSTART-1) (num_enc_chars+num_oth_chars)\
+        substr(s,RSTART+RLENGTH)
+    if (match(s,"##[^#]+##"))
+      mess("!EXTRA TAG: " substr(s,RSTART,RLENGTH))
+    if (s!="") print s > AFM
+  }
+#
+  for (i=0; i<=255; ++i) if (i in afm_text) {
+    print afm_text[i] > AFM
+    delete afm_text[i]
+  }
+  for (i in afm_text) mess("!CHAR OF CODE " i)
+  for (i=1; i<=num_oth_chars; ++i) print afm_text_oth[i] > AFM
+#
+  for (n=1; n<=AFM_TRA[0]; n++) {
+    s=AFM_TRA[n]
+    if (match(s,"##AFM_KPX##")) {
+      s=""
+      if (kpx_data[0]>0) flush_kpx(kpx_data)
+    }
+    if (s!="") print s > AFM
+  }
+}
+
+function flush_kpx(k, s,i,a,l) {
+  for (l=1; l<=AFM_KPX[0]; l++) {
+    s=AFM_KPX[l]
+    if (match(s,"##NUMBER_OF_KPX##"))
+      s=substr(s,1,RSTART-1) k[0] substr(s,RSTART+RLENGTH)
+    if (match(s,"##KPX_DATA##")) {
+      s=""
+      for(i=1; i<=k[0]; ++i) s=s (s==""?"":"\n") k[i]
+    }
+    print s > AFM
+  }
+}
+
+function make_lineto(dx,dy) {
+  if ((dx!=0) || (dy!=0)) {# emergency test
+    if (dx==0) {store_pfb("\t" fround(dy) " vlineto")}
+    else
+      if (dy==0) {store_pfb("\t" fround(dx) " hlineto")}
+      else {store_pfb("\t" fround(dx) " " fround(dy) " rlineto")}
+  }
+}
+
+function make_moveto(dx,dy) {
+  if ((dx!=0) || (dy!=0)) {# emergency test
+    if (dx==0) {store_pfb("\t" fround(dy) " vmoveto")}
+    else
+      if (dy==0) {store_pfb("\t" fround(dx) " hmoveto")}
+      else {store_pfb("\t" fround(dx) " " fround(dy) " rmoveto")}
+  }
+}
+
+function make_curveto(dx1,dy1,dx2,dy2,dx3,dy3) {
+  if ((dx1+dx2+dx3!=0) || (dy1+dy2+dy3!=0)) {# no loops (emergency test)
+    if ((dy1==0) && (dx3==0))
+      store_pfb("\t" fround(dx1) " " fround(dx2) " "\
+        fround(dy2) " " fround(dy3) " hvcurveto")
+    else
+    if ((dx1==0) && (dy3==0))
+      store_pfb("\t" fround(dy1) " " fround(dx2) " "\
+      fround(dy2) " " fround(dx3) " vhcurveto")
+    else
+      store_pfb("\t" fround(dx1) " " fround(dy1) " " fround(dx2) " "\
+        fround(dy2) " " fround(dx3) " " fround(dy3) " rrcurveto")
+  }
+}
+
+function prepare_fontdimen_names(mathsy, mathex) {
+# exactly one of the parameters equals 1, remaining one is equal to 0
+
+  dimen_name_dft[0]="designsize"
+  dimen_name_dft[1]="slant"
+  dimen_name_dft[2]="space"
+  dimen_name_dft[3]="space stretch"
+  dimen_name_dft[4]="space shrink"
+  dimen_name_dft[5]="xheight"
+  dimen_name_dft[6]="quad"
+  dimen_name_dft[7]="extra space"
+
+  if (mathsy) {
+    dimen_name_dft[8]="num1"
+    dimen_name_dft[9]="num2"
+    dimen_name_dft[10]="num3"
+    dimen_name_dft[11]="denom1"
+    dimen_name_dft[12]="denom2"
+    dimen_name_dft[13]="sup1"
+    dimen_name_dft[14]="sup2"
+    dimen_name_dft[15]="sup3"
+    dimen_name_dft[16]="sub1"
+    dimen_name_dft[17]="sub2"
+    dimen_name_dft[18]="supdrop"
+    dimen_name_dft[19]="subdrop"
+    dimen_name_dft[20]="delim1"
+    dimen_name_dft[21]="delim2"
+    dimen_name_dft[22]="axis height"
+  }
+
+  if (mathex) {
+    dimen_name_dft[8]="default rule thickness"
+    dimen_name_dft[9]="bigop spacing1"
+    dimen_name_dft[10]="bigop spacing2"
+    dimen_name_dft[11]="bigop spacing3"
+    dimen_name_dft[12]="bigop spacing4"
+    dimen_name_dft[13]="bigop spacing5"
+  }
+
+}
+
+function rational(x,nlimit,dlimit, p0,q0,p1,q1,p2,q2,s,ds) {
+  # a simplified version of the code kindly sent us by Berthold K. P. Horn
+  if (x == 0.0) return "0 1" # if (x == 0.0) return "0/1"
+  if (x < 0.0) return "-" rational(-x, nlimit, dlimit)
+  # if (int(x) > nlimit) return round(x) # unlikely (in Type 1 fonts)
+  p0=0; q0=1; p1=1; q1=0; s=x;
+  while (1) {
+    # in general, it is advisable to avoid crossing limits;
+    # here, it is perhaps a bit of pedantry:
+    if ( int(s)!=0 &&\
+      ((p1 > (nlimit-p0)/int(s)) || (q1 > (dlimit-q0)/int(s))) )
+      {p2=p1; q2=q1; break}
+    p2=p0+int(s)*p1; q2=q0+int(s)*q1;
+#   printf("%ld %ld %ld %ld %ld %ld %lg\n", p0, q0, p1, q1, p2, q2, s)
+    if (p2/q2==x) break
+    ds=s-int(s)
+    if (ds == 0.0) break
+    p0=p1; q0=q1; p1=p2; q1=q2; s=1/ds
+  }
+  # q2 != 0
+  return p2 " " q2 # the answer is p2/q2
+}
+
+function approx(x, r,a) {
+  # 32767 is a limit due to old (DOS?) implementations of t1utils
+  r=rational(x,32767,32767); split(r,a); return (a[2]==1 ? a[1] : r " div")
+}
+
+function abs(x) {return (x>=0 ? x : -x)}
+
+function round(x) {# round
+  return (x>=0 ? int(x+.5) : -int(-x+.5))
+}
+
+function fround(x) {# forced round
+  if (x!=int(x)) {
+    mess("!WRONG ROUNDING IN METAPOST " x " IN " name)
+    return (x>=0 ? int(x+.5) : -int(-x+.5))
+  } else return x
+}
+
+function mess(s) {print s > CONSOLE; if (LOG!="") print s > LOG}'
+
+if [ $? != 0 ] ; then 
+  printf "! %s: gawk error when creating raw font %s\n" $script_name $fname >&2
+  printf "! Terminating...\n\n" >&2
+  exit 1
+fi
+
+if [ $skip_subroutines_opt -eq 0 ]; then
+printf "Packing subroutines in %s.p\n" $fname >&2
+
+gawk -vLEV=5 -vOUP=$fname.pn '\
+# File: packsubr.awk
+#
+# THIS FILE BELONGS TO THE METATYPE1 PACKAGE
+#
+# It is an AWK script for subroutine packing in Type 1 fonts;
+# an algorithm for finding the longest repeating substring is exploited
+# 31.07.2002, v. 0.1: first numbered version; banner added, VERBOSE introduced 
+
+BEGIN {
+ CONSOLE="/dev/tty"
+# for MS-DOS you may use:
+#  CONSOLE="CON"
+  ini_chstr()
+  if (LEV=="") LEV=5 # default number of lines of the shortest chunk
+  if (VERBOSE=="") VERBOSE=2
+  if ((VERBOSE!=0) && (VERBOSE!=1) && (VERBOSE!=2)) VERBOSE=2
+  verbose_mess(0.5,
+    "This is packsubr, ver. 0.1 (a packer of subroutines in PS Type 1 fonts)")
+}
+
+/./ {
+  T[++T[0]]=$0 # T -- table containing lines of the font
+  if ($NF in chstr) {
+    # X -- alphabet of lines; the input lines are unequivocally
+    #      numbered -- identical lines receive the same number
+    #      (X[line] = such a number) it is used only during
+    #      the reading of the font
+    # C[i] sequence to be analysed
+    # L[i] the number of line in the input file that corresponds to C[i];
+    #      in other words: C[i]=X[T[L[i]]], i.e., the line T[L[i]] received
+    #      the number C[i]
+    # F[i] frequency of a given symbol
+    L[++n]=T[0]; if ($0 in X) {C[n]=X[$0]} else C[n]=X[$0]=n
+    F[C[n]]++; p=1
+  } else if (p) {C[n]=++n # not: C[++n]=n (gues why ;-)
+    F[n]=1; p=0
+  }
+}
+
+/^\/Subrs/ {
+  if (subrs_beg>0) {odd_font=FILENAME; exit}; subrs_beg=T[0]; subrs_sofar=$2
+}
+(subrs_end==0) && (/^ND/ || /^\|-/) {subrs_end=T[0]}
+
+END {
+  if (odd_font) {mess("Odd font: " odd_font); exit}
+
+  # primary parameters:
+  # C -- classes, F -- frequency
+  # L -- line numbers
+  # T -- text of font
+  # n -- number of ,,good'' line in font
+  #
+  step=1; verbose_messf(1, "STEP " step)
+  prepare_list(n,C,F,N,P)
+  while ((k=output_classes(step,n,C,F,L,N,R))>0) {
+    verbose_mess(1.5,", found " k " items")
+    verbose_messf(1, "STEP " ++step); next_step(n,C,F,N,P);
+  }
+  verbose_mess(1.5, ", no items found")
+  if (VERBOSE==1) print "" > CONSOLE
+#
+  find_subrs(step-1,R,O,Q,S)
+  verbose_mess(0.5,
+    "Subroutines found: source " subrs_sofar+0 ", new " 0+S[0] ".")
+  flush_font(subrs_beg,subrs_sofar,subrs_end,O,Q,S,T)
+}
+
+function prepare_list(n,C,F,N,P,  i,p) {
+  # N, P -- doubly linked list of elements belonging to multi-element classes
+  #         (N -- next; P -- previous)
+  p=0; for (i=1; i<=n; i++) if (F[C[i]]>1) {N[p]=i; P[i]=p; p=i}; N[p]=0
+  return n
+}
+
+function next_step(n,C,F,N,P,  T,G,i) {
+  for (i=N[0]; i!=0; i=N[i]) {
+    j=C[i]; k=C[i+1]
+    if ((j,k) in T) {C[i]=T[j,k]; G[C[i]]++} else {C[i]=T[j,k]=i; G[i]=1}
+  }
+  for (i in G) if ((F[i]=G[i])==1) {# one-element class -- to be skipped
+    N[P[i]]=N[i]; P[N[i]]=P[i]
+  }
+}
+
+function find_subrs(r,R,O,Q,S, F,i,j,a,b,f) {
+  for (i=r; i>=LEV; --i) {
+    delta=i-1; for (j in F) delete F[j]
+    for (j=R[i-1]+1; j<=R[i]; ++j) {
+      a=R[j,0]
+      if (!(a in O) && !((a+delta) in O)) {
+        b=R[j,1]
+        if (b in F) {
+          f=F[b]
+          if (f<0) fix_pool(a,delta,-f,O,Q)
+          else
+            if ((a-f>delta) && !(f in O) && !((f+delta) in O)) {
+              S[++S[0]]=f; F[b]=-S[0]
+              fix_pool(f,delta,S[0],O,Q)
+              fix_pool(a,delta,S[0],O,Q)
+            } else F[b]=a
+        } else F[b]=a
+      }
+    }
+  }
+}
+
+function output_classes(r,n,C,F,L,N,R, i,k) {
+  for (i=N[0]; i!=0; i=N[i]) {
+    k++; if (r>=LEV) {R[++R[0],0]=L[i];  R[R[0],1]=L[C[i]]}
+  }
+  if (r>=LEV) R[r]=R[0]
+  return k
+}
+
+function fix_pool(b,d,s,O,Q, i) {for (i=b; i<=b+d; i++) O[i]=s; Q[b]=d}
+
+function flush_font(sb,ssf,se,O,Q,S,T, i) {
+  for (i=1; i<se; ++i) {
+    if (i==sb) sub(ssf, ssf+S[0], T[i])
+    output_line(T[i])
+  }
+  flush_subr_defs(ssf,Q,S,T)
+  for (i=se; i<=T[0]; ++i)
+    if (i in Q) i=output_subr_call(i,ssf,O,Q)
+    else output_line(T[i])
+}
+
+function flush_subr_defs(ssf,Q,S,T, i,j,b) {
+  for (i=1; i<=S[0]; ++i) {
+    output_line("dup " ssf+i-1 " {")
+    b=S[i]; for (j=b; j<=b+Q[b]; ++j) output_line(T[j])
+    output_line("\treturn")
+    output_line("\t} NP")
+  }
+}
+
+function output_subr_call(i,ssf,O,Q) {
+  output_line("\t" ssf+O[i]-1 " callsubr")
+  return i+Q[i]
+}
+
+function ini_chstr() {
+  chstr["rmoveto"]; chstr["hmoveto"]; chstr["vmoveto"]
+  chstr["rlineto"]; chstr["hlineto"]; chstr["vlineto"]
+  chstr["rrcurveto"]; chstr["hvcurveto"]; chstr["vhcurveto"]
+  chstr["hstem"]; chstr["vstem"]; chstr["hstem3"]; chstr["vstem3"]
+  chstr["closepath"];
+#  chstr["callsubr"]; chstr["pop"]; chstr["callothersubr"]; chstr["dotsection"]
+}
+
+function output_line(t) {print t > OUP}
+
+function mess(s) {print s  > CONSOLE; if (LOG!="") print s > LOG}
+function messf(s) {printf s  > CONSOLE; if (LOG!="") printf s > LOG}
+
+function verbose_mess(l,s) {
+  if (VERBOSE>l) print s  > CONSOLE
+  else if (VERBOSE==l) printf "." > CONSOLE
+  if (LOG!="") print s > LOG
+}
+function verbose_messf(l,s) {
+  if (VERBOSE>l) printf s  > CONSOLE
+  else if (VERBOSE==l) printf "." > CONSOLE
+  if (LOG!="") printf s > LOG
+}' $fname.p
+else
+    printf "Skipping subroutines packing in %s.p\n" $fname >&2
+    cp $fname.p $fname.pn
+fi
+
+if [ $? != 0 ] ; then 
+  printf "! %s: gawk error when packing subroutines in %s\n" $script_name $fname >&2
+  printf "! Terminating...\n\n" >&2
+  exit 1
+fi
+
+printf "Assembling Type 1 font %s.pfb\n" $fname >&2
+
+t1asm -b $fname.pn $fname.pfb
+
+if [ $? != 0 ] ; then 
+  printf "! %s: t1asm error when assembling %s.pfb\n" $script_name $fname >&2
+  printf "! Terminating...\n\n" >&2
+  exit 1
+fi
+
+printf "Creating TeX Font Metric file %s.tfm\n" $fname >&2
+
+mpost "\generating:=1; \input $font"
+
+if [ $? != 0 ] ; then 
+  printf "! %s: mpost error when creating %s.tfm\n" $script_name $fname >&2
+  printf "! Terminating...\n\n" >&2
+  exit 1
+fi
+
+if [ $delete_opt -ne 0 ] ; then
+  printf "Deleting intermediate files.\n" >&2
+  rm -f $fname.{log,pfi,kpx,p,pn,ps,tmp,cnt,mlo,proof} piclist.tex \
+    $fname.{[0-9],[1-9][0-9],[1-9][0-9][0-9],[1-9][0-9][0-9][0-9]}
+fi
+
+if [ $install_font_opt -ne 0 ] ; then 
+
+  mkdir -p $tree_prefix/fonts/type1/$vendor_name 
+  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/fonts/type1/$vendor_name" ; fi
+  mkdir -p $tree_prefix/fonts/afm/$vendor_name
+  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/fonts/afm/$vendor_name" ; fi
+  mkdir -p $tree_prefix/fonts/tfm/$vendor_name 
+  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/fonts/tfm/$vendor_name" ; fi
+##
+  mkdir -p $tree_prefix/fonts/map/$vendor_name
+  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/fonts/map/$vendor_name" ; fi
+  mkdir -p $tree_prefix/fonts/enc/$vendor_name
+  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/fonts/enc/$vendor_name" ; fi
+##
+##  mkdir -p $tree_prefix/dvips/$vendor_name
+##  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/dvips/$vendor_name" ; fi
+##  mkdir -p $tree_prefix/dvips/config
+##  if [ $? != 0 ] ; then exitwith ErrMkDir "$tree_prefix/dvips/config" ; fi
+
+  printf "Moving $fname.{pfb,afm,tfm} into $tree_prefix/fonts/{type1,afm,tfm}/$vendor_name\n" >&2
+  mv -f $fname.pfb $tree_prefix/fonts/type1/$vendor_name
+  mv -f $fname.afm $tree_prefix/fonts/afm/$vendor_name
+  mv -f $fname.tfm $tree_prefix/fonts/tfm/$vendor_name
+
+##  map_filename="$tree_prefix/dvips/config/$map_filename"
+  map_filename="$tree_prefix/fonts/map/$map_filename"
+  fontmap_entry="`cat $fname.map`"
+  printf "Looking for $map_filename.." >&2 
+  if [ -f "$map_filename" ] ; then
+      printf "  Found.\n" >&2 
+      grep -q -s -F "$fontmap_entry" $map_filename > /dev/null
+      if [ $? = 0 ] ; then
+	  printf "Font entry:\n  $fontmap_entry\nalready in $map_filename.\n" >&2
+      else
+	  test -w "$map_filename" || exitwith ErrNoWrite "$map_filename"
+	  printf "Appending entry:\n  $fontmap_entry\nonto $map_filename.\n"; >&2
+	  cp $map_filename $map_filename-orig
+	  ( cat $map_filename ; echo $fontmap_entry ) > $fname.tmp
+	  mv -f $fname.tmp $map_filename
+      fi
+  else
+      printf "  Not found.\n" >&2
+      printf "Renaming $fname.map to $map_filename.\n" >&2
+      cp $fname.map $map_filename
+  fi
+##  printf "Moving $fname.{map,enc} into $tree_prefix/dvips/config/$vendor_name\n" >&2
+  printf "Moving $fname.map into $tree_prefix/fonts/map/$vendor_name\n" >&2
+  printf "Moving $fname.enc into $tree_prefix/fonts/enc/$vendor_name\n" >&2
+##  mv -f $fname.map $fname.enc $tree_prefix/dvips/config/$vendor_name
+  mv -f $fname.map $tree_prefix/fonts/map/$vendor_name
+  mv -f $fname.enc $tree_prefix/fonts/enc/$vendor_name
+ 
+fi

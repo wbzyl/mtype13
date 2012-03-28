@@ -1,0 +1,103 @@
+%&plain
+
+% Modified fonttbl.tex from makor package (matwb@univ.gda.pl) 
+
+\nopagenumbers
+\newif\ifblankfont \blankfontfalse %\blankfonttrue
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% If necessary, change the font name/size within the curly brackets:
+%\def\myfont{plr10}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\font\tblfont=\myfont
+\font\littlerm=cmtt8
+
+\def\today{\ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \ \number\day, \number\year}
+\newcount\hours \newcount\minutes \newcount\scratch
+\def\now{\scratch=60 \hours=\time \divide\hours by\scratch
+        \scratch=\hours \multiply\scratch by60
+        \minutes=\time \advance\minutes by-\scratch
+        \ifnum\hours<10 0\fi\the\hours:%
+        \ifnum\minutes<10 0\fi\the\minutes}
+
+\newcount\scr \scr=0
+\newcount\scrr \scrr=0
+\dimen8=\hsize \advance\dimen8 by-45pt \advance\dimen8 by-6.4pt
+\divide\dimen8 by16
+\def\.{\hskip1pt}\def\\{\vrule width0pt height13pt}
+\def\adjustglyphend{\let\glyphend=\noboundary % the default
+  \ifnum\scr<31 \let\glyphend=\relax\fi 
+  \ifnum\scr=129 \let\glyphend=\relax\fi
+  \ifnum\scr=18 \let\glyphend=\noboundary\fi
+}
+
+\newdimen\Vthickness \Vthickness=.5pt
+\def\boxme#1{\vbox{\hrule height\Vthickness
+        \hbox{\vrule width\Vthickness#1\vrule width\Vthickness}%
+        \hrule height\Vthickness}}
+
+%% The \tableentry macro originally tested for zero-widths.  It was
+%% assumed that if the width of a character was zero, than the character
+%% was on-existent, and vice-versa.  Unfortunately, many non-TeX fonts
+%% poorly behaved---non-existent characters may have non-zero widths!
+%% Inspection of the afm file may reveal non-existent characters by
+%% virtue of the `.notdef' keyword, but who knows if this is a 
+%% reliable test either?
+\newif\ifnotdef % we'll test by the presence of .notdef
+\newif\ifusingnotdefs \usingnotdefsfalse
+\usingnotdefstrue
+\def\notdeftests{% these tests are user defined!
+  %\ifnum\scr<32 \notdeftrue \fi
+  %\ifnum\scr=127 \notdeftrue \fi
+}
+\def\setnochar{\setbox0=\hbox to\dimen0{\hss$\times$\hss}}
+\def\setachar{\setbox0=\hbox to\dimen0{\hss\tblfont\char\scr\glyphend\hss}}
+\def\tableentry{%
+        \adjustglyphend
+        \setbox2=\hbox to\dimen8{\.\littlerm \the\scr\hss\vrule width0pt
+        depth3pt
+        \char\scr\glyphend\.}\dimen0=\wd2
+        \setbox0=\hbox to\dimen8{\hss\tblfont\\\char\scr\glyphend\hss}%
+        \ifblankfont\setbox0=\hbox to \wd0{\\\hss}\fi
+        \notdeffalse % assume char is defined...
+        %% \ifusingnotdefs 
+        %%   \notdeftests
+        %% \else 
+        %%   \ifdim\wd0=0pt \notdeftrue\fi
+        %% \fi
+        %% \ifnotdef \setnochar \else \setachar \fi
+        \setachar
+        \vbox{\hrule\hbox{\vrule\vbox{\hbox to\dimen8{\vrule width0pt
+                height 13pt\box0}\vskip6pt%
+                \hbox to\dimen8{\hss \box2\hss}}\vrule}\hrule}\hskip3pt}
+\newcount\nrows \nrows=16%15
+\newcount\ncols \ncols=16
+\def\tableline{\scrr=0 \hbox{\loop \tableentry 
+        \global\advance\scr by 1 \advance\scrr by1 \ifnum\scrr<\ncols 
+        \repeat}}
+
+
+\dimen0=\dp\strutbox \advance\dimen0 by\Vthickness
+\ifblankfont\centerline{\bf Blank Font Table}\else
+\centerline{\bf Font Table for font \lower\dimen0\boxme{\
+\strut\myfont\ }}\centerline{\littlerm Produced on \today\ at \now.}\fi
+\bigskip
+
+\newcount\thisrow \thisrow=0
+\loop 
+  \tableline \smallskip\advance\thisrow by1 
+\ifnum\thisrow<\nrows \repeat
+
+\bye
+
+%%% Local Variables: 
+%%% mode: plain-tex
+%%% TeX-master: t
+%%% End: 
+

@@ -1,0 +1,13 @@
+#  mtype13.cnf
+#
+#  This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+#
+#  configuration file for fmtutil
+#  invoke with 'fmtutil --cnffile <file> --all'
+#
+# format     engine   pattern-file    arguments
+#
+mex          tex      mexconf.tex     mex.ini
+mex-pl       tex      mexconf.tex     nls=tex-pl,il2-pl mex.ini
+# must use type3ini.mp namem, because fmtutil does not find type3.ini
+type3         mpost    -               type3ini.mp

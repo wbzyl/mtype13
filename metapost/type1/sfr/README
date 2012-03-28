@@ -1,0 +1,62 @@
+=== === === === === === === === === === === === === === === === === === ===
+ ENGLISH:
+=== === === === === === === === === === === === === === === === === === ===
+This directory contains examples of using the METATYPE1 package (ver. 0.31)
+and is a part of the package.
+Author: JNS team <JNSteam@gust.org.pl>
+
+Both resulting Type 1 fonts and the remarks given herewith can be
+considered an auxiliary source (which does not mean unimportant)
+of the information about data structures used in programs of this package.
+
+The directory ``samples'' contains:
+   tapes.mp      -- a font containing a few simple geometrical figures
+   sfr.mp        -- a font containing rounded-corner frames
+                    of different widths
+   sfr-test.tex  -- a TeX file being an example of using of
+                    the ``frame'' font
+   sfr-defs.sty  -- macros for the example mentioned above
+   README	 -- this file
+
+An instructive example of the METATYPE1 package is also METAPOST
+version of D. E. Knuth's ``logo'' font (file logo-mp.zip).
+
+METATYPE1 requires that crucial macros are called in an appropriate order.
+More important relations:  macro `introduce' has to be placed after the
+`beginfont' command and before the `beginglyph' one; macros specifying kerns
+must be used after drawing the characters to be kerned; the code after the
+`endfont' command is ignored.
+
+=== === === === === === === === === === === === === === === === === === ===
+ POLSKI:
+=== === === === === === === === === === === === === === === === === === ===
+Pliki w tej kartotece zawieraj/a przyk/lady zastosowania pakietu
+METATYPE1 (ver. 0.31) i stanowi/a jego cz/e/s/c.
+Autorstwo: JNS team <JNSteam@gust.org.pl>
+
+Zar/owno przyk/ladowe fonty w fromacie Type 1 utworzone z u/zyciem pakietu
+METATYPE1 jak i poni/zsze uwagi mog/a by/c traktowane jako dodatkowe
+(co nie znaczy nieistotne) /xr/od/lo informacji o strukturze danych
+u/zywanych w programach tego pakietu.
+
+Katalog ,,samples'' zawiera:
+   tapes.mp      -- przyk/ladowy font sk/ladaj/acy si/e z kilku prostych
+	            figur geometrycznych		        
+   sfr.mp        -- font sk/ladaj/acy si/e z ramek o r/o/znej szeroko/sci, 
+                    z zaokr/aglonymi naro/zami
+   sfr-test.tex  -- plik TeX-owy b/ed/acy przyk/ladem zastosowania 
+                    fontu ,,ramkowego''
+   sfr-defs.sty  -- makrodefinicje wykorzystane w powy/zszym przyk/ladzie
+   README	 -- niniejszy plik
+
+Pouczaj/acym przyk/ladem zastosowania pakietu METATYPE1 jest te/z
+METAPOST-owa wersja fontu ,,logo'', zawarta w pliku logo-mp.zip.
+
+Kolejno/s/c wywo/lywania kluczowych makr pakietu METATYPE1 jest istotna.
+Z wa/zniejszych zale/zno/sci: makro wprowadzaj/ace znak (introduce) musi 
+wyst/api/c za poleceniem beginfont, a przed rozpocz/eciem rysowania danego 
+znaku (beginglyph); makra definiuj/ace kerny musz/a wyst/api/c po 
+zdefiniowaniu kernowanych znak/ow; tre/s/c za poleceniem endfont
+jest ignorowana.
+
+

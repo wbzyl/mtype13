@@ -1,0 +1,170 @@
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+Wlodek Bzyl                                        matwb@univ.gda.pl
+
+              INSTALLING MTYPE13 PACKAGE UNDER LINUX
+
+Version 1.3                                            February 2004
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+THE PACKAGE CONSISTS OF SEVERAL TOOLS AND LIBRARIES FOR PROGRAMMING
+        TYPE 1 AND TYPE 3 FONTS IN THE METAPOST LANGUAGE
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+Generation of Type 1 and 3 fonts is automated by the `make' program.
+For example, to create a font `foo.pfb' from a `foo.mp' source 
+it suffices to execute:
+
+        make foo.pfb
+
+A hardcopy proof could be created with:
+
+        make foo.ps
+
+Alternatively, fonts could be build and checked directly with
+the tools: mkfont1, mkfont3, mkproof1, mkproof3.
+
+
+                <* INSTALLATION INSTRUCTIONS *> 
+
+The package is available as tarred and gzipped archive named
+
+        mtype13-<version>tar.gz
+
+The archive should be unpacked with the command:
+
+        tar zxvf mtype13-<version>.tar.gz
+  
+Unpacking the archive creates the following tree:
+
+  bin/
+  doc/metapost/{epsincl,pfbtomp,metatype1}/
+  metapost/{type1,type3}/{base,make,<directories containing fonts>}/
+  mft/
+  tex/
+  web2c/
+
+To install the MTYPE13 package:
+ 
+   (A)  scripts should be moved to a location where shell finds them
+   (B)  the `texmf' tree should be planted into existing TeX Directory 
+        Structure
+
+This is quite complicated task, that is why I wrote a shell script
+`read-texmf.sh' to help you with installation.
+
+When executed it will find web2c/kpathsea configuration files. Moreover,
+it will compare the value of each configuration variable, relevant to
+font creation, with a value needed during font creation.
+
+If suggested values make sense in your tetex instalation,
+run Makefile which will install scripts in the `/usr/local/bin'
+directory and source files (including new texmf.cnf configuration file)
+in the `/usr/local/texmf-local' directory.
+
+If, for some reason, you want to change some of the suggested values,
+edit their values in the `texmf-local.cnf' file (created by the
+read-texmf.sh script) and run provided Makefile. If you want to install
+the source files somewhere else please edit Makefile.
+
+Execute `make uninstall' to remove the package from your system.
+
+Please remember that earlier entries (in the same or another
+configuration file) override later ones, and a value of environment
+variable overrides any texmf.cnf definition.
+
+
+           <* MANUAL INSTALLATION IN $HOME DIRECTORY *>
+
+(A) Execute shell command:
+
+        echo $PATH
+
+    In typical UNIX installation the output of this command
+    should contain `$HOME/bin' directory. If this is the case
+    move the scripts from `texmf/bin' there. 
+    If not, move scripts to one of other directories pointed by
+    the PATH variable or create one and add it to the search PATH. 
+
+(B) Planting trees into an existing TeX directory structure is
+    a quite complicated task. 
+
+    1. Create `$HOME/texmf' directory:
+
+          mkdir -p $HOME/texmf
+
+   2. Move the MTYPE13 tarball into `$HOME/texmf' directory
+      and unpack it there:
+
+        tar zxvf mtype13-<version>.tar.gz
+
+   3. Tell the `Kpathsea' library how to find these trees. 
+      This amounts to:
+
+      (  i)  creating a new `texmf.cnf' configuration file
+      ( ii)  copying the configuration file to `$HOME/texmf/web2c'
+             directory
+      (iii)  telling the Kpathsea library to use the changed 
+             configuration file
+
+      Create following `texmf.cnf' file:
+ 
+          HOMETEXMF = texmf,$HOME/texmf
+          TEXMF = {$HOMETEXMF,!!$TEXMFLOCAL,!!$VARTEXMF,!!$TEXMFMAIN}
+          SYSTEXMF = $TEXMFLOCAL,$VARTEXMF,$TEXMFMAIN
+          TEXMFDBS = $TEXMFLOCAL,$VARTEXMF,$TEXMFMAIN,$VARTEXFONTS
+          TEXPSHEADERS = .;$TEXMF/{dvips,pdftex,fonts/type1}//
+          TEXCONFIG = .,$TEXMF/dvips//
+
+      Check if there are TEXMFLOCAL or VARTEXMF trees in your TeX
+      installation:
+
+          kpsewhich -expand-var \$TEXMFLOCAL
+          kpsewhich -expand-var \$VARTEXMF
+        
+      If there are no TEXMFLOCAL or VARTEXMF trees in your system
+      remove them from the configuration lines above.
+
+      Copy the file to a new location:
+
+          $HOME/texmf/web2c
+ 
+      Add these lines to your personal bash startup 
+      file ~/.bash_profile:
+
+          TEXMFCNF=$HOME/texmf/web2c,<location of texmf.cnf on your system>
+          export TEXMFCNF
+
+      (kpsewhich texmf.cnf will report this location)
+      and `source' the startup file (logout and login again, for example).
+
+      Now, change to the $HOME/texmf/web2c directory and run make there.
+      This will create `type3.mem' format file.
+
+      Finally, check the installation:
+
+          kpsewhich texmf.cnf
+
+      The output of this command should point at copy of
+      `texmf.cnf' in $HOME/texmf/web2c.
+            
+
+      
+      Examples of fonts are contained in directories under:
+
+          $HOME/texmf/metapost/{type1,type3}
+
+      To generate one, try `make tapes.pfb' from within 
+     `$HOME/texmf/metapost/type1/tapes' directory.
+      To generate a hardcopy proof, try `make tapes.ps'.
+
+      Enjoy
+
+      Wlodek Bzyl.
+
+
+                 <* AVAILABILITY *> 
+
+Tarred and gzipped archive could be get from the following URL:
+
+     ftp://pub/tex/systems/unix/mtype13-1.<version>.tar.gz

@@ -1,0 +1,1384 @@
+%
+% I Ching macros for typesetting divinations
+%                               by Wlodek Bzyl, <matwb@univ.gda.pl>
+% November 2002
+
+\ifx\ichingisloaded\relax\endinput\else\let\ichingisloaded=\relax\fi
+
+\input epsfx
+
+\def\ichingPrefix{iching::}
+
+\def\ichingCircle{icircle.eps}
+
+% Encoding.
+
+\def\ichingdef#1#2#3% name name code
+  {\expandafter\chardef\csname\ichingPrefix#1\endcsname=#3
+   \expandafter\chardef\csname\ichingPrefix#2\endcsname=#3}
+\def\iching#1{\csname\ichingPrefix#1\endcsname}
+
+% Trigrams
+
+\ichingdef{cosmos}{111}{65} % niebiosa
+\ichingdef{thunder}{100}{66} % b³yskawica
+\ichingdef{water}{010}{67} % rzeka
+\ichingdef{mountain}{001}{68} % ska³a
+\ichingdef{earth}{000}{69} % ziemia
+\ichingdef{wind}{011}{70} % wiatr
+\ichingdef{fire}{101}{71} % ogieñ
+\ichingdef{lake}{110}{72} % mokrad³o
+
+% Hexagrams
+
+\ichingdef{ch'ien1}{111111}{1} % niebiosa
+\ichingdef{ch'ien2}{001000}{15} % skromno¶æ
+ 
+\ichingdef{chien1}{001010}{39} % przeszkoda
+\ichingdef{chien2}{001011}{53} % ³agodny postêp
+\ichingdef{chien3}{110010}{60} % ograniczanie
+
+\ichingdef{k'un1}{000000}{2} % ziemia
+\ichingdef{k'un2}{010110}{47} % okowy
+
+\ichingdef{chun}{100010}{3} % pocz±tkowe troski
+\ichingdef{meng}{010001}{4} % naiwno¶æ
+\ichingdef{hsu}{111010}{5} % oczekiwanie
+\ichingdef{sung}{010111}{6} % sprzeczka
+\ichingdef{shih}{010000}{7} % ¿o³nierze
+
+\ichingdef{pi1}{000010}{8} % zwi±zek
+\ichingdef{pi2}{101001}{22} % powab
+
+\ichingdef{hsiao ch'u}{111011}{9} % ograniczona si³a w ma³ym
+\ichingdef{u lu}{110111}{10} % st±panie
+\ichingdef{t'ai}{111000}{11} % pokój
+\ichingdef{p'i}{000111}{12} % stagnacja
+\ichingdef{t'ung jen}{101111}{13} % mi³o¶æ i przyja¼ñ
+\ichingdef{ta yu}{111101}{14} % wielki skarb
+\ichingdef{yu}{001000}{16} % entuzjazm
+\ichingdef{sui}{100110}{17} % na¶ladowanie
+\ichingdef{ku}{011001}{18} % naprawa
+\ichingdef{lin}{110000}{19} % zbli¿enie
+\ichingdef{kuan}{000011}{20} % kontemplacja
+\ichingdef{shih ho}{100101}{21} % przegryzanie
+\ichingdef{po}{000001}{23} % samodzielno¶æ
+\ichingdef{fu}{100000}{24} % powrót
+\ichingdef{wu wang}{100111}{25} % niewinno¶æ
+\ichingdef{ta ch'u}{111001}{26} % ograniczona si³a w wielkim
+
+\ichingdef{i1}{100001}{27} % ¿ywienie
+\ichingdef{i2}{100011}{42} % zysk
+
+\ichingdef{ta kuo}{011110}{28} % nadmiar w wielkim
+\ichingdef{k'an}{010010}{29} % topiel
+\ichingdef{li}{101101}{30} % ogieñ
+ 
+\ichingdef{hsien1}{001110}{31} % oddzia³ywanie
+\ichingdef{hsien2}{010100}{40} % roz³adowanie
+
+\ichingdef{heng}{011100}{32} % wytrwa³o¶æ
+\ichingdef{tun}{001111}{33} % ustêpstwo
+\ichingdef{ta chuang}{111100}{34} % si³a
+\ichingdef{chin}{000101}{35} % postêp
+\ichingdef{ming}{101000}{36} % zmrok
+\ichingdef{chia jen}{101011}{37} % ród
+\ichingdef{k'uei}{110101}{38} % opozycja
+
+\ichingdef{sun1}{110001}{41} % strata
+\ichingdef{sun2}{011011}{57} % podmuch
+
+\ichingdef{kuai}{111110}{43} % prze³om
+\ichingdef{kou}{011111}{44} % % spotkanie
+\ichingdef{ts'ui}{000110}{45} % zbiór
+\ichingdef{sheng}{011000}{46} % wznoszenie
+\ichingdef{ching}{011010}{48} % studnia
+\ichingdef{ko}{101110}{49} % przewrót
+\ichingdef{ting}{011101}{50} % naczynie ofiarne
+\ichingdef{chen}{100100}{51} % b³yskawica
+\ichingdef{ken}{001001}{52} % góra
+\ichingdef{kuei mei}{110100}{54} % po¶lubianie narzeczonej
+\ichingdef{feng}{101100}{55} % obfito¶æ
+\ichingdef{lu}{001101}{56} % podró¿nik
+\ichingdef{tui}{110110}{58} % rado¶æ
+\ichingdef{huan}{010011}{59} % marnotrawienie
+\ichingdef{chung fu}{110011}{61} % wewnêtrzna prawda
+\ichingdef{hsiao kuo}{001100}{62} % powodzenie ma³ego
+\ichingdef{chi chi}{101010}{63} % po spe³nianiu
+\ichingdef{wei chi}{010101}{64} % przed spe³nianiem
+
+% Divinations.
+
+\newcount\ichingCounter \ichingCounter=0
+
+\def\ichingStoreDivination#1#2#3#4#5#6#7#8#9%
+  {\advance\ichingCounter by 1
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::name\endcsname{#1}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::translation\endcsname{#2}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::interpretation\endcsname{#3}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::changeline:1\endcsname{#4}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::changeline:2\endcsname{#5}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::changeline:3\endcsname{#6}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::changeline:4\endcsname{#7}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::changeline:5\endcsname{#8}
+   \expandafter
+     \def\csname\ichingPrefix\number\ichingCounter::changeline:6\endcsname{#9}}
+
+\def\divination#1#2{\csname\ichingPrefix#1::#2\endcsname}
+
+% The text of divinations was taken from the `iching.tex' file by
+% Alan M Stanier, Computing Service, Essex Univerity (alan@essex.ac.uk)
+
+\ichingStoreDivination{CH'IEN}{The Origin}
+ {The origin. Continuing through. Harmonious. Correct.}
+ {Do not use the diving dragon.}
+ {The dragon is seen in the field. It is helpful to see the great man.}
+ {This wise man is active all day long, but in the evening he is watchful.
+  There will be great difficulty.}
+ {He is bouncing up and down in stormy waters. The sage says that
+  he sometimes leaps up and sometimes down. There is nothing wrong
+  in this as long as evil is avoided.}
+ {The dragon is flying in the heavens. It is good to see the great man.}
+ {A group of headless dragons appears. There will be good fortune.}
+
+\ichingStoreDivination{K'UN}{Success} 
+{Great success. A wise man is virtuous and proper, like a strong
+  but gentle mare. When he is faced with a task he can only succeed
+ if he takes things slowly and carefully, not trying to be first.
+ If he is happy to follow others, all will be well. It is
+ important to have friends in the south and west, but they can be
+ lost or forgotten if they are in the north and east. A wise man
+ must remember to draw strength from proper conduct, and by doing
+ this he will be fortunate.}
+ {He is walking on newly formed frost. Freezing conditions are on
+  the way.}
+ {Square, straight and strong. Everything will work out well
+  without any effort.}
+ {He does not reveal his virtue for all to see, but nurtures it
+  within himself. He has the opportunity of serving the Emperor
+  and will perform his tasks with great success.}
+ {A sack has been sealed up so that nothing can flow in or
+  out. There will be no blame and no praise. What is done is done.}
+ {Imperial yellow undergarments. There will be excellent fortune.}
+ {There are dragons involved in a ferocious fight in the desert.
+  The blood that flows from their wounds is Imperial yellow.}
+
+\ichingStoreDivination{CHUN}{Birth Pangs} 
+ {Birth pangs. He will succeed if he behaves properly. Beware of
+  starting a new venture without giving it sufficient thought. It
+  will be useful to enlist the help of an experienced person.}
+ {The way ahead is blocked. Remain firm. Act sensibly. Listen to
+  the advice of someone more experienced.}
+ {The horses are outside the village but are not allowed inside.
+  The people think they are robbers. They have come to collect the
+  bride. The bride remains firm and rejects the union. Ten years
+  later she marries and has children.}
+ {The hunter, stalking a deer, is drawn into the forest. He failed
+  to ask the forester for help and is now lost. The wise man can
+  see the dangers which lie ahead. He know it would be foolish to
+  continue, so decides to give up the chase.}
+ {The woman has lost control of her carriage and the horses are
+  running away with her. The man who wants to marry her is nearby
+  and she calls for his help. To advance will bring good fortune.
+  All will turn out well.}
+ {He is finding it difficult to grant the favors people expect of
+  him. Wise behavior brings success when dealing with minor
+  affairs. Any attempts to deal with major issues will bring
+  misfortune.}
+ {The man is in complete disarray since his chariot horses have
+  gone into full retreat. He cannot hold back his tears and begins
+  to weep.}
+
+\ichingStoreDivination{MENG}{Rebellious Youth}
+ {Rebellious youth. I do not look for the rebellious and ignorant
+  child; it is he who looks for me. When he asks me for an oracle I
+  will answer him. But when he asks me a second and third time he
+  becomes a nuisance. I refuse to answer his requests. It is
+  helpful to be consistent and well behaved.}
+ {It is good to use punishment in order to banish ignorance. This
+  will free the mind from its bondage. Too much punishment brings
+  about humiliation.}
+ {Be patient with the ignorant, since this will bring good
+  fortune. It is good to listen to the requests of women. A son is
+  able to run his family.}
+ {Do not become involved with a woman who will easily give herself
+  to a man with money. Such behavior will bring misfortune.}
+ {It is sordid to be constrained by ignorance. It will bring regret.}
+ {The innocent child. There will be good fortune.}
+ {Punishing the ignorant child will do no good. It is better to
+  protect him.}
+
+\ichingStoreDivination{HSU}{Patience}
+ {Patience. Confidence and sincerity will bring prosperity. Virtue
+  will encourage good fortune. There is much to be gained by
+  crossing the great river.}
+ {He is waiting in open country. A lot can be gained by using that
+  which endures.}
+ {He is waiting on the sand. He will have to tolerate gossip, but
+  in the end he will be very fortunate.}
+ {He is sitting out in the mud. This allows the enemy to arrive.}
+ {He is waiting in a place of blood. He must escape from the pit.}
+ {He is waiting amongst the food and drink. Good fortune will come
+  through virtue.}
+ {He goes into the pit. Three guests arrive who have not been
+  invited. Treat them well and in the end there will be good
+  fortune.}
+
+\ichingStoreDivination{SUNG}{Contention} 
+ {Contention. He is confident in the face of opposition.
+  Respectable behavior will bring good fortune. If he persists to
+  the bitter end there will be misfortune. It is very helpful to
+  see the great man. It is not a good idea to cross the great
+  river.}
+ {He never pursues the issue. He has to tolerate gossip.
+  Eventually he will be lucky.}
+ {He does not have the strength to face the challenge. If he
+  decides to run back home to the three hundred families of his
+  city he will bring no harm upon himself.}
+ {He stays in the correct place. There are great difficulties at
+  the moment but everything will work out well in the end. If he
+  should happen to be in the king's service he will not achieve all
+  that he hoped for.}
+ {He does not have the strength to face up to the challenge. He
+  retreats and studies the way fate deals with people. He changes
+  his attitude and finds peace in virtuous behavior. There will be
+  good fortune.}
+ {By attending in the law court extremely good fortune will
+  follow.}
+ {The leather belt of status may be given to him but it will be
+  taken away from him three times in one morning.}
+
+\ichingStoreDivination{SHIH}{The Army} 
+ {The army. Everything is correct. Nothing will go wrong is the
+  leader is wise and experienced.}
+ {The army marches off after receiving its orders. It will be
+  disastrous if these orders are wrong or not well thought out.}
+ {There is good fortune since the commander is at the center of
+  the army. He did not make any mistakes. The king honors him
+  three times.}
+ {The army has incompetent leaders. There will be misfortune.}
+ {The army retreats. There are no mistakes.}
+ {There are many different species of birds in the field. Now is
+  the time to seize them to avoid mistakes. The eldest son is the
+  leader of the army. Although a younger son acts wisely he will
+  certainly fail in the role of commander because evil will befall
+  him.}
+ {The great prince in is complete charge. He chooses men to be
+  rulers of countries, and others he appoints as the heads of
+  powerful families. He does not give any of these appointments to
+  weaker men.}
+
+\ichingStoreDivination{PI}{Unity}
+ {Unity. There will be good fortune. When he asks the oracle about
+  his fortune he is reassured. Those who are concerned will gather
+  together at the right time. Those who arrive late will be
+  unlucky.}
+ {Confident actions result in unity. Confidence is like an
+  overflowing cup which will eventually bring a variety of good
+  fortune.}
+ {Unity develops from the inner self. Good fortune will result
+  from righteous behavior.}
+ {He looks to unscrupulous people for unity.}
+ {Unity is sought with those outside his close circle. Wise
+  behavior will bring good fortune.}
+ {The need for unity is becoming obvious. The king hunts the
+  wild-fowl on three sides only; he leaves the fourth side open for
+  their escape. The local people were not instructed properly.
+  There will be good fortune.}
+ {There is nobody to lead the united group. It is an evil time.}
+
+\ichingStoreDivination{HSIAO CH'U}{Holding Back the Less Able}
+ {Holding back the less able. Progress and prosperity will
+  develop. Clouds approach from our lands to the west but they do
+  not bring rain.}
+ {He returns to the true path. Why should he be blamed for this?
+  There will be good fortune.}
+ {He is lured back. There will be good fortune.}
+ {The spokes in the carriage wheel are broken. The husband and
+  wife turn away from each other.}
+ {Have confidence. The risk of bloodshed passes and fears
+  disappear. There will be no mistakes.}
+ {The feeling of confidence is like the security of being bound
+  together. He has ample resources close at hand and can draw his
+  neighbors to him.}
+ {When the rain falls everything stops, but virtue continues to
+  flourish. The woman who behaves wisely is still in danger. It is
+  nearly full moon. The man who ventures forth at this time will
+  cause or create evil.}
+
+\ichingStoreDivination{LI}{Walking Carefully}
+ {Walking carefully. Although the man treads on the tiger's tail
+  he is not bitten. There is success.}
+ {He is walking along his normal path. As long as he continues to
+  do so there will be no problems.}
+ {He walks on the path which is smooth and easy. The peaceful
+  hermet will be lucky, if he acts honorably.}
+ {The one-eyed man can see; the lame mane can walk; but the man
+  who treads on the tail of the tiger is bitten and will have bad
+  luck. The army officer behaves in this way for the benefit of his
+  great ruler.}
+ {He walks on the tail of the tiger. He will eventually be lucky
+  if he is careful and cautious.}
+ {He walks resolutely. Although his behavior is correct he is
+  surrounded by danger.}
+ {Look at the path which is taken and examine the resulting good
+  luck. When everything is fulfilled there will be great fortune.}
+
+\ichingStoreDivination{T'AI}{Benevolence}
+ {Benevolence. The lesser has disappeared and the greater is yet
+  to come. There will be success and good fortune.}
+ {When grass is pulled up it brings other stalks with it.
+  Persevere. There will be good fortune.}
+ {He bears with that which is uncontrolled. He is confident and
+  crosses the river without using a boat. He does not forget the
+  things which are far away from him and does not worry about
+  friends. In this way he will keep to the middle path.}
+ {Peace cannot exist without disruption. He cannot go without
+  coming back. The man who is steadfast will not be blamed. He is
+  not sorry but confident. He enjoys his good fortune.}
+ {There is disruption and bustle. He does not rely on his own
+  finances but turns to his neighbors. He puts his confidence in
+  them. He does not withdraw from them.}
+ {The Emperor Yi gives his younger sister in marriage. This
+  blessing brings great fortune.}
+ {The city wall collapses into the moat. Do not summon the army.
+  He tells the people of his own country what is happening.
+  Nevertheless, proper behavior still causes distress.}
+
+\ichingStoreDivination{P'I}{Obstruction}
+ {Obstruction. Evil men block the path of progress. Events turn
+  out badly for the wise man even when he acts correctly. The great
+  are leaving and the less important ones are arriving.}
+ {Newly pulled-up grass will bring up other stalks which are
+  attached to it. Firm and correct actions will result in progress
+  and good fortune.}
+ {He is guided by patience and endurance The lesser man will be
+  lucky and the obstacles which lie in the great man's path will
+  lead to success.}
+ {He bears with his shame.}  
+ {He is wise to follow the demands which are made by destiny. When
+  his companions come they rejoice in his blessings.}
+ {The obstruction is removed. The great man is fortunate. He
+  should take care and be on his guard against destruction. He
+  should act as though he is bound to a mulberry bush.}
+ {At first there are obstacles. They have now been cast aside and
+  there is rejoicing.}
+
+\ichingStoreDivination{T'UNG JEN}{Companions}
+ {Companions. Friends will be found in the remote countryside. He
+  will be successful. It is helpful to travel across the great
+  river. The wise man will reap rewards if he behaves correctly.}
+ {Friendships should be developed with people at the door. There
+  will be no mistakes.}
+ {Friendships formed within the family bring humiliation.}  
+ {He hides the weapons in the grass on top of a hill. He does not
+  attack for three years.}
+ {He scales the defenses of the city but is unable to attack.
+  There will be good fortune.}
+ {At first his companions cry out, then they weep and finally they
+  laugh. The great army conquers all in its path. They meet
+  together.}
+ {Good friends are to be found in the countryside. There is
+  nothing to regret.}
+
+\ichingStoreDivination{TA YU}{Many Possessions}
+ {Many possessions. It bodes well for him to have numerous
+  possessions and great success.}
+ {He is wise not to approach dangerous areas or people. If he
+  understands the way things work there will be no mistakes.}
+ {The heavily loaded wagon will be safe whichever way it goes.}
+ {The duke offers his labors to the son of Heaven. A lesser man
+  could not do this.}
+ {He does not use up his strength. There will be no mistakes.}
+ {His self-confidence sets an example for others. Such dignity
+  will bring good fortune.}
+ {He is fortunate since Heaven is his personal protector. There is
+  nothing wrong in this.}
+
+\ichingStoreDivination{CH'IEN}{Modesty}
+ {Modesty. The wise man will eventually succeed in everything.}
+ {The wise man carries out his duties with true modesty. Because
+  of his unassuming nature he is able to cross the great river.
+ There will be good fortune.}
+ {Modesty speaks for itself. Good luck will come from proper
+  conduct.}
+ {The superior man succeeds because he is a person of merit and
+  honesty. Thus he has good fortune.}
+ {Modesty is an admirable quality.}
+ {He is not considered rich by his neighbor's standards. The time
+  is right for invasion. Everything he does will work out to his
+  advantage.}
+ {Humility has made itself known. It is the right time to attack
+  both city and the country.}
+
+\ichingStoreDivination{YU}{Enthusiasm}
+ {Enthusiasm. The time is right to appoint princes and give orders
+  for the army to approach.}
+ {He shows enthusiasm. There will be misfortune.}
+ {He is as solid as a rock. He does not wait until the end of the
+  day. His wise behavior brings good luck.}
+ {He raises his head with enthusiasm. This only brings regret.
+  Delays will result in sorrow.}
+ {The source of enthusiasm is also the bringer of success. It is
+  better for him to gather friends around him than to spend his
+ time worrying.}
+ {Although he is very ill he perseveres and does not die.}
+ {His enthusiasm is misguided. As long as he has his strength to
+  change direction there will be no problems.}
+
+\ichingStoreDivination{SUI}{According or Agreeing With}
+ {Agreeing with. Great success. It is helpful to behave with
+  propriety. There will be no mistakes.}
+ {The official changes. He is fortunate because of his wise
+  behavior. He is credited for going out through the gate to join
+ his friends.}
+ {He becomes attached to the young boy and rejects the older and
+  wiser man.}
+ {He becomes attached to the older and wiser man and rejects the
+  small boy. By following such a course he will find what he is
+  looking for. He will benefit by following the righteous path.}
+ {Dogged perseverance is bad but agreeing with others brings
+  fortune. His confidence in the path ahead is founded on true
+  understanding. Can you find anything to blame him about is that?}
+ {He is confident in that which is good. There will be good
+  fortune.}
+ {He is bound down by strong links. The king brings fortune to the
+  Western Mountain.}
+
+\ichingStoreDivination{KU}{Decay}
+ {Decay. Crossing the great river will bring good fortune. Check
+  everything carefully three days beforehand and three days
+  afterwards.}
+ {The son sorts out the chaos which is caused by his father. As
+  long as he is competent he can solve these problems without
+  difficulties. Although there are immense problems everything will
+  work out well in the end.}
+ {The son has to sort out the chaos caused by his mother. He
+  should not be overzealous in this.}
+ {The son sorts out the chaos which his father caused. There is
+  very little to repent and he will make no mistakes.}
+ {He tolerates the chaos caused by his father. If he continues in
+  this way he will be humiliated.}
+ {The son is praised for sorting out the chaos which his father
+  caused.}
+ {He does not work for the king or his lord since he wants to
+  serve a higher ideal.}
+
+\ichingStoreDivination{LIN}{To Draw Near}
+ {To draw near. This is a time of great success which is helped by
+  good behavior. The eighth month is an unlucky time.}
+ {He draws close to his friends. He will have good luck if he
+  behaves wisely.}
+ {It is to his advantage to draw close to his friends. Good luck
+  will come.}
+ {He will not suffer setbacks if he does draw close. He will not
+  make any mistakes if he thinks his activities through properly.}
+ {Nothing will go wrong when he arrives in great style.}
+ {Like an eminent leader, he approaches wisely. He will have good
+  fortune.}
+ {No mistakes will be made if he approaches with honesty and
+  generosity. He will have good fortune.}
+
+\ichingStoreDivination{KUAN}{Examine}
+ {Examine. He washes his hands in preparation but has not yet made
+  the sacrifice. He inspires confidence in others because of his
+  dignified appearance.}
+ {He looks at things like a boy. This behavior is acceptable in
+  lesser men but not in a superior man.}
+ {He looks out of the door. This kind of behavior is acceptable
+  in a woman.}
+ {He examines his life so that he can decide whether to go forward
+  or retreat.}
+ {It is useful to be the king's guest since he can consider the
+  achievements of the kingdom.}
+ {He examines his life. The wise man does not make mistakes.}
+ {He examines his character to see if he is wise. He will not
+  lapse into error.}
+
+\ichingStoreDivination{SHIH HO}{Biting Through}
+ {Biting through. Success. It is helpful to use the law.}
+ {His feet are trapped and his toes are cut off. There will be no
+  mistakes.}
+ {He sinks his teeth into tender flesh and bites off the nose.
+  There will be no mistakes.}
+ {He bites on tough meat and it is poisoned. This is not a mistake
+  but it is a cause for minor regrets.}
+ {He bites on hard, bony meat. He receives the golden arrow. He
+  will benefit from being firm and will recognize the dangers.
+ There will be good fortune.}
+ {He discovers a small piece of gold when he bites on dried meat.
+  He should be firm and recognize the dangers in order to avoid
+  mistakes.}
+ {He is trapped in a wooden collar and has no ears. There will be
+  bad fortune.}
+
+\ichingStoreDivination{PI}{To Adorn}
+ {To adorn. Success. There is little to be gained in giving him
+  permission to undertake anything.}
+ {He adorns his toes with fiery. He steps out of the carriage and
+  continues on foot.}
+ {He adorns his beard.}
+ {His body is bejewelled as though sprinkled with dew. Constancy
+  will bring good luck.}
+ {His body is adorned so that he looks as though he is shining
+  with light. He travels on a white, winged horse. He is not a
+ thief but is looking for someone to marry.}
+ {His clothes and body are decorated with fiery and he travels
+  through hills and gardens. His roll of silk is poor and small.
+  This may cause distress but in the end there will be good
+  fortune.}
+ {He is adorned only in white. There will be no mistakes.}
+
+\ichingStoreDivination{PO}{Peeling or Splitting}
+ {Peeling or splitting. There is nothing to be gained by moving
+  anywhere.}
+ {He breaks the leg of the bed. It is bad to destroy anything
+  which is good.}
+ {He breaks the frame of the bed. It is bad to destroy things
+  which are good and useful.}
+ {He is the one who breaks things. This is not a mistake.}  
+ {He breaks both the bed and the skin. This is bad.}
+ {He is kind to the people of the palace, treating them like a
+  shoal of fish. There are many advantages in this.}
+ {He is like a ripe fruit ready to be eaten. The wise man travels
+  in a special carriage. A lesser man's home breaks up.}
+
+\ichingStoreDivination{FU}{Return}
+ {Return. Success. The man traveling to and fro will not be
+  disrupted. His friends come to him and there is nothing wrong
+  with this. It is in his way to come and go. He returns on the
+  seventh day. It is helpful to have a place to stay, wherever that
+  may be.}
+ {He returns after traveling a short distance. There is nothing
+  to regret. There will be very good fortune.}
+ {He returns resigned. There will be good fortune.}
+ {He returns many times. This is dangerous. There is no mistake.}
+ {He starts out in the midst of others, but returns alone.}
+ {He returns with dignity. There is no need for regret.}
+ {He has been given misleading information about his return. This
+  is bad. There will be misfortune and mistakes. If he summons the
+  army there will be a resounding defeat, which will also be
+  disastrous for the country's ruler. It will not be possible to
+  repel the invaders for another ten years.}
+
+\ichingStoreDivination{WU WANG}{Not False}
+ {Not false. Great success. It is good to remain firm. He will be
+  distressed if he is wild instead of upright. It is useless for
+  him to try to go in any direction.}
+ {He is sincere. Wherever he goes he will meet good fortune.}
+ {He does not slough the ground or clear the stable. But he still
+  benefits from this wherever he goes.}
+ {Even those who are truthful suffer misfortunes, like an ox which
+  is tethered to a post and stolen by a passer-by. A local person
+  suffers as a result of this misfortune.}
+ {If he is able to stand firm there will be no mistakes.}
+ {He is ill even though he is open and truthful. He does not use
+  medicine. He will rejoice.}
+ {He is not false yet if he tries to move he will be in
+  difficulties. At this time it is wiser not to move.}
+
+\ichingStoreDivination{TA CH'U}{Great Domesticating Powers}
+ {Great powers of domestication. It is helpful to stand firm. He
+  is lucky when he does not eat with his family. It is helpful to
+  cross the great river.}
+ {He is in a dangerous situation. It is wise to stop.}
+ {The main strap underneath the carriage has been taken away.}
+ {He urges his good horse to travel on. It will be helpful to
+  realize the dangers and behave accordingly. He trains daily in
+  chariot driving and self-defense. There will be advantages in
+  whatever direction he takes.}
+ {The wild young bull is restrained by a yoke. There will be good
+  fortune.}
+ {The tusks of the gelded boar. There will be good fortune.}  
+ {He is the one who controls the very substance of Heaven. There
+  will be success.}
+
+\ichingStoreDivination{I}{Taking Nourishment}
+ {Taking nourishment. By behaving properly there will be good
+  fortune. Look at what we are seeking to nourish. How people
+  naturally seek nourishment.}
+ {Let your sacred tortoise go and look at me with your mouth open.
+  There will be misfortunes.}
+ {He turns everything upside down for nourishment. It goes against
+  the tradition of seeking nourishment above the ground. This will
+  lead to evil.}
+ {He rejects nourishment. This will be bad no matter how firm he
+  is. He does nothing for ten years. This will not bring any
+  disadvantages.}
+ {It is good if he turns things upside down for nourishment. Like
+  a tiger who glares down, he is ready to drive them out. This is
+  no mistake.}
+ {He is opposed to the correct traditional teachings. He will have
+  good fortune if he lives properly. He should not be allowed to
+  try to cross the great river.}
+ {The source of nourishment. It is dangerous but there will be
+  good fortune. It is helpful to cross the great river.}
+
+\ichingStoreDivination{TA KUO}{Great Experience}
+ {Great experience. The main support is weak. It is helpful to
+  move in any direction. There will be success.}
+ {He puts white woven mats on the ground. There will be no
+  mistakes.}
+ {The aging willow sprouts new shoots. The old husband has
+  married a young wife. There are no disadvantages.}
+ {The main support is weak. This is bad.}
+ {The main support has held. This is good fortune. Another support
+  will only cause regret.}
+ {The aging willow flowers. The old wife marries a young husband.
+  There will be mistakes and no praise.}
+ {He crosses the stream and the water rises above his head. This
+  is bad, but there are no mistakes or blame.}
+
+\ichingStoreDivination{K'AN}{The Watery Depths}
+ {The watery depths are twofold. Have faith. He keeps his heart
+  faithful and prospers. Whatever he does is worthwhile}
+ {The waters are twofold. The man enters the watery cavern. This
+  is evil.}
+ {The watery depths are dangerous. His desires will not be fully
+  satisfied.}
+ {He is confronted by the watery depths whether he goes forward or
+  retreats. When danger such as this is around he should stop and
+  rest, otherwise he will fall into the watery depths. Do nothing.}
+ {He only has a bottle of wine and a basket of rice and he uses
+  ordinary earthenware pots. He has agreed to bring enlightenment.
+  There is nothing wrong in this.}
+ {The watery depths are not overflowing. Order is approaching.
+  There will be no mistakes.}
+ {He is bound with thick strong ropes and imprisoned behind walls
+  of thorn bushes. For three years he cannot find a means of
+  escape. This is evil.}
+
+\ichingStoreDivination{LI}{To Shine Brightly, to Part}
+ {To Part. It is useful to stand firm and behave well. This will
+  bring success. Take care of the cows. There will be good
+  fortune.}
+ {He moves but in a very confused way. If this is done with good
+  and proper intentions there will be no mistakes.}
+ {The yellow parts. There will be good fortune.}
+ {The setting sun shines as it goes down. The old sing and beat
+  their pots, or complain about their lot. This is evil.}
+ {It comes unexpectedly. It is like a fire which dies down and is
+  discarded.}
+ {He leaves in floods of tears, crying and bemoaning. There will
+  be good fortune.}
+ {The king uses him to attack. Skillfully he kills the leaders but
+  spares the followers. This is not a mistake.}
+
+\ichingStoreDivination{HSIEN}{All-Embracing}
+ {All-embracing. It is helpful to stand firm and behave properly.
+  Marriage to a young woman will be fortunate.}
+ {He concentrates on wriggling his toes.}
+ {He concentrates on the calves of his legs. This is evil. If he
+  stays where he is there will be good fortune.}
+ {He concentrates on flexing his thigh muscles. He follows others
+  closely. Going forward in this way will bring unhappiness.}
+ {By being firm and righteous there will be good fortune. This
+  prevents regret. If he is restless, moving to and fro, only his
+  friends will take him seriously.}
+ {He concentrates on the back of his neck. There will be no
+  regrets.}
+ {He concentrates on his jaw and tongue.}
+
+\ichingStoreDivination{HENG}{Constant}
+ {Constant. There will be success. There is no mistake. It is
+  helpful to stand firm and behave righteously. It is helpful to go
+  forward in any direction.}
+ {Too great an emphasis on constancy will bring evil, even though
+  he behaves firmly and righteously. Nothing at all can be gained
+  here.}
+ {All regret is removed.}
+ {He does not always make use of virtue. Others think of this as a
+  disgrace. Even if he behaves properly there will be mistakes.}
+ {There is no game in the field.}
+ {By righteous behavior he increases his virtue. This is good for
+  the wife but bad for the husband.}
+ {He constantly excites himself. This is evil.}
+
+\ichingStoreDivination{TUN}{To hide}
+ {To hide. There will be success. There is a small advantage to be
+  gained from being firm and behaving properly.}
+ {It is dangerous because the tail is hidden. Do not try to move.}
+ {He grasps it tightly, using an ox's yellow hide. He cannot be
+  persuaded to let go.}
+ {He hides away as thought he is bound to this place. He is ill
+  and troubled. Keeping domestic servants or a concubine will bring
+  good fortune.}
+ {He hides away well. This is fortunate for a wise man. It is
+  impossible for a lesser man.}
+ {He hides himself away very carefully. Righteous behavior will
+  bring good fortune.}
+ {He hides away honorably. This will bring many advantages.}
+
+\ichingStoreDivination{TA CHUANG}{Great Strength}
+ {Great strength. It is helpful to act properly and firmly.}
+ {His strength lies in his toes. It is certainly a bad time to
+  attack.}
+ {We will be fortunate if he behaves properly.}
+ {The small man uses all his strength, whereas the wise man does
+  not do this. There is a grave danger even when he behaves
+  properly. He is like a ram who butts a fence and only succeeds in
+  trapping his horn.}
+ {Righteous conduct will bring good fortune and remorse will
+  disappear. He approaches a fence determined not to get trapped.
+  His strength is like the strength of a heavy wagon's wheels.}
+ {He changes and loses his ram-like nature. There is nothing to
+  regret.}
+ {He is like a ram butting a fence. He cannot retreat or advance.
+  He cannot gain anything by carrying on like this. If he
+  understands the dangers there will be good fortune.}
+
+\ichingStoreDivination{CHIN}{To Advance}
+ {To advance. The vigorous noble. He uses his charm like a display
+  of fine horses. Three times within the space of one day he is
+  received in audience.}
+ {He seems to advance and retreat at the same time. If he behaves
+  properly all will work out well. If confidence is expressed
+  remain calm. There will be no mistakes.}
+ {He appears to advance, but at the same time he is sad. If he
+  behaves properly he will receive very good fortune from his
+  heavenly mother.}
+ {Everyone is in harmony. All regret has disappeared.}  
+ {He is like a hamster when he advances. He is in danger even if
+  he behaves properly.}
+ {All regrets have now gone. Do not be worried by what is gained
+  or lost. To advance will bring good fortune and many advantages.}
+ {He advances with his horns. He only uses them to punish the
+  city. There will be good fortune. There is no mistake. Even if he
+  behaves properly there will be problems.}
+
+\ichingStoreDivination{MING I}{Brightness Dimmed.}
+ {Brightness dimmed. It is wise to appreciate the dangers and
+  behave properly.}
+ {The brightness is dimmed with flying and he lowers his wings.
+  The wise man goes away and does not eat for three days. Wherever
+  he travels people speak of him unkindly.}
+ {Brightness is dimmed. He is wounded in the left thigh. He uses a
+  swift horse to save himself. There will be good fortune.}
+ {While hunting in the south the brightness is dimmed. He captures
+  the most important general. He should not be too hasty when he
+  tries to restore order.}
+ {He enters the left side of the belly. He reaches the heart of
+  that which dims the brightness. He leaves through the courtyard
+  gate.}
+ {Wherever brightness is dimmed, be like Prince Chi. It is good to
+  behave properly.}
+ {No light, just obscurity. First of all he climbs to Heaven.
+  Afterwards he returns to earth.}
+
+\ichingStoreDivination{CHIA JEN}{The Family}
+ {The family. It is good if a woman behaves properly.}
+ {He has restrictions in his family. Regrets will disappear.}
+ {She should not follow her own desires. She should be at the
+  center of the home preparing food. Her good conduct brings great
+ fortune.}
+ {Excessive severity in the family brings repentance and dangers.
+  There is also good fortune. If the women and children are always
+  chattering this will end in distress and humiliation.}
+ {The wealthy family. There is extremely good fortune.}
+ {The Emperor is very forgiving with his family. There is nothing
+  to worry about. There will be good fortune.}
+ {He is confident and has a regal presence. There will be good
+  fortune in the end.}
+
+\ichingStoreDivination{K'UEI}{Opposition}
+ {Opposition. There will be good fortune in minor matters.}
+ {There is no need for repentance. He has lost his horse but does
+  not go in search of it because it will return of its own accord.
+  If he meets evil men he should avoid making any mistakes.}
+ {By chance he meets his lord in a narrow street. He does not make
+  any mistakes.}
+ {The wagon is seen as it is dragged backwards. His oxen are
+  obstructed. The man's own hair and nose are cut off. This is not
+  a good start, but the end will be better.}
+ {Alone in opposition. He can be confident when he meets the top
+  man. There is danger but there will be no mistakes.}
+ {There is no need for repentance. His own relative bites through
+  the covering. Where is the fault in carrying on like this?}
+ {Alone in opposition. He can see the pig carrying all the filth
+  on its back. There is a carriage full of ghosts. At first the bow
+  is drawn, then it is unstrung. He is not a robber in the act of
+  theft, but a bridegroom going to woo. If he carries on along this
+  way he will encounter rain and there will be good fortune.}
+
+\ichingStoreDivination{CHIEN}{Obstruction}
+ {There are advantages in the southwest. There are no advantages
+  in the northeast. It is helpful to see the great man. Behave
+  properly and there will be good fortune.}
+ {The way ahead is blocked. Returning will bring praise.}
+ {The king's servant faces many obstructions and difficulties. He
+  is not to be blamed.}
+ {To go forward is to encounter difficulties. The reverse of this
+  is to return.}
+ {To go forward is to encounter obstacles. By returning he is
+  united.}
+ {There are very great obstacles. His friends come back to him.}
+ {To go forward is to encounter obstacles. It is better if he
+  turns back. There will be good fortune. It is helpful to see the
+  great man.}
+
+\ichingStoreDivination{HSIEH}{Let Loose}
+ {Let loose. There are advantages in the southwest. If there is
+  nothing else to be done there is good fortune in his returning.
+  If he has to go anywhere it will be more fortunate to travel
+  early.}
+ {There will be no mistakes.}
+ {He catches three foxes in a field. He receives the yellow arrow.
+  Proper behavior brings good fortune.}
+ {The man is carrying a burden on his back. He is also traveling
+  in a carriage and this will lead to robbers attacking him. No
+  matter how properly he behaves there will be sadness.}
+ {Free yourself from your toe. Then your trusted friends will come
+  to you.}
+ {The wise man removes the carriage and has good fortune. He has
+  the confidence of a lesser man.}
+ {The lord fires an arrow at a falcon which is perched on top of a
+  wall. He hits it. The act brings advantages to him.}
+
+\ichingStoreDivination{SUN}{Injured}
+ {Injured. Have confidence. Supreme good fortune and no regrets.
+  Proper behavior is possible. It is good to advance when fully
+  prepared. Two baskets of offerings may be better than offerings
+  which are expensive.}
+ {He leaves his own work. He goes to help another person. There is
+  no cause for regret if he deliberates on what he is doing.}
+ {It is good to behave properly and to attack evil. It is not
+  possible to help another without helping himself.}
+ {Three man travel together, but one then disagrees with the
+  others and he therefore goes. He then finds another person as a
+  companion}
+ {He tackles his weakness and is then able to help others. This is
+  good. He has nothing to regret by doing this.}
+ {He may receive advantages because friends give him ten tortoise
+  shells. They will not accept them back. There will be very great
+  fortune.}
+ {He does not injure. He has the advantage and there is no cause
+  for remorse. It is good to remain firm and true because good
+  fortune will naturally arise. He has the advantage in every move.
+  He draws to himself able ministers, not just relatives.}
+
+\ichingStoreDivination{I}{Increase}
+ {Increase. It is helpful to go forward with plans in mind. It is
+  good to cross the great river.}
+ {It is good to undertake impressive actions. There will be great
+  fortune and nothing to regret.}
+ {Someone gives him the advantage by giving him ten pairs of
+  tortoise shells. These cannot be resisted. He will always be
+  fortunate as long as he behaves properly. The king who offers
+  what he receives to the supreme ruler will be very fortunate.}
+ {He gains advantage by using evil. There is nothing wrong in
+  this. He has confidence. He walks the straight path and, using
+  the seal, announces himself to the prince.}
+ {He walks the true path. He announces himself to the prince who
+  will follow. It is good to be relied upon, even to the extent of
+  helping to remove the capital.}
+ {He is confident in his generosity and kindness. He can be
+  confident because he will recognize his virtue and kindness}
+ {He is of no benefit to anyone. Someone may even hit him. He sets
+  no standard for his attitudes and this is evil.}
+
+\ichingStoreDivination{KUAI}{New Outcome}
+ {New outcome. He must display it in the king's court. He must
+  speak confidently and with strict regard to honesty. There is
+  danger. It is not a good idea to tell the city, nor is it useful
+  to rush to arms. It is helpful to carry on with plans already in
+  action.}
+ {He steps out boldly. He sets forth, but not to victory. He will
+  regret this.}
+ {He stands almost ready whilst others arm in the night. There is
+  nothing to fear.}
+ {He puts his best face forward and this brings misfortune. The
+  wise man is securely positioned. He walks above and encounters
+  rain, and is therefore soaked and annoyed. There is no cause for
+  regret.}
+ {The skin on his buttocks has been stripped away and he walks
+  with difficulty. If he were led like a sheep there would be no
+  worries. However, if he were to hear what is said he would not
+  believe it.}
+ {When he sorts out weeds he is secure in his determined attitude.
+  There will be no mistake in following the correct path.}
+ {He does not stand prepared. This will eventually bring evil.}
+
+\ichingStoreDivination{KOU}{To Meet}
+ {To meet. The woman is strong and tough. Do not get married to a
+  woman like this.}
+ {He should be restrained with an iron brake. Proper behavior
+  will bring good fortune. If he goes forward in any way he will
+  encounter misfortune. He is like a thin pig who rushes around.}
+ {There is nothing wrong in the fact that he has a packet of fish.
+  Do not give this to guests.}
+ {The skin of his buttocks has been stripped away and he has
+  difficulty walking. There is danger but he does not make any
+  major mistakes.}
+ {He has a packet but no fish. There will be misfortune.}
+ {The melon is covered by the tree's leaves. Part of it is hidden.
+  It comes as though from Heaven.}
+ {He meets others with his horns. This will bring regret. There
+  will be no mistakes.}
+
+\ichingStoreDivination{TS'UI}{To Collect}
+ {To collect. Success. The king approaches the temple. It is good
+  to see the great man. There will be success. The use of large
+  offerings brings good fortune. To move forward in any direction
+  will also bring good fortune.}
+ {He is sincere in his wish, but if he does not carry it out there
+  may sometimes be confusion, sometimes a coming together. He calls
+  out. Then his tears give way to smiles. He does not mind. He goes
+  forward and there will be no mistakes.}
+ {He is led forward and there is great fortune. There are no
+  mistakes. As long as he is sincere even the smallest offering
+  will bring advantages.}
+ {He tries to bring unity, but then he sighs. He can find no
+  advantages anywhere. There will be no mistakes if he goes
+  forward, but there may be slight cause for regret.}
+ {Great fortune. There will be no mistakes.}
+ {He uses his dignified position to unite them together. This is
+  no mistake. If someone is insincere, then admirable, persistent
+  and good behavior will ensure that distress disappears.}
+ {He sighs and weeps floods of tears. There will be no mistakes.}
+
+
+\ichingStoreDivination{SHENG}{Rising Up}
+ {Rising up. There will be great success. He tries to see the
+  great man. He does not worry. Moving to the south will bring good
+  fortune.}
+ {He rises up and is welcomed. There will be extremely good
+  fortune.}
+ {If he is sincere then even the smallest offerings will be
+  advantageous. There will be no mistakes.}
+ {He goes up into an empty town.}
+ {The king uses him to make offerings for success on Mount Ch'i.
+  There will be good fortune. There will be no mistakes.}
+ {He behaves properly and is fortunate. He mounts the steps.}
+ {He rises up from the dark. It is helpful to be unceasingly
+  persistent.}
+
+\ichingStoreDivination{K'UN}{To Surround and Wear Out}
+ {To surround and wear out. There will be success. Keep going. The
+  great man has good fortune. There will be no mistakes. He has a
+  speech to make but he is not believed.}
+ {He is sitting exhausted under the barren trees. He wanders into
+  a dreary valley. Nothing happens for three years.}
+ {He is sitting exhausted amid his wine and meat. The person with
+  the red knee bands is coming. It is helpful to offer sacrifices.
+  Moving forwards brings bad fortune but there will be no
+  mistakes.}
+ {He is sitting exhausted among the stones. He grasps at thorns.
+  He goes into his palace and does not see his wife. There will be
+  bad fortune.}
+ {He proceeds very slowly. He is sitting exhausted by his golden
+  carriage. There is good reason for his sadness but all will be
+  well in the end.}
+ {His nose and feet are cut off. He is sitting, exhausted by the
+  person with the scarlet knee bands. Everything is slow but well.
+  It is helpful to make sacrifices.}
+ {He is sitting exhausted among the creeping plants. He moves in a
+  certain way and says ``If I move I shall be sorry.'' If he is
+  able to be sorry and then moves forward there will be good
+  fortune.}
+
+\ichingStoreDivination{CHING}{The Well}
+ {The well. The town may be moved, but the well may not. It does
+  not shrink or grow. People come and go to draw water from the
+  well. If they cannot quite reach the water with a rope or if the
+  bucket breaks, there will be bad fortune.}
+ {He does not drink from the muddy well. No creatures come to an
+  old well.}
+ {The well has sprung a leak and the fish and water spurt forth.
+  The broken jug leaks.}
+ {Although the well has been cleaned no one uses it. This is a
+  weight upon the heart because it can be used. If the king were
+  clever he and others could benefit from this.}
+ {The well is well lined. There will be no mistakes.}
+ {The well has clear, cold water which can be drunk.}
+ {He draws from the well without difficulty because it is open. He
+  is sincere. This will bring great good fortune.}
+
+\ichingStoreDivination{KO}{Change}
+ {Change. He is believed in his own right time. There will be
+  great success. It is helpful to behave properly. Any cause for
+  regret disappears.}
+ {He is bound in the skin of a yellow cow.}
+ {When his time comes he is able to make changes. Initiating
+  action will bring extremely good fortune. There will be no
+  mistakes.}
+ {Initiating action will bring bad fortune. Even if he behaves
+  properly there is danger. If he wishes to change things he will
+  need to discuss them three times, and then people will have
+  confidence in him.}
+ {The need to repent disappears. He is believed. He alters the way
+  things are and is fortunate.}
+ {The great man changes into a tiger. Even though he has not yet
+  consulted the oracle people have confidence in him.}
+ {The wise man changes like a leopard, whereas the lesser man
+  simple decomposes his face. To advance will bring bad fortune. To
+  continue behaving correctly will bring good fortune.}
+
+\ichingStoreDivination{TING}{The Cooking Pot}
+ {Ting, the tree-legged cooking pot. Great fortune and success.}
+ {The cooking pot is upturned and its feet are in the air. This is
+  helpful for getting rid of useless stuff. A concubine is useful
+  because of the son she has. There will be no mistakes.}
+ {The cooking pot has food inside it. My colleagues are jealous
+  but they cannot harm me. There will be good fortune.}
+ {The handles on the cooking pot have been changed. He is halted
+  in his progress. The pheasant's juicy meat is not eaten. The rain
+  comes and sadness ends. In the end there will be good fortune.}
+ {The legs of the cooking pot are broken. The noble's food is
+  split and his clothes are soiled. There will be bad fortune.}
+ {The cooking pot has yellow ears and gold handles. It is helpful
+  to continue behaving properly.}
+ {The cooking pot has rings of jade. There will be very good
+  fortune. Everything here works to his advantage.}
+
+\ichingStoreDivination{CHEN}{Shock}
+ {Shock. Success. The shock comes but he looks out and is seen
+  with cheerful words on his lips. Although the shock terrifies
+  everyone for an hundred miles around, he does not drop the
+  sacrificial spoon and cup.}
+ {The shock comes and he looks around carefully, but then cheerful
+  words come to his lips. There will be good fortune.}
+ {He is in danger when the shock comes. He loses his treasure. He
+  climbs nine hills. He does not go in search of his treasures but
+  finds them again after seven days.}
+ {The shock makes him very upset and disturbed. The shock makes
+  him act but there is nothing wrong in this.}
+ {The shock makes him as sluggish as mud.}
+ {He comes and goes and the shock threatens danger. However, there
+  is no problem because he has things to do.}
+ {The shock causes him to be dismayed and he looks around
+  anxiously. Initiating action will bring good fortune. He will
+  have acted rightly if he moves before the shock reaches him
+  although is has reached his neighborhood. His family, however,
+  may grumble about him.}
+
+\ichingStoreDivination{KEN}{Resting}
+ {Resting. Resting his back, he is not able to feel his body. He
+  goes into the courtyard. He does not see his own people. There
+  will be no mistakes.}
+ {There is nothing wrong with resting his toes. It is helpful for
+  him to behave in a true manner.}
+ {He rests his legs. He is unable to save the person whom he
+  follows and is uneasy in his heart.}
+ {He rests his loins. He puts his ribs aside from him. There is
+  danger and his heart bursts with anxious excitement.}
+ {He rests his body. There will be no mistakes.}
+ {He rests his jaws. His speech is composed. Any cause for regret
+  disappears.}
+ {He remains resting with devotion. There will be good fortune.}
+
+\ichingStoreDivination{CHIEN}{Gradual Development}
+ {Gradual development. The woman is married. There will be good
+  fortune. It is helpful to behave properly.}
+ {The geese gradually draw near to the shore. The younger son is
+  in danger. Although he is talked about there will be no
+  mistakes.}
+ {The geese gradually draw near to the cliff, and here they eat
+  and drink happily and contentedly. There will be good fortune.}
+ {The geese gradually draw near to the plains. This is like a
+  husband who goes out but does not return, or like a wife who is
+  pregnant but does not have the baby. There will be bad fortune.
+  It is good to fight off thieves.}
+ {The geese gradually draw near to the tree and land on its flat
+  branches. There will be no mistakes.}
+ {The geese gradually draw near the mountain. This is like a wife
+  who does not become pregnant for three years. In the end she
+  conceives as nothing can prevent this. There will be good
+  fortune.}
+ {The geese gradually draw near to the highest heights. Their
+  feathers can be used for the ritual dance. There will be good
+  fortune.}
+
+\ichingStoreDivination{KUEI MEI}{Marrying the Younger Sister}
+ {Marrying the younger sister. Initiating actions will bring bad
+  fortune. There are no advantages here.}
+ {The younger sister is married as a subordinate to the first
+  wife. This is like a lame man who manages to get along. To
+  advance will bring good fortune.}
+ {The one-eyed person is able to see. It is helpful for a man to
+  behave in the same way as a woman does.}
+ {The younger sister is ready to be married but she is in a lowly
+  position. When she returns she is married off as a concubine.}
+ {The younger sister spins out the time to her marriage, but she
+  will eventually be married.}
+ {Emperor I gave his younger sister in marriage but her
+  embroidered clothes were not as gorgeous as those of her
+  attendants. The moon is almost full. There will be good fortune.}
+ {The woman carries a basket but it does not contain any food. The
+  gentleman stabs the sheep but no blood comes out. There is
+  nothing to be gained here.}
+
+\ichingStoreDivination{FENG}{Prosperity}
+ {Prosperity. Success. There is nothing to worry about because the
+  king achieves everything. He should be like the sun at midday.}
+ {He meets his supreme ruler. There is nothing wrong in the fact
+  that they are alike. Going forward will result in praise.}
+ {His prosperity is like a curtain. At midday he can see the stars
+  in the Dipper constellation. When he goes out he is treated with
+  suspicion and hatred. There will be fortune if he is encouraged
+  to follow confidently}
+ {His prosperity is like a banner through which he can see the
+  smallest stars at midday. He breaks his right arm but there will
+  be no mistakes.}
+ {His prosperity is like a curtain, through which he can see the
+  stars in the Dipper constellation at midday. He meets his king
+  and they are alike. There will be good fortune.}
+ {The various parts come together. He is praised and
+  congratulated. There will be good fortune.}
+ {His own household is prosperous. He encloses his family inside
+  and peers out through the gate, but does not see anyone there. He
+  does not see anything for three years. There will be misfortune.}
+
+\ichingStoreDivination{LU}{The Traveler}
+ {The traveler. Minor success. If the traveler behaves properly
+  there will be good fortune.}
+ {Because the traveler is engaged in worthless activities he
+  brings disaster upon himself.}
+ {The traveler arrives at an inn, carrying his goods. He obtains
+  the services of a dependable and upright servant.}
+ {The traveler burns down the inn. He loses his faithful servant.
+  Even if he behaves properly there in danger.}
+ {The traveler is in a shelter and has his goods and an ox with
+  him. ``My heart is not at ease.''}
+ {He shoots at a pheasant but loses his arrow. Eventually he is
+  praised and given an official post.}
+ {He is like a bird which burns its own nest. Initially the
+  traveler laughs, but then he weeps. Because of the changes he
+  loses his ox. There will be bad fortune.}
+
+\ichingStoreDivination{SUN}{Gentle and Yielding}
+ {Gentle and yielding. Minor success. It is helpful to advance. It
+  is also helpful to see the great man.}
+ {He advances and retreats. It is helpful to be well prepared and
+  to behave like a soldier.}
+ {He sits quietly under the bed. He uses divines and magicians,
+  causing great confusion. There will be good fortune and no
+  mistakes.}
+ {He is persistent but gentle. This is regrettable.}
+ {There are no regrets. He catches three kinds of creatures in the
+  field.}
+ {Proper behavior brings good fortune. There is nothing to
+  regret. Everything he does is advantageous. The start may not be
+  good but everything will work out well in the end. There will be
+  three days before the changes occur. Allow three days after the
+  changes. There will be good fortune.}
+ {He sits quietly under the bed. He loses his goods and his ox.
+  However well he behaves there will be misfortune.}
+
+\ichingStoreDivination{TUI}{Happiness}
+ {Happiness. Success. It is advantageous to behave properly and
+  firmly.}
+ {Happiness and harmony. There will be good fortune.}  
+ {Confidence and happiness. There will be good fortune. Every
+  sadness disappears.}
+ {Happiness is coming. There will be misfortune.}
+ {He deliberates about what will make him happy but this does not
+  satisfy him. The things he is involved with are diseased but he
+  will be happy.}
+ {He is confident despite the disasters around him. This is
+  dangerous.}
+ {Seductive happiness.}
+
+\ichingStoreDivination{HUAN}{Scattered}
+ {Scattered. Success. The king travels to his temple. It is
+  helpful to cross the great river. It is also good to behave
+  properly.}
+ {He rescues with the strength of a horse. There will be good
+  fortune.}
+ {When everything is scattered abroad he hurries to a place of
+  safety. There is nothing to be anxious about.}
+ {He disregards his own person. This is no cause for regret.}
+ {He breaks up his group. There will be great fortune. He scatters
+  and then gathers in a mound; ordinary people would never have
+  considered doing this.}
+ {He is dripping with sweat when he loudly cries out. He has done
+  nothing wrong. He scatters the king's officers. There is nothing
+  wrong in this.}
+ {He scatters his blood. He departs. He leaves and then keeps his
+  distance. There will be no mistakes.}
+
+\ichingStoreDivination{CHIEH}{Limitations}
+ {Limitations. Success. If the limitations are too strict they
+  should not be allowed to go on for too long.}
+ {He does not go out of the courtyard outside his door. There will
+  be no mistakes.}
+ {He does not go out of the courtyard inside his gate. There will
+  be bad fortune.}
+ {Tears will fall because he does not observe the restrictions.
+  There is no fault in this.}
+ {He accepts the limitations peacefully. There will be success.}
+ {He willingly accepts the limitations. There will be good
+  fortune. His advance is praised.}
+ {He is distressed by the limitations. Even when he acts properly
+  there will be misfortune. Although there are regrets, they will
+  disappear.}
+
+\ichingStoreDivination{CHUNG FU}{Inner Confidence}
+ {Inner confidence. Pigs and fish mean good fortune. It is helpful
+  to cross the great river. It is helpful to behave properly.}
+ {He is ready. There will be good fortune. Otherwise he would be
+  uneasy.}
+ {The crane calls out from her cover. Her chicks answer back. ``I
+  have a good cup full which I will share with you.''}
+ {He meets his companions. He beats the drum and then stops. He
+  weeps and then sings.}
+ {The moon is almost full. The horse has lost his mate. There is
+  nothing wrong in this.}
+ {He is united with others when he is confident. There will be no
+  mistakes.}
+ {The voice of the cockerel rises up to Heaven. Even if be behaves
+  properly there is bad fortune.}
+
+\ichingStoreDivination{HSAIO KUO}{Minor Problems}
+ {Minor problems. Success. It is useful to behave properly. This
+  is appropriate for minor things but not for more important
+  things. The bird on the wing brings the message. It is good to
+  come down but not to go up. There will be extremely good
+  fortune.}
+ {The bird is on the wing. There will be misfortune.}
+ {He passes by his ancestor. He meets his grandmother. He does not
+  do anything against his ruler. He meets his official. There will
+  be no mistakes.}
+ {Someone comes up and attacks him because he is not sufficiently
+  careful. There will be misfortune.}
+ {There are no mistakes here. Instead of passing by he meets him.
+  Carrying on brings danger and care should be taken. Do not always
+  try to use proper behavior.}
+ {There is a heavy cloud which is coming from our lands in the
+  west, but no rain. The prince fires and hits the bird in the
+  cave.}
+ {He does not meet him but passes by. The bird on the wing has
+  flown far away from him. There will be bad fortune. This is a
+  sign of pain and misfortune.}
+
+\ichingStoreDivination{CHI CHI}{Already Done}
+ {Already done. Minor success. It is helpful to behave properly.
+  There will be good fortune to begin with, but chaos at the end.}
+ {He puts the brakes on his wheels. He is like a creature who has
+  wet his tail. There will be no mistakes.}
+ {He is like a woman who has lost her screen. She does not go
+  after it. She will get it back in seven days.}
+ {The noble ancestor destroyed the devil's territory but took
+  three years to subdue it. Lesser people should not be used.}
+ {The best clothes are now in rags. In the end he will be careful
+  all day.}
+ {His neighbor is the east kills an ox, but he does not have as
+  much as his neighbor in the west who sacrifices. His sacrifice
+  brings great blessings.}
+ {His head is in the water. There is danger.}
+
+\ichingStoreDivination{WEI CHI}{Not Yet Done}
+ {Not yet done. Success. A young fox crossing the stream gets his
+  tail wet. There is no advantage in this.}
+ {He gets his tail wet. This will cause regret.}
+ {He puts the brakes on his wheels. Proper behavior will bring
+  good fortune.}
+ {He advances and meets misfortunes before things are properly
+  finished. It is helpful to cross the great stream.}
+ {Proper conduct will bring good fortune. All regret passes away.
+  He is shaken and invades the devil's territory. The great country
+ rewards him for three years.}
+ {Proper behavior will bring good fortune. There is no cause for
+  regret. He has the glory of the wise man and he is sincere. There
+ will be good fortune.}
+ {He is confident and celebrates with drink. There is no wrong in
+  this. If he wets his head he will lose his confidence.}
+
+% Divinations.
+
+\def\ichingSetFonts#1#2#3#4#5#6{
+  \font\ichingHexagramF = #2
+  \font\ichingTitleF = #3
+  \font\ichingSubTitleF = #4
+  \font\ichingInterpretationF = #5
+  \font\ichingTextF = #6
+  \baselineskip = #1 }
+
+%\ichingSetFonts{16bp}% baselineskip
+%  {iching-e00 at 160bp}
+%  {anttb at 32bp}
+%  {anttb at 24bp}
+%  {anttri at 12bp}
+%  {anttr at 12bp}
+
+\newcount\ichingRandomNumber
+\newcount\ichingHexagram
+\newcount\ichingChangeline
+
+\def\printDivination #1 {\hfuzz=\maxdimen
+   \ichingRandomNumber=#1
+   % choose hexagram
+   \ichingHexagram=\ichingRandomNumber
+   \divide\ichingHexagram by 64 
+   \advance\ichingHexagram by 1
+   \multiply\ichingHexagram by 64
+   \advance\ichingHexagram by -\ichingRandomNumber
+   % choose change line
+   \ichingChangeline=\ichingRandomNumber
+   \divide\ichingChangeline by 6
+   \advance\ichingChangeline by 1
+   \multiply\ichingChangeline by 6
+   \advance\ichingChangeline by -\ichingRandomNumber
+   \message{[hexagram: \number\ichingHexagram]}
+   \message{[change line: \number\ichingChangeline]}
+   % typeset divination 
+   \centerline{\ichingTitleF\divination{\number\ichingHexagram}{name}}
+   \vskip .25in
+   \centerline{\ichingSubTitleF
+     \divination{\number\ichingHexagram}{translation}}
+   \vskip .4in
+   \centerline{\epsffile{\ichingCircle}}
+   \nointerlineskip
+   \centerline{\smash{\raise110bp\hbox{\ichingHexagramF\char\ichingHexagram}}}
+   \vskip .4in
+   \centerline{\ichingInterpretationF INTERPRETATION}
+   \vskip .1in
+   {\ichingTextF \divination{\number\ichingHexagram}{interpretation}\par}
+   \vskip .2in
+   \centerline{\ichingInterpretationF Interpretation of the
+%%%%     \number\ichingChangeline\kern2pt
+%%%%     \ifcase \ichingChangeline
+%%%%     \or st \or nd \or rd \or th \or th \or th \fi 
+         change line}
+   \vskip .1in
+   {\ichingTextF
+    \divination{\number\ichingHexagram}{changeline:\number\ichingChangeline}
+    \par}}
+
+\font\ichingdescF=cmss8
+
+\def\ichingSymbol#1%
+  {$\matrix{\vrule height 36bp width 0pt\hbox{\ichingF\iching{#1}}\cr
+           \hbox{\ichingdescF#1}\vrule depth 6pt width 0pt}$}
+
+\def\ichingFontTable#1{$$\vbox{\offinterlineskip
+  \font\ichingF=#1
+  \halign{\hfil\ichingSymbol{##}\hfil\enspace\vrule&&
+          \enspace\hfil\ichingSymbol{##}\hfil\enspace\cr
+        & cosmos& thunder& water& mountain& earth& wind& fire& lake\cr%
+	                                                    \noalign{\hrule}
+%%         1 34  5 26 11  9 14 43
+ cosmos& ch'ien1& ta chuang& hsu& ta ch'u& t'ai& hsiao ch'u& ta yu& kuai\cr
+%%        25 51  3 27 24 42 21 17
+ thunder& wu wang& chen& chun& i1& fu& i2& shih ho& sui\cr
+%%         6 40 29  4  7 59 64 47
+ water&    sung& hsien2& k'an& meng& shih& huan& wei chi& k'un2\cr
+%%        33 62 39 52 15 53 56 31
+ mountain&     tun& hsiao kuo& chien1& ken& ch'ien2& chien2& lu& hsien1\cr
+%%        12 16  8 23  2 20 35 45
+ earth&     p'i& yu& pi1& po& k'un1& kuan& chin& ts'ui\cr
+%%        44 32 48 18 46 57 50 28
+ wind&     kou& heng& ching& ku& sheng& sun2& ting& ta kuo\cr
+%%        13 55 63 22 36 37 30 49
+ fire&     t'ung jen& feng& chi chi& pi2& ming& chia jen& li& ko\cr
+%%        10 54 60 41 19 61 38 58
+ lake& u lu& kuei mei& chien3& sun1& lin& chung fu& k'uei& tui\cr}}$$}
+
+\endinput

@@ -1,0 +1,510 @@
+#!/usr/bin/perl -w
+#
+# THIS FILE IS DISTRIBUTED WITH THE METATYPE1 PACKAGE
+#
+# It is a script for converting text metric AFM --> binary
+# metric PFM (for Windows); many heuristic guesses
+# are necessary (PFM documentation is messy and buggy)
+#
+# ver. 0.17, 17.01.2003 -- careful rounding
+# ver. 0.16, 16.01.2003 -- the old form of PFM parameters comment (PFMParams)
+#                          also included for compatibility reasons
+# ver. 0.15, 03.01.2003 -- adjusted to (modified) pfcommon.dat
+# ver. 0.14, 26.10.2002 -- sub prepare_data() --> sub prepare_data
+#                          (otherwise prototyping was needed); many
+#                          thanks to Krzysio Leszcz\'nski
+# ver. 0.13, 31.07.2002 -- a typo in a comment fixed, message changed,
+#                          banner added
+# ver. 0.12, 01.03.2002 -- bug fixed in fixing WindowsName
+#                          (an error in a regular expression)
+# ver. 0.11, 12.09.2001 -- first release
+
+initialize();
+
+if ($#ARGV<1) {
+  print "Usage: perl afm2pfm.pl <afm-file> <pfm-file>\n";
+  exit;
+}
+
+$infile=shift @ARGV;
+$outfile=shift @ARGV;
+foreach $i (@ARGV) {$i =~ /^(\w+):(.*)$/; $args{$1}=$2}
+
+open (AFM, "<$infile") or die "Can't open input file: $infile";
+
+open (OUT, ">$outfile") or die "Can't open output file: $outfile";
+binmode(OUT);
+
+read_afm();
+close(AFM);
+prepare_data();
+calculate_offsets();
+#print_text_file();
+print OUT make_pfm();
+close(OUT);
+
+exit 0;
+
+sub initialize {
+  print "This is afm2pfm, ver. 0.17\n";
+  %pat_len = ('C' => 1, 's' => 2, 'v' => 2, 'V' => 4, 'a60' => 60);
+  struct_pfm_header();
+  struct_pfm_extmetric();
+  struct_pfm_strings();
+  afm_names();
+  magic_numbers();
+}
+
+sub read_afm {
+  if (<AFM>!~/^StartFontMetrics/) {print 'Not a AFM file'}
+  while (<AFM>) {
+    chomp; @l=split;
+    if (/StartCharMetrics/) {last};
+    if (exists $afm_headers{$l[0]}) {$afm_values{$l[0]}=$l[1]}
+    if (/PFMParams/) {# obsolete convention
+      $afm_values{'PFMname'}=$l[2];
+      $afm_values{'PFMbold'}=$l[3];
+      $afm_values{'PFMitalic'}=$l[4];
+    }
+    if (/PFM parameters/) {
+      $afm_values{'PFMname'}=$l[3];
+      $afm_values{'PFMbold'}=$l[4];
+      $afm_values{'PFMitalic'}=$l[5];
+    }
+    if (/Notice/) {
+      $afm_values{'Notice'}=$_;
+      $afm_values{'Notice'}=~ s/^Notice +//;
+    }
+    if (/FontBBox/) {
+      $afm_values{'llx'}=$l[1]; $afm_values{'lly'}=$l[2];
+      $afm_values{'urx'}=$l[3]; $afm_values{'ury'}=$l[4];
+    }
+  }
+# $afm_chars_num=$l[1];
+  $first_char=255; $last_char=0; $max_width=0;
+  while (<AFM>) {
+    chomp; @l=split;
+    if (/EndCharMetrics/) {last}
+    if ($l[1]>0) {
+      $afm_widths[$l[1]]=$l[4]; $afm_codes{$l[7]}=$l[1]; $afm_names[$l[1]]=$l[7];
+      if ($l[1]<$first_char) {$first_char=$l[1]}
+      if ($l[1]>$last_char) {$last_char=$l[1]}
+      if ($l[4]>$max_width) {$max_width=$l[4]}
+    }
+    if ($l[7] eq 'X') {$avg_width=$l[4]}
+    if ($l[7] eq 'bullet') {$default_char=$l[1]}
+  }
+  while (<AFM>) {if (/StartKernPairs/) {last}}
+  if (!eof(AFM)) {
+    while (<AFM>) {
+      chomp; ($dummy,$chara,$charb,$kern)=split;
+      if (/EndKernPairs/) {last}
+      if ($dummy ne 'KPX') {die 'Malformed AFM kern table'}
+      if ((exists $afm_codes{$chara}) && (exists $afm_codes{$charb})) {
+        push @afm_kerns, [$afm_codes{$chara}, $afm_codes{$charb}, $kern];
+      }
+    }
+  }
+}
+
+sub prepare_data {
+  $pfm_values{'Version'}=256;  # or 512 (according PFM doc)
+  $pfm_values{'Type'}=129;
+  $pfm_values{'Points'}=10;
+  $pfm_values{'VertRes'}=300;  # dpi (some other values are in `dots')
+  $pfm_values{'HorizRes'}=300; #
+  $pfm_values{'ExternalLeading'}=0;
+  $pfm_values{'Underline'}=0;
+  $pfm_values{'Stikeout'}=0;
+  $pfm_values{'WidthBytes'}=0;
+  $pfm_values{'BitsPointer'}=0;
+  $pfm_values{'BitsOffset'}=0;
+#
+  $pfm_values{'SizeFields'}=30; # constant
+  $pfm_values{'OriginTable'}=0;
+  $pfm_values{'TrackKernTable'}=0;
+  $pfm_values{'Reserved'}=0;
+#
+  $pfm_values{'Size_ext'}=$pfm_ext_length; # = 52 constant
+  $pfm_values{'PointSize'}=200;     # or 240 (according Y&Y)
+  $pfm_values{'Orientation'}=0;
+  $pfm_values{'MasterHeight'}=1000; # or 300 (according PFM doc)
+  $pfm_values{'MinScale'}=4;        # 1pt in dots or 3 (Y&Y)
+  $pfm_values{'MaxScale'}=900;      # 216pt in dots or 1000 (Y&Y)
+  $pfm_values{'MasterUnits'}=1000;
+  $pfm_values{'KernTracks'}=0;
+#
+  $pfm_values{'DeviceName'}='PostScript';
+# Font dependent:
+  # must have length = 60
+  $pfm_values{'Copyright'}=substr($afm_values{'Notice'} . (' ' x 60), 0, 60);
+#  $pfm_values{'Ascent'}=round($afm_values{'Ascender'}); # or 'ury' ? or!
+  $pfm_values{'Ascent'}=ceiling($afm_values{'ury'});
+  # probably PixHeight should be 1000+InternalLeading
+  $pfm_values{'InternalLeading'}=max(0,
+    ceiling($afm_values{'ury'})-floor($afm_values{'lly'})-1000);
+  $pfm_values{'Italic'}=($afm_values{'ItalicAngle'}!=0 ? 1 : 0 );
+  # ???
+  $pfm_values{'Weight'}=($afm_values{'FontName'} =~ /[^A-Za-z](Light|Regular|Normal|Medium|Book|Bold|Black)/ ? $weight{$1} : $weight{'Regular'});
+  # should be derived from Encoding Scheme???
+  $pfm_values{'CharSet'}=(0? 238 : 255); # EE or FF
+  # maxwidth or 1000
+  $pfm_values{'PixWidth'}=max(0,ceiling($afm_values{'urx'})-floor($afm_values{'llx'}));
+  # see comment above
+  $pfm_values{'PixHeight'}=1000+$pfm_values{'InternalLeading'};
+  # how to evaluate this ???
+  $pfm_values{'PitchAndFamily'}=16*1+($afm_values{'IsFixedPitch'} ne 'true' ? 1 : 0 );
+  $pfm_values{'AvgWidth'}=(defined $avg_width ? round($avg_width) : 500);
+  $pfm_values{'MaxWidth'}=round($max_width);
+  $pfm_values{'FirstChar'}=0;  # or first_char
+  $pfm_values{'LastChar'}=255; # or last_char
+  # bullet or question_mark
+  $pfm_values{'DefaultChar'}=(defined $default_char ? $default_char : ord('?'))-$pfm_values{'FirstChar'};
+  $pfm_values{'BreakChar'}= ord(' ') - $pfm_values{'FirstChar'};
+#
+  $pfm_values{'CapHeight'}=round($afm_values{'CapHeight'});
+  $pfm_values{'XHeight'}=round($afm_values{'XHeight'});
+  $pfm_values{'LowerCaseAscent'}=round($afm_values{'Ascender'});
+  $pfm_values{'LowerCaseDescent'}=round(-$afm_values{'Descender'});
+  $pfm_values{'Slant'}=round(10*$afm_values{'ItalicAngle'});
+  $pfm_values{'SuperScript'}=-round(.8*$pfm_values{'XHeight'}); # -480, <0 ???
+  $pfm_values{'SubScript'}=round(.3*$pfm_values{'XHeight'}); # 150, >0 ???
+  $pfm_values{'SuperScriptSize'}=800; # 650 ???
+  $pfm_values{'SubScriptSize'}=800;   # 650 ???
+  $pfm_values{'UnderlineOffset'}=round(-$afm_values{'UnderlinePosition'});
+  $pfm_values{'UnderlineWidth'}=round($afm_values{'UnderlineThickness'});
+  $pfm_values{'DoubleUpperUnderlineOffset'}=$pfm_values{'UnderlineOffset'};
+  $pfm_values{'DoubleLowerUnderlineOffset'}=$pfm_values{'DoubleUpperUnderlineOffset'}+3*$pfm_values{'UnderlineWidth'};
+  $pfm_values{'DoubleUpperUnderlineWidth'}=$pfm_values{'UnderlineWidth'};
+  $pfm_values{'DoubleLowerUnderlineWidth'}=$pfm_values{'UnderlineWidth'};
+  $pfm_values{'StrikeOutOffset'}=round(.6*$pfm_values{'XHeight'});
+  $pfm_values{'StrikeOutWidth'}=$pfm_values{'UnderlineWidth'};
+#
+  if (exists $afm_values{'PFMname'}) {
+    $pfm_values{'WindowsName'}=$afm_values{'PFMname'};
+    $pfm_values{'Weight'}=($afm_values{'PFMbold'} eq 0 ? 400 : 700);
+    $pfm_values{'Italic'}=($afm_values{'PFMitalic'} eq 0 ? 0 : 1);
+  } else {# hazardous guess
+    $pfm_values{'WindowsName'}=$afm_values{'FontName'};
+      while ($pfm_values{'WindowsName'} =~s/([Oo]bli(que)?|[Ii]t(alic)?
+        |[Kk]ursywa|[Ss]lant(ed)?|Lt|[Ll]ight|[Rr]eg(ular)?|[Nn]or(mal)?
+        |Bk|[Bb]ook|Md|[Mm]edium|Bd|[Bb]old|Blk|[Bb]lack|[\ _\-:])$//gx){}
+  }
+  $pfm_values{'PostscriptName'}=$afm_values{'FontName'};
+  prepare_widths();
+  prepare_kerns();
+# put extra info and allow to override values
+  put_extra_values('Info','JNSteam');
+  foreach $i (keys %args) {
+    if (exists $pfm_values{$i}) {$pfm_values{$i}=$args{$i}}
+    else {die "Unknown key in command line parameter $i\n"}
+  }
+}
+
+sub prepare_widths {
+  $pfm_widths_num=$pfm_values{'LastChar'}-$pfm_values{'FirstChar'}+1;
+  $pfm_widths_length=$pfm_widths_num*2;
+  $pfm_widths_template='v' x ($pfm_widths_num);
+  for ($i=$pfm_values{'FirstChar'}; $i<=$pfm_values{'LastChar'}; ++$i) {
+    push @pfm_widths, (defined $afm_widths[$i] ? round($afm_widths[$i]) : $pfm_values{'AvgWidth'});
+  }
+}
+
+sub prepare_kerns {
+  if ($#afm_kerns>0) {
+    if ($#afm_kerns>511) {
+      @afm_kerns=sort {(abs($b->[2]) <=> abs($a->[2]))} @afm_kerns;
+      @deleted=splice @afm_kerns, 512;
+      print 'Number of kerns reduced by ', $#deleted+1, ' (max. value ', abs($deleted[0][2]) , ")\n";
+    }
+    # nice isn't it?
+    @afm_kerns=sort { $a->[1] <=> $b->[1] or $a->[0] <=> $b->[0] } @afm_kerns;
+    $pfm_kerns_num=@afm_kerns;
+    $pfm_values{'KernPairs'}=$pfm_kerns_num;
+    $pfm_kerns_length=$pfm_kerns_num*4+2; # +2 for undocumented length of kern table
+    $pfm_kerns_template='CCs' x $pfm_kerns_num;
+    foreach $i (@afm_kerns) {
+      push @pfm_kerns, $i->[0],$i->[1],$i->[2];
+    }
+  } else {
+    $pfm_kerns_num=0;
+    $pfm_values{'KernPairs'}=0;
+  }
+}
+
+sub make_pfm {
+# header
+  my (@content_h,@content_x);
+  for ($i=0; $i<$pfm_ext_start; $i++)
+    {push @content_h, $pfm_values{$pfm_names[$i]}}
+  $new_pfm = pack $pfm_head_template, @content_h;
+  if (1) {# order according Y&Y
+  # ext metrics
+    my @content; for ($i=$pfm_ext_start; $i<$pfm_strings_start; $i++)
+      {push @content_x, $pfm_values{$pfm_names[$i]}}
+    $new_pfm .= pack $pfm_ext_template, @content_x;
+  # strings and extra info
+    for ($i=$pfm_strings_start; $i<=$#pfm_names; $i++) {
+      $new_pfm .= pack $pfm_template{$pfm_names[$i]}, $pfm_values{$pfm_names[$i]}
+    }
+  # widths
+    $new_pfm .= pack $pfm_widths_template, @pfm_widths;
+  # kerns
+    if ($pfm_kerns_num>0) {
+      $new_pfm .= pack 'v', $pfm_kerns_num; # NOT documented number of kerns field
+      $new_pfm .= pack $pfm_kerns_template, @pfm_kerns;
+    }
+  } else {# order according PFM doc
+  # strings (only DeviceName and WindowsName)
+    for ($i=$pfm_strings_start; $i<$pfm_strings_start+2; $i++) {
+      $new_pfm .= pack $pfm_template{$pfm_names[$i]}, $pfm_values{$pfm_names[$i]}
+    }
+  # ext metrics
+    my @content; for ($i=$pfm_ext_start; $i<$pfm_strings_start; $i++)
+      {push @content_x, $pfm_values{$pfm_names[$i]}}
+    $new_pfm .= pack $pfm_ext_template, @content_x;
+  # widths
+    $new_pfm .= pack $pfm_widths_template, @pfm_widths;
+  # strings (and now PostscriptName) -- loop is not needed
+    for ($i=$pfm_strings_start+2; $i<$pfm_extravalues_start; $i++) {
+      $new_pfm .= pack $pfm_template{$pfm_names[$i]}, $pfm_values{$pfm_names[$i]}
+    }
+  # kerns
+    if ($pfm_kerns_num>0) {
+      $new_pfm .= pack 'v', $pfm_kerns_num; # NOT documented number of kerns field
+      $new_pfm .= pack $pfm_kerns_template, @pfm_kerns;
+    }
+  # and extra info
+    for ($i=$pfm_extravalues_start; $i<=$#pfm_names; $i++) {
+      $new_pfm .= pack $pfm_template{$pfm_names[$i]}, $pfm_values{$pfm_names[$i]}
+    }
+  }
+  if ($new_size!=length $new_pfm) {
+    print 'Packing PFM went wrong!!!';
+  }
+  return $new_pfm;
+}
+
+sub calculate_offsets {
+  my $start=0;
+    $start +=$pfm_head_length;
+  if (1) {# order according Y&Y
+      $pfm_values{'ExtMetricOffset'}=$start; $pfm_ext_offset=$start;
+    $start +=$pfm_ext_length;
+      $pfm_values{'Device'}=$start;          $pfm_offset{'DeviceName'}=$start;
+    $start += length($pfm_values{'DeviceName'})+1;
+      $pfm_values{'Face'}=$start;            $pfm_offset{'WindowsName'}=$start;
+    $start += length($pfm_values{'WindowsName'})+1;
+      $pfm_values{'DriverInfo'}=$start;      $pfm_offset{'PostscriptName'}=$start;
+    $start += length($pfm_values{'PostscriptName'})+1;
+    for ($i=$pfm_extravalues_start; $i<=$#pfm_names; $i++) {
+      $pfm_offset{$pfm_names[$i]}=$start;
+      $start += length($pfm_values{$pfm_names[$i]})+1
+    }
+      $pfm_values{'ExtentTable'}=$start;     $pfm_widths_offset=$start;
+    $start += $pfm_widths_length;
+    if ($pfm_kerns_num>0) {
+        $pfm_values{'PairKernTable'}=$start; $pfm_kerns_offset=$start;
+      $start += $pfm_kerns_length;
+    } else {
+      $pfm_values{'PairKernTable'}=0;
+    }
+  } else {# order according PFM doc
+      $pfm_values{'Device'}=$start;          $pfm_offset{'DeviceName'}=$start;
+    $start += length($pfm_values{'DeviceName'})+1;
+      $pfm_values{'Face'}=$start;            $pfm_offset{'WindowsName'}=$start;
+    $start += length($pfm_values{'WindowsName'})+1;
+      $pfm_values{'ExtMetricOffset'}=$start; $pfm_ext_offset=$start;
+    $start +=$pfm_ext_length;
+      $pfm_values{'ExtentTable'}=$start;     $pfm_widths_offset=$start;
+    $start += $pfm_widths_length;
+      $pfm_values{'DriverInfo'}=$start;      $pfm_offset{'PostscriptName'}=$start;
+    $start += length($pfm_values{'PostscriptName'})+1;
+    if ($pfm_kerns_num>0) {
+        $pfm_values{'PairKernTable'}=$start; $pfm_kerns_offset=$start;
+      $start += $pfm_kerns_length;
+    } else {
+      $pfm_values{'PairKernTable'}=0;
+    }
+    for ($i=$pfm_extravalues_start; $i<=$#pfm_names; $i++) {
+      $pfm_offset{$pfm_names[$i]}=$start;
+      $start += length($pfm_values{$pfm_names[$i]})+1
+    }
+  }
+  $new_size=$start;
+  $pfm_values{'Size'}=$new_size;
+  for ($i=$pfm_strings_start; $i<=$#pfm_names; $i++) {
+    $pfm_template{$pfm_names[$i]}='Z' . (1+length $pfm_values{$pfm_names[$i]});
+  }
+}
+
+sub put_extra_values {
+  my ($name,$value)=@_;
+  push @pfm_names, $name;
+  $pfm_values{$name}=$value;
+  $pfm_template{$name}='Z' . (1+length $value);
+}
+
+sub print_text_file {
+  foreach $i (@pfm_names) {
+    if ($pfm_template{$i} =~ /[CsvV]/) {
+      printf "%04X %26s: %4d %0" . $pat_len{$pfm_template{$i}}*2 . "X\n",
+        $pfm_offset{$i}, $i, $pfm_values{$i}, $pfm_values{$i};
+    } else {
+      printf "%04X %26s: %s\n", $pfm_offset{$i}, $i, $pfm_values{$i};
+    }
+  }
+
+  printf "%04X Widths:\n", $pfm_widths_offset;
+  for ($i=0; $i<$pfm_widths_num; $i++) {
+    printf "  %04X %3d: %4d %04X\n", $pfm_widths_offset+2*$i,
+      $pfm_values{'FirstChar'}+$i, $pfm_widths[$i], $pfm_widths[$i];
+  }
+
+  if ($pfm_kerns_num>0) {
+    printf "%04X Kerns (%d):\n", $pfm_kerns_offset, $pfm_kerns_num;
+    for ($i=0; $i<$pfm_kerns_num; $i++) {
+      printf "  %04X %3d %3d %4d  %02X %02X %04X\n", $pfm_kerns_offset+4*$i+2,
+        $pfm_kerns[3*$i], $pfm_kerns[3*$i+1], $pfm_kerns[3*$i+2],
+        $pfm_kerns[3*$i], $pfm_kerns[3*$i+1], $pfm_kerns[3*$i+2];
+    }
+  }
+
+  printf "%04X EOF\n", $new_size;
+}
+
+sub struct_pfm_header {
+  @pfm_header = (
+  ['v',   'Version'],
+  ['V',   'Size'],
+  ['a60', 'Copyright'],
+  ['v',   'Type'],
+  ['v',   'Points'],
+  ['v',   'VertRes'],
+  ['v',   'HorizRes'],
+  ['v',   'Ascent'],
+  ['v',   'InternalLeading'],
+  ['v',   'ExternalLeading'],
+  ['C',   'Italic'],
+  ['C',   'Underline'],
+  ['C',   'Stikeout'],
+  ['v',   'Weight'],
+  ['C',   'CharSet'],
+  ['v',   'PixWidth'],
+  ['v',   'PixHeight'],
+  ['C',   'PitchAndFamily'],
+  ['v',   'AvgWidth'],
+  ['v',   'MaxWidth'],
+  ['C',   'FirstChar'],
+  ['C',   'LastChar'],
+  ['C',   'DefaultChar'],
+  ['C',   'BreakChar'],
+  ['v',   'WidthBytes'],
+  ['V',   'Device'],
+  ['V',   'Face'],
+  ['V',   'BitsPointer'],
+  ['V',   'BitsOffset'],
+# we assume PostScript PFM so there is PFMEXTENSION table
+  ['v',   'SizeFields'],
+  ['V',   'ExtMetricOffset'],
+  ['V',   'ExtentTable'],
+  ['V',   'OriginTable'],
+  ['V',   'PairKernTable'],
+  ['V',   'TrackKernTable'],
+  ['V',   'DriverInfo'],
+  ['V',   'Reserved']);
+  $pfm_head_length=0;
+  $pfm_head_template='';
+  foreach $i (@pfm_header) {
+    push @pfm_names, $i->[1];
+    $pfm_template{$i->[1]}=$i->[0];
+    $pfm_head_template .= $i->[0];
+    $pfm_offset{$i->[1]}=$pfm_head_length;
+    $pfm_head_length += $pat_len{$i->[0]};
+  }
+}
+
+sub struct_pfm_extmetric {
+  my @pfm_extmetric = (
+  ['s', 'Size_ext'],
+  ['s', 'PointSize'],
+  ['s', 'Orientation'],
+  ['s', 'MasterHeight'],
+  ['s', 'MinScale'],
+  ['s', 'MaxScale'],
+  ['s', 'MasterUnits'],
+  ['s', 'CapHeight'],
+  ['s', 'XHeight'],
+  ['s', 'LowerCaseAscent'],
+  ['s', 'LowerCaseDescent'],
+  ['s', 'Slant'],
+  ['s', 'SuperScript'],
+  ['s', 'SubScript'],
+  ['s', 'SuperScriptSize'],
+  ['s', 'SubScriptSize'],
+  ['s', 'UnderlineOffset'],
+  ['s', 'UnderlineWidth'],
+  ['s', 'DoubleUpperUnderlineOffset'],
+  ['s', 'DoubleLowerUnderlineOffset'],
+  ['s', 'DoubleUpperUnderlineWidth'],
+  ['s', 'DoubleLowerUnderlineWidth'],
+  ['s', 'StrikeOutOffset'],
+  ['s', 'StrikeOutWidth'],
+  ['v', 'KernPairs'],
+  ['v', 'KernTracks']);
+  $pfm_ext_start=$#pfm_names+1;
+  $pfm_ext_offset=$pfm_head_length+1;
+  $pfm_ext_length=0;
+  $pfm_ext_template='';
+  foreach $i (@pfm_extmetric) {
+    push @pfm_names, $i->[1];
+    $pfm_template{$i->[1]}=$i->[0];
+    $pfm_ext_template .= $i->[0];
+    $pfm_offset{$i->[1]}=$pfm_ext_offset+$pfm_ext_length;
+    $pfm_ext_length += $pat_len{$i->[0]};
+  }
+}
+
+sub struct_pfm_strings {
+  my @pfm_strings = (
+    ['Device',     'DeviceName'],
+    ['Face',       'WindowsName'],
+    ['DriverInfo', 'PostscriptName']);
+  $pfm_strings_start=$#pfm_names+1;
+  foreach $i (@pfm_strings) {
+    push @pfm_names, $i->[1];
+  }
+  $pfm_extravalues_start=$#pfm_names+1;
+}
+
+sub afm_names {
+  %afm_headers=(
+    'FontName' => 1,
+    'Weight' => 1,
+    'ItalicAngle' => 1,
+    'IsFixedPitch' => 1,
+    'CapHeight' => 1,
+    'XHeight' => 1,
+    'Descender' => 1,
+    'Ascender' => 1,
+    'UnderlinePosition' => 1,
+    'UnderlineThickness' => 1,
+    'EncodingScheme' => 0,
+    'Version' => 0,
+    'FullName' => 0,
+    'FamilyName' => 0
+  );
+}
+
+sub magic_numbers {
+  $weight{'Light'}=300;
+  $weight{'Regular'}=$weight{'Normal'}=$weight{'Book'}=400;
+  $weight{'Medium'}=500; $weight{'Bold'}=700; $weight{'Black'}=1000;
+}
+
+sub max { ($_[0]>$_[1] ? $_[0] : $_[1]) }
+sub round { ($_[0]>0 ? int($_[0]+.5) : -int(-$_[0]+.5)) }
+sub ceiling { (int($_[0])==$_[0] ? $_[0] :
+  ($_[0]>0 ? int($_[0]+1) : -int(-$_[0]))) }
+sub floor { (int($_[0])==$_[0] ? $_[0] :
+  ($_[0]>0 ? int($_[0]) : -int(-$_[0]+1))) }

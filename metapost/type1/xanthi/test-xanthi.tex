@@ -1,0 +1,100 @@
+%%%%
+%%%%  $Revison:$
+%%%%  $Date: 2004/08/24 23:40:18 $
+%%%%
+
+\raggedbottom
+
+\input multido
+
+\def\background#1{\special{background rgb #1}}
+\def\subdef#1{\gdef\globalColor##1{\special
+       {color push #1}##1\special{color pop}}}
+\def\textColor#1{\subdef{rgb #1}\special{color rgb #1}}
+\def\Color#1#2{\special{color push rgb #1}#2\special{color pop}}
+
+\centerline{\Color{.1 .8 0}{\bf TEST OF XANTHI FONT}}
+
+\font\X = xanthi at 10pt
+\font\bX = xanthi at 24pt
+
+\item{\X i} xanthi
+\item{\X 1} xanthi
+\item{\X 2} Xanthi
+\item{\X 3} XANTHI
+\item{\X 4} yanthi
+
+\parindent 0pt
+\obeylines
+\offinterlineskip
+\bigskip
+{\X aaaaaaaaaaaaaaaaaaaa}
+{\X lsssssssssssssssssssr}
+{\X bbbbbbbbbbbbbbbbbbbb}
+\bigskip
+{\bX aaaaaaaa}
+{\bX lsssssssr}
+{\bX bbbbbbbb}
+\vskip 18pt
+{\bX AAAAAAAA}
+{\bX LSSSSSSSR}
+{\bX BBBBBBBB}
+\vskip 24pt
+
+\font\ornamentFont = xanthi at 24pt
+
+\def\MakeOrnament#1#2#3#4#5#6{%
+  \gdef#1##1{\begingroup\ornamentFont
+    \Color{#2}l%
+    \multido{}{##1}{\Color{#2}s\Color{#3}s\Color{#4}s\Color{#5}s\Color{#6}s}%
+    \Color{#6}r%
+  \endgroup}
+}
+
+\MakeOrnament\olimpic{0 0 1}{0 0 0}{1 0 0}{1 1 0}{0 1 0}
+
+\olimpic3
+
+\vskip .25in
+
+\def\MakeVerticalOrnament#1#2#3#4#5#6{%
+  \gdef#1##1{\begingroup\vbox{\ornamentFont
+    \hbox{\Color{#2}u}%
+    \multido{}{##1}{\hbox{\Color{#2}v}%
+        \hbox{\Color{#3}v}\hbox{\Color{#4}v}\hbox{\Color{#5}v}%
+        \hbox{\Color{#6}v}}%
+    \Color{#6}d}%
+  \endgroup}}
+
+\MakeVerticalOrnament\olimpic{0 0 1}{0 0 0}{1 0 0}{1 1 0}{0 1 0}
+
+\olimpic1
+
+
+\def\MakeCornerOrnament#1#2#3#4#5#6{%
+  \gdef#1##1##2{\begingroup\ornamentFont
+        \hbox{\Color{#2}T%
+              \multido{}{##1}{%
+                \Color{#3}s%
+                \Color{#4}s%
+                \Color{#5}s%
+                \Color{#6}s}%
+              \Color{#6}r}%
+        \vbox{\multido{}{##2}{%
+                \hbox{\Color{#3}v}%
+                \hbox{\Color{#4}v}%
+                \hbox{\Color{#5}v}%
+                \hbox{\Color{#6}v}}%
+              \Color{#6}d}%
+    \endgroup}}
+
+\eject
+
+\MakeCornerOrnament\olimpic{0 0 1}{0 0 0}{1 0 0}{1 1 0}{0 1 0}
+
+\noindent \olimpic41
+
+\end
+
+\vbox{\hbox{\ornamentFont Tsss}%
+\olimpic1}

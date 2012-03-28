@@ -1,0 +1,118 @@
+%%%% THIS FILE BELONGS TO THE METATYPE1 PACKAGE
+%%%%
+%%%% It is a local (METATYPE1-oriented) MFT style
+%% % MFT style for the METAPOST-to-TYPE1 converter has been used (mt1form.mft)
+%%%% MFT commands for the PLAIN base
+%%% } ( ) ]] ! ^ %%%% tokens that need no special formatting
+%%% step upto downto %%%% boldface binary operators
+%%% addto fill unfill draw undraw %%%% boldface unary operators
+%%% addto filldraw unfilldraw drawdot undrawdot erase pickup
+%%% addto exitunless stop incr decr proofrulethickness screenrule
+%%% addto define_pixels define_whole_pixels define_whole_vertical_pixels
+%%% addto define_blacker_pixels define_whole_blacker_pixels
+%%% addto define_corrected_pixels lowres_fix proofoffset penstroke
+%%% addto beginchar italcorr font_size font_slant labels
+%%% addto font_normal_space font_normal_stretch font_normal_shrink font_quad
+%%% addto font_x_height font_extra_space font_identifier font_coding_scheme
+%%% enddef endchar %%%% boldface closing
+%%% true relax mode_setup %%%% boldface nullary operators
+%%% true clearit shipit cullit openit showit clearxy clearpen
+%%% true nodisplay notransforms screenchars screenstrokes imagerules
+%%% .. ... -- --- %%%% path operators made of dots and dashes
+%%% length flex abs dir %%%% unary operators to be in roman type
+%%% length unitvector inverse ceiling round vround counterclockwise
+%%% length tensepath byte reflectedabout rotatedaround magstep max min
+%%% and mod dotprod intersectionpoint softjoin %%%% binary operators to be roman
+%%% ++ ** %%%% binary operators made of two special characters
+%%% penoffset goodval direction directionpoint %%%% operators that take "of"
+%%% pausing tolerance pixels_per_inch blacker o_correction %%%% internals
+%%% pausing screen_rows screen_cols currentwindow displaying
+%%% pausing pen_top pen_bot pen_lft pen_rt rt lft top bot
+%%% = <= >= <> %%%% conversions for the SAIL character set only
+%%%%-------------------------------------------------------------------------
+%%%% So far it was PLAIN; now
+%%%% AP team's predilections & idiosyncrasies
+%%%% follow:
+%%%%-------------------------------------------------------------------------
+%%% end bye                 %%%% end=bye, isn't it?
+%%% for range               %%%% we prefere \MF{}book convention
+%%% step thru               %%%% ditto
+%%% good lower
+%%% step div
+%%% length rotatedabout
+%%%%-------------------------------------------------------------------------
+%%%% METAPOST extensions
+%%% message write readfrom closefrom
+%%% numeric color
+%%% scaled withcolor dashed
+%%% beginchar beginfig
+%%% endchar endfig
+%%% labels drawoptions
+%%% length arclength arctime center
+%%%%-------------------------------------------------------------------------
+%%%% PLAIN_EX formatting
+%%% true origin left right up down
+%%% message maybeinput
+%%% subpath predir postdir udir upredir upostdir x_time y_time extrapolate
+%%% xpart signum tand cotd round mirr rel
+%%% scaled && amp_amp_ intersection_join inside leg sub
+%%% scaled llshiftedto lrshiftedto urshiftedto ulshiftedto ccshiftedto
+%%% scaled xyscaled yxscaled yxscaledto xyscaledto
+%%% angle turn_ang
+%%% subpath pos_subpath
+%%% addto find_outlines pen_stroke
+%%% interim local
+%%% end endlocal slant_stroke unslant_stroke
+%%% length is_suffix is_suffix_
+%%%%-------------------------------------------------------------------------
+%%%% FONTBASE formatting
+%%% beginchar beginfont beginglyph beginfig_
+%%% endchar endfont endglyph endglyph_
+%%% fill Fill unFill italicized
+%%% cycle slab_corr stem_corr is_line semicolon_
+%%% cycle store_prec_obj node first last nflipped xflipped yflipped 
+%%% scaled node_ nflipped_ xflipped_ yflipped_ store_prec_obj_
+%%% scaled nrotated crotated start
+%%% labels label makelabel
+%%% labels pen_labels dot_label dot_labels just_labels path_labels
+%%% labels fix_hsbw fix_exact_hsbw standard_hsbw standard_exact_hsbw
+%%% labels fix_hstem fix_vstem fix_stem ghost_stem
+%%% labels set_hstem set_vstem set_stem
+%%% special write_special write_TeX write_dvips_info
+%%% good glyph
+%%% good glyph_code glyph_xcode glyph_xcode glyph_usage glyph_stencil
+%%% good glyph_axis glyph_slanting glyph_hsb glyph_width glyph_shift
+%%% good glyph_stored stem_stored_ hstem_stored vstem_stored
+%%% length use_accent use_glyph use_stems
+%%% addto encode assign_name
+%%% addto introduce introduce_selected exclude_selected standard_introduce
+%%% addto pf_info_version pf_info_creationdate pf_info_pfm
+%%% addto pf_info_familyname pf_info_fontname pf_info_encoding
+%%% addto pf_info_author pf_info_adl pf_info_underline
+%%% addto pf_info_fontdimen pf_info_designsize
+%%% addto pf_info_space pf_info_normal_space 
+%%% addto pf_info_space_stretch pf_info_space_shrink pf_info_extra_space
+%%% addto pf_info_quad pf_info_italicangle pf_info_fixedpitch
+%%% addto pf_info_capheight pf_info_xheight
+%%% addto pf_info_weight pf_info_forcebold pf_info_overshoots
+%%% addto complete_pf_info complete_tfm_info
+%%% addto font_math_rule font_math_axis font_family coding_scheme
+%%% addto font_face_byte
+%%% addto LK KP LP KL
+%%% define_pixels define_ps_units define_whole_ps_units define_even_ps_units
+%%% good wd ht dp ic pf_info_set
+%%% length fix_name_list fix_name_list_ fix_name_list_s_ fix_name_list_e_ 
+%%%%-------------------------------------------------------------------------
+%%%% AP_LEGO formatting
+%%% cycle pmirr prefl
+%%% scaled open_ pmirr_ prefl_
+%%% scaled ^ || /\
+%%% cycle expanded expanded_ expanded__ deriv deriv_
+%%% cycle default_start_
+%%% cycle sym_serif asym_serif lc_serif swelled
+%%% cycle beak_serif gen_crook_serif lc_crook_serif uc_crook_serif horn_serif
+%%% cycle lc_lobes h_lobes
+%%% cycle lower_half_oval half_oval Half_oval
+%%% cycle Prop prop
+%%%%-------------------------------------------------------------------------
+

@@ -1,0 +1,13 @@
+%%%%
+%%%%  $Revison:$
+%%%%  $Date: 2004/08/23 09:35:44 $
+%%%%
+%%
+%% % Local MFT style for Xanthi font
+%%
+%%% addto fill_outlines expand_stroke
+%%% addto expand_logo_stroke begin_glyph end_glyph
+%%% addto set_wht set_sb
+%%% good lft_sidebearing rt_sidebearing
+%%% addto NE NW SE SW
+%%% 

@@ -1,0 +1,25 @@
+=============================================================================
+This is the METATYPE1 (METAPOST) version of the D. E. Knuth's LOGO font.
+
+These fonts consist of A, E, F, M, O, P, S, and T letters, 
+and have following variants:
+  canonical ones, i.e., logo10, logo8, logo9, logobf10, logosl10,
+  and, additionally, logobs10, logoxa30, logoxb30.
+
+Version: 0.2 (20.02.2004).
+Author: Donald E. Knuth
+METATYPE1 version: JNS team <JNSteam@gust.org.pl>
+=============================================================================
+To jest font LOGO Donalda E. Knutha dostosowany do dzia/lania z pakietem
+METATYPE1 (METAPOST).
+
+Font ten sk/lada si/e z liter A, E, F, M, O, P, S oraz T, 
+i wyst/epuje w odmianach:
+  kanonicznych, czyli: logo10, logo8, logo9, logobf10, logosl10,
+  oraz dodatkowych: logobs10, logoxa30, logoxb30.
+
+Wersja: 0.2 (20.02.2004).
+Autor: Donald E. Knuth
+Adaptacja do systemu METATYPE1: JNS team <JNSteam@gust.org.pl>
+=============================================================================
+

@@ -1,0 +1,17 @@
+\input epsfx
+\raggedbottom
+
+\def\EPSNAMEandNUMBER #1#2{%
+  \ifnum #2=132 
+  \else
+  \ifnum #2=501
+  \else
+    \centerline{\epsfxsize=.75\hsize
+    \eps{logo10.#2}}
+    \vfil\eject
+  \fi
+  \fi}
+
+\input piclist.tex
+
+\end

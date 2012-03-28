@@ -1,0 +1,180 @@
+#!/bin/bash
+#
+# This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+#
+
+script_name=$(basename $0)
+version=1.41
+#tex_prog=pdfetex
+tex_prog=tex
+
+help_opt=0
+version_opt=0
+tex_opt=0
+tex_arg=
+tex_fmt_opt=0
+tex_fmt=
+tex_tcx_opt=0
+tex_translate_file=
+metapost_opt=0
+skip_type3_opt=0
+skip_proofs_opt=0
+dvips_opt=0
+dvips_arg=
+dvips_arg_default=""
+wrong_number_of_args=0
+clean_opt=0
+
+# Note that we use `"$@"' to let each command-line parameter expand to a 
+# separate word. The quotes around `$@' are essential!
+# We need TEMP as the `eval set --' would nuke the return value of getopt.
+TEMP=`getopt -o a:f:x:cm:tpd:u:D:P:hv --long tex-arg:,fmt:,translate-file:,clean,metapost-arg:,skip-type3,skip-proofs,dvips-arg:,map-file:,resolution:,printer-cfg:,help,version -a -n 'mkproof3' -- "$@"`
+
+if [ $? != 0 ] ; then 
+    printf "Try \`$script_name --help' for more information\n" >&2
+    printf "Terminating...\n" >&2
+    exit 1
+fi
+
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
+
+while true ; do
+  case "$1" in
+    -h|--help) help_opt=1 ; shift ;;
+    -v|--version) version_opt=1 ; shift ;;
+    -a|--tex-arg) tex_opt=1 tex_arg=$2 ; shift 2 ;;
+    -f|--fmt) tex_fmt_opt=1 tex_fmt=$2 ; shift 2 ;;
+    -x|--translate-file) tex_tcx_opt=1 tex_translate_file=$2 ; shift 2 ;;
+    -m|--metapost-arg) metapost_opt=1 metapost_arg=$2 ; shift 2 ;;
+    -t|--skip-type3) skip_type3_opt=1 ; shift ;;
+    -p|--skip-proofs) skip_proofs_opt=1 ; shift ;;
+    -d|--dvips-arg) dvips_opt=1 dvips_arg="$dvips_arg $2" ; shift 2 ;;
+    -u|--map-file) dvips_opt=1 dvips_arg="$dvips_arg -u$2" ; shift 2 ;;
+    -D|--resolution) dvips_opt=1 dvips_arg="$dvips_arg -D$2" ; shift 2 ;;
+    -P|--printer-cfg) dvips_opt=1 dvips_arg="$dvips_arg -P$2" ; shift 2 ;;
+    -c|--clean) clean_opt=1 ; shift ;;
+    --) shift ; break ;;
+    *) echo "Getopt internal error!" ; exit 1 ;;
+  esac
+done
+
+if [ $# -eq 1 ] ; then
+    font=$(basename $1 .mp)
+    driver=$(basename $1 .mp)
+elif [ $# -eq 2 ] ; then
+    font=$(basename $1 .mp)
+    driver=$(basename $2 .mp)
+else
+    wrong_number_of_args=1
+fi
+
+if [ $clean_opt -gt 0 ] ; then
+  printf "Cleaning up %s %s\n" $font $driver >&2
+  rm -f *~ \#* $driver.{sh,proof,par,pcw,tfm,t1,t3,map,tex,log,dvi,ps,pdf} \
+    $driver.{[0-9],[1-9][0-9],[0-9][0-9][0-9]} \
+    $font.{tex,log,dvi,ps} sfont.{log,dvi,ps}
+  exit 0
+fi
+
+trap 'rm -f *~ \#* $driver.{sh,proof,par,pcw,tfm,t1,t3,tex,log,dvi,ps,pdf} \
+ $driver.{[0-9],[1-9][0-9],[1-9][0-9][0-9]} \
+ $font.{tex,log,dvi,ps} sfont.{log,dvi,ps} ; exit' 1 2 15
+
+if [ $version_opt -ne 0 ] ; then
+  printf "%s (MTYPE13) %s\n" $script_name $version >&2
+  printf "Written by Wlodek Bzyl <matwb@univ.gda.pl>\n\n" >&2
+  printf "Copyright (C) 2002 Wlodek Bzyl.\n" >&2
+  printf "This is free software; see the source for copying conditions.  There is NO\n" >&2
+  printf "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n" >&2
+  exit 1
+fi
+
+if [ $wrong_number_of_args -gt 0 -o $help_opt != 0 ] ; then
+  printf "Usage:    %s [OPTION]... [FILE] DRIVER_FILE\n" $script_name
+  printf "Examples: %s xstripes-000.mp\n" $script_name >&2
+  printf "          %s xstripes.mp xstripes-000.mp\n" $script_name >&2
+  printf "Prettyprinter for MTYPE13 sources.\n\n" >&2
+  printf "  Metapost options:\n" >&2
+#  printf "    -m --metapost-arg=STR  pass STR to metapost\n" >&2
+  printf "    -t --skip-type3           don't generate font\n" >&2
+  printf "    -p --skip-proofs          don't generate proofs\n" >&2
+  printf "  TeX options:\n" >&2
+  printf "    -a --tex-arg=STR          STR passed to tex\n" >&2
+  printf "    -f --fmt=NAME             use NAME.fmt format\n" >&2
+  printf "    -x --translate-file=NAME  use NAME.tcx translate file\n" >&2
+  printf "  Dvips options:\n" >&2
+  printf "    -d --dvips-arg=STR        STR passed to dvips\n" >&2
+  printf "    -u --map-file=NAME        load PostScript map file\n" >&2
+  printf "    -D --resolution=NUM       set resolution to NUM (10--10000)\n" >&2
+  printf "                              this affects the positioning of letters\n" >&2
+  printf "    -P --printer-cfg=NAME     read the configuration file \`config.NAME'\n" >&2 
+  printf "  Miscellaneous options:\n" >&2
+  printf "    -c --clean                remove generated files\n" >&2
+  printf "    -h --help                 display this help and exit\n" >&2
+  printf "    -v --version              output version information and exit\n" >&2
+  exit 1
+fi
+
+if [ -f $driver.sh ] ; then rm -f $driver.sh ; fi
+
+if [ $skip_type3_opt -eq 0 ] ; then
+  printf "Generating \`%s' font..\n" $driver.t3 >&2
+  mkfont3 $driver
+  if [ $? -gt 0 ] ; then 
+    rm -f *~ \#* $driver.{sh,par,pcw,tfm,t1,t3,map,log} \
+      $driver.{[0-9],[1-9][0-9],[0-9][0-9][0-9]}
+    printf "mkfont3 error!\n" >&2
+    printf "Terminating...\n" >&2
+    exit 1
+  fi
+else
+  printf "Skipping generation of \`%s' font.\n" $driver.t3 >&2
+fi
+
+if [ $skip_proofs_opt -eq 0 ] ; then
+  printf "Generating proofs for \`%s' font..\n" $driver.mp >&2
+  if [ $metapost_opt -eq 0 ] ; then metapost_arg="mode=proof" ; fi
+  mpost -mem=type3 "\\$metapost_arg ; input $driver"
+  if [ $? -eq 0 ] ; then 
+    touch $driver.proof
+  else
+    printf "mpost error during generation of proofs for \`%s' font.\n" $driver.mp >&2
+    printf "Terminating...\n" >&2
+    exit 1
+  fi
+  if [ -f $driver.sh ] ; then sh $driver.sh ; fi
+else
+  printf "Skipping generation of proofs for \`%s' font.\n" $driver.mp >&2
+fi
+
+mft -m $font.mp --style=type3
+
+if [ $? -eq 0 ] ; then 
+    if [ $tex_fmt_opt -eq 1 ] ; then tex_arg="$tex_arg -fmt=$tex_fmt"; fi
+    if [ $tex_tcx_opt -eq 1 ] ; then
+      tex_arg="$tex_arg -translate-file=$tex_translate_file"; 
+    fi
+    $tex_prog $tex_arg $font.tex
+else
+    printf "MFT error!\n" >&2
+    printf "Terminating...\n" >&2
+    exit 1
+fi
+
+if [ $? -eq 0 ] ; then 
+    if [ $dvips_opt -eq 0 ] ; then dvips_arg=$dvips_arg_default ; fi
+    dvips $dvips_arg $font.dvi -o
+else
+    printf "tex error!\n" >&2
+    printf "Terminating...\n" >&2
+    exit 1
+fi
+
+if [ $? -eq 0 ] ; then 
+    printf "Done with proofing.\n"
+else
+    printf "dvips error\n" >&2
+    printf "Terminating...\n" >&2
+    exit 1
+fi

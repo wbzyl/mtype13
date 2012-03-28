@@ -1,0 +1,80 @@
+%
+% TYPE 3 FONTS REPOSITORIUM        Wlodek Bzyl <matwb@univ.gda.pl>
+%
+
+\input setupf
+
+\catcode`\@=11
+
+\let\cal=\relax
+\let\Re=\relax
+\let\Im=\relax
+
+\def\bbC{{\fam2 C}}
+\def\bbN{{\fam2 N}}
+\def\bbQ{{\fam2 Q}}
+\def\bbR{{\fam2 R}}
+\def\bbZ{{\fam2 Z}}
+
+\def\joinrel{\mathrel{\mkern-8mu}}
+
+\mathchardef\mathdash="2241
+\mathchardef\mathddash="2244
+\mathchardef\mmathdash="2242
+
+\def\rightarrowfill{$\m@th\smash\mathdash\mkern-10mu
+  \cleaders\hbox{$\smash\mathdash$}\hfill\mkern-10mu\mathord\rightarrow$}
+\def\leftarrowfill{$\m@th\mathord\leftarrow\mkern-10mu%
+  \cleaders\hbox{$\smash\mathdash$}\hfill\mkern-10mu\smash\mathdash$}
+\def\downbracefill{$\m@th
+  \braceld\mkern-2mu
+    \cleaders\hbox{$\mkern-2mu\smash\mmathdash\mkern-2mu$}\hfill
+    \mkern-2mu\braceru
+  \bracelu\mkern-2mu
+    \cleaders\hbox{$\mkern-2mu\smash\mmathdash\mkern-2mu$}\hfill
+    \mkern-2mu\bracerd$}
+\def\upbracefill{$\m@th
+  \bracelu\mkern-2mu
+    \cleaders\hbox{$\mkern-2mu\smash\mmathdash\mkern-2mu$}\hfill
+    \mkern-2mu\bracerd
+  \braceld\mkern-2mu
+    \cleaders\hbox{$\mkern-2mu\smash\mmathdash\mkern-2mu$}\hfill
+    \mkern-2mu\braceru$}
+
+\def\relbar{\mathrel\mathdash} % \smash, because - has the same height as +
+\def\Relbar{\mathrel\mathddash}
+
+\def\Bigg#1{{\hbox{$\left#1\vbox to18.5\p@{}\right.\n@space$}}}
+
+\def\roman#{\bgroup\rm\let\next= }
+\def\bold#{\bgroup\bf\let\next= }
+\def\italic#1%
+    {\begingroup
+     \def \next
+         {\def \next
+              {\setbox 0 = \hbox {\nexttoken}%
+               \ifdim \ht 0 < \fontdimen 5 \font
+                  \it #1%
+               \else
+                  \it #1\/%
+               \fi}% setbox
+          \ifcat A\noexpand \nexttoken
+             \next
+          \else 
+             \ifcat 0\noexpand \nexttoken
+                \next
+             \else
+                \ifcat \space \noexpand \nexttoken
+                \else
+                %%% \message {?: \meaning \nexttoken}%
+                \fi
+                \it #1\/%
+             \fi
+          \fi
+          \endgroup}% next
+     \futurelet \nexttoken \next}
+\def\ttype#{\bgroup\tt\let\next= }
+
+\catcode`\@=11
+
+\endinput

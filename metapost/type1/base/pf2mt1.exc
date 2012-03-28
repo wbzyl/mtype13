@@ -1,0 +1,25 @@
+% THIS FILE BELONGS TO THE METATYPE1 PACKAGE
+%
+% It is an ``exception file'' for the converter form raw PostScript
+% font --> METATYPE1 (METAPOST) font (see pf2mt1.awk)
+% AUTHORS: JNS team, JNSteam@gust.org.pl
+%
+% The data lines (lines that begin with a percent sign
+% are comments) have the following form:
+%    name1 name2
+% where name2 can be empty; if it is empty, the character having name1
+% is to be skipped, otherwise it is to be renamed to name2
+
+% can be easily typeset in TeX:
+% trademark
+
+% i and j should preferably be constructed (after manual adjustments) using
+% dotlessi, originalj, and dotaccent, e.g.:
+% i
+% j originalj
+% if there is no dotlessi in a font, resort to:
+% i originali
+
+% It is always advisable to use the following name substitution:
+zdot zdotaccent
+Zdot Zdotaccent

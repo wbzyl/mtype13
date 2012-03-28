@@ -1,0 +1,20 @@
+%
+% This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+
+\input iching.sty
+
+\ichingSetFonts{16bp}% baselineskip
+  {ichingr at 222bp}% use Type 1 font
+  {cmbx10 at 32bp}{cmbx10 at 24bp}{cmti10 at 12bp}{cmr10 at 12bp}
+
+\headline={\fiverm\vbox{\baselineskip7pt\hbox{hexagram: \number\ichingHexagram}
+                        \hbox{change line: \number\ichingChangeline\hfil}}\hss}
+%\nopagenumbers
+\parindent=0pt
+\parskip=3pt
+\advance\vsize by 1in
+\advance\hsize by -1in \advance\hoffset by .5in
+
+\printDivination 1234567890
+
+\end

@@ -1,0 +1,83 @@
+%
+% TYPE 3 FONTS REPOSITORIUM        Wlodek Bzyl <matwb@univ.gda.pl>
+%
+
+% Font setup for Type 3 fonts.
+
+\catcode`\@=11
+
+\newdimen\normalparindent \normalparindent=\parindent
+\newdimen\normalbaseline \normalbaseline=\baselineskip
+
+%%  \textfonts{npunk100}{npunksl100}{npunkbx100}{pltt10}{10}{8}{5}
+\def\textfonts#1#2#3#4#5#6#7%
+  {\font\xtextroman=#1 at #5\p@ \font\xxtextroman=#1 at #6\p@ 
+     \font\xxxtextroman=#1 at #7\p@
+   \font\xtextitalic=#2 at #5\p@ \font\xxtextitalic=#2 at #6\p@ 
+     \font\xxxtextitalic=#2 at #7\p@
+   \font\xtextbold=#3 at #5\p@ \font\xxtextbold=#3 at #6\p@ 
+     \font\xxxtextbold=#3 at #7\p@
+   \font\xtextt=#4 at #5\p@ \font\xxtextt=#4 at #6\p@ 
+     \font\xxxtextt=#4 at #7\p@
+   % family 4
+   \textfont\itfam=\xtextitalic \scriptfont\itfam=\xxtextitalic 
+     \scriptscriptfont\itfam=\xxxtextitalic
+   % family 5
+   %    \newfam\slfam \def\sl{\fam\slfam\tensl} % \sl is family 5
+   % family 6 (plain codes)
+   \textfont\bffam=\xtextbold \scriptfont\bffam=\xxtextbold 
+     \scriptscriptfont\bffam=\xxxtextbold
+   % family 7
+   \textfont\ttfam=\xtextt \scriptfont\ttfam=\xtextt
+     \scriptscriptfont\ttfam=\xtextt
+   %
+   \def\rm{\fam0\xtextroman}%
+   \def\it{\fam\itfam\xtextitalic}%
+   \def\bf{\fam\bffam\xtextbold}%
+   \def\tt{\fam\ttfam\xtextt}%
+   \rm}
+
+%%  \parasetup{12}{20}
+\def\parasetup#1#2%
+  {\normalbaseline=#1\p@
+   \bigskipamount=\normalbaseline plus .25\normalbaseline minus 2\p@
+   \medskipamount=.5\normalbaseline plus .125\normalbaseline minus 1\p@
+   \smallskipamount=.25\normalbaseline plus .125\normalbaseline minus 1\p@
+   \normalparindent=#2\p@
+   \parindent=\normalparindent
+   \normalbaselineskip=\normalbaseline
+   \normalbaselines}
+
+%%  \textfontsetup{{npunk100}{npunksl100}{npunkbx100}{pltt10}{10}{8}{5}{12}
+\def\textfontsetup#1#2#3#4#5#6#7#8#9%
+  {\textfonts{#1}{#2}{#3}{#4}{#5}{#6}{#7}\relax
+   \parasetup{#8}{#9}}
+
+%%  \mathfonts{npunk100}{npunkmi100}{npunksy100}{npunkex100}{10}{8}{5}
+\def\mathfonts#1#2#3#4#5#6#7%
+  {\font\xmathtext=#1 at #5\p@ \font\xxmathtext=#1 at #6\p@ 
+     \font\xxxmathtext=#1 at #7\p@
+   \font\xmathitalic=#2 at #5\p@ \font\xxmathitalic=#2 at #6\p@
+     \font\xxxmathitalic=#2 at #7\p@
+   \font\xmathsymbol=#3 at #5\p@ \font\xxmathsymbol=#3 at #6\p@
+     \font\xxxmathsymbol=#3 at #7\p@
+   \font\xmathext=#4 at #5\p@ \font\xxmathext=#4 at #6\p@
+     \font\xxxmathext=#4 at #7\p@
+   % family 0
+   \textfont0=\xmathtext \scriptfont0=\xxmathtext
+     \scriptscriptfont0=\xxxmathtext
+   % family 1
+   \textfont1=\xmathitalic \scriptfont1=\xxmathitalic
+     \scriptscriptfont1=\xxxmathitalic
+   % family 2
+   \textfont2=\xmathsymbol \scriptfont2=\xxmathsymbol
+     \scriptscriptfont2=\xxxmathsymbol
+   % family 3   don't used in sup/sub scripts??
+   \textfont3=\xmathext \scriptfont3=\xxmathext
+     \scriptscriptfont3=\xxxmathext
+   \def\oldstyle{\fam\@ne\xmathitalic}%
+   \def\mit{\fam\@ne}}
+
+\catcode`\@=12
+
+\endinput

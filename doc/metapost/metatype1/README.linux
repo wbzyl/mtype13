@@ -1,0 +1,100 @@
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+This is METATYPE1 package---a tool for creating Type 1 fonts using METAPOST
+Version: 0.31 (12.09.2001)
+Author: JNS team <JNSteam@gust.org.pl>
+
+Linux Version by Wlodek Bzyl <matwb@univ.gda.pl>
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ 
+"This is the first public release of the METATYPE1 package
+Warning: package is still under development, upwards incompatible
+changes are likely to occur." 
+
+This quote from README applies to Linux version too.
+
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+The Linux version of METATYPE1 package __differs__ from the original.
+
+The differences are: 
+
+   -- in naming files and scripts
+   -- DOS batch files were converted to BASH scripts and 
+      AWK programs: mp2pf.awk, packsubr.awk, epsincl.awk
+      were inserted into these scripts
+   -- MetaPost sources are prettyprinted with the new version of 
+      the `mft' program (*)
+   -- the `afm2pfm' script is not included (**)
+      
+   ----------
+   *)    The `mft' program is included in every TeX distribution.
+         The new version are available in teTeX-beta and on
+         TeXLive 7
+   **)   It converts AFM files (Adobe font metric) into 
+         a PFM files (printer font metric) 
+
+
+The METATYPE1 package uses and works (at my machine) with the
+following programs:
+
+   MetaPost (Web2C 7.3.1) 0.641, kpathsea version 3.3.1
+   GNU Awk 3.0.4 or 3.1.0  (*)
+   t1asm (LCDF t1utils) 1.23 or 1.25
+   perl, v5.6.0 or v5.8.0
+   MFT (Web2C 7.3.1) 2.1   (**)
+   EPSINCL (0.41)  (***)
+
+   -------
+   *)    Awk scripts does not work with the GNU Awk version 3.0.6
+         and 3.1.1; so you must downgrade
+   **)   Generation of hardcopy proofs requires the NEW version of MFT
+         prettyprinter
+   ***)  Included in this distribution
+
+
+Linux version of the METATYPE1 package includes:
+
+   mkfont1       -- a shell script which automates font generation
+   type1.mp      -- a set of METAPOST macros supporting Type 1 fonts
+                    creation
+   plain-ex.mp   -- an extension of `plain.mp', useful not only for
+                    creating fonts; it is input by `fontbase.mp';
+   plain_e_.mp   -- the set of illustrations to `plain_ex.mp'
+   encqxtex.mp   -- a sample encoding file: QX layout in a TeX-oriented
+                    incarnation 
+   encqxwin.mp   -- a complementary encoding file: QX layout
+                    in a Windows-oriented incarnation
+   type1.mft     -- `mft' formatting data
+   type1.sty     -- plain TeX macros for prettyprinting METATYPE1
+                    sources 
+
+   mkproof1      -- a shell script for running the `mft' prettyprinter
+   epsincl       -- a shell script which converts files generated
+                    by MetaPost with embedded epses into into eps file
+   sfont         -- a shell script to typesets font tables
+
+   README        
+   README.linux  -- this file
+   INSTALL.linux -- a detailed installation instructions
+
+                           ---
+
+The package unpacks into `texmf' which conforms the TeX Directory
+Structure (TDS) standard.
+
+To install the package:
+ 
+(A)  scripts should be moved to a location where shell finds them
+(B)  trees should be planted into existing TeX Directory Structure
+
+See INSTALL.linux for the detailed instructions.
+
+                           ---
+
+We (JNS & WB) suggest familiarising with a METATYPE1 version of
+D.~E. Knuth's logo font `logo-mp' and with the `pfbtomp' package.
+There is a good chance that both packages will prove useful during
+the first steps in METATYPE1. 
+
+The `pfbtomp' script and `logo-mp' are part of METATYPE1 distribution.

@@ -1,0 +1,119 @@
+%%%%
+%%%% This file belongs to MTYPE13 package by Wlodek Bzyl <matwb@univ.gda.pl>
+%%%%
+%%%% MFT formatting of `plain.mp', `mfplain.mp' and `type3.mp'
+%%%%
+%%%% This file borrows code from `mp2.mft' and `pl.mft' by 
+%%%% Ulrik Vieth <vieth@thphy.uni-duesseldorf.de> and
+%%%% Boguslaw Jackowski <b.jackowski@gust.org.pl> respectively.
+%%%%
+%%%% METAPOST primitives not found in METAFONT
+%%%% (METAFONT primitives are hard-wired in the MFT program).
+%%%%
+%%%% Variables and macros defined both in "plain.mf" and "plain.mp"
+%%%% (from "plain.mft", but severly edited).
+%%%%
+%%% } ( ) ]] ! ^ %%%% tokens that need no special formatting
+%%% .. ... -- --- %%%% path operators made of dots and dashes
+%%% ++ ** %%%% binary operators made of two special characters
+%%% step upto downto thru %%%% boldface binary operators
+%%% addto fill unfill draw undraw %%%% boldface unary operators
+%%% addto filldraw unfilldraw drawdot undrawdot cutdraw cutoff culldraw
+%%% addto erase pickup penstroke
+%%% addto exitunless stop incr decr range
+%%% pencircle pensquare penrazor penspeck
+%%% true relax blankpicture %%%% boldface nullary operators
+%%% true clearit shipit cullit openit showit clearxy clearpen savepen
+%%% length abs dir byte %%%% unary operators to be in roman type
+%%% length unitvector inverse ceiling round hround vround counterclockwise
+%%% length tensepath reflectedabout rotatedaround rotatedabout
+%%% length magstep max min
+%%% and mod div dotprod
+%%% and intersectionpoint softjoin %%%% binary operators to be roman
+%%% penoffset direction directionpoint %%%% operators that take "of"
+%%% penoffset takepower
+%%% pausing pen_top pen_bot pen_lft pen_rt
+%%% pausing lft rt top bot llft lrt ulft urt
+%%% end bye
+%%%%
+%%%% Variables and macros defined only in "plain.mp".
+%%%%
+%%% addto beginfig %%%% boldface opening
+%%% enddef endfig %%%% boldface closing
+%%% addto dashpattern image bbox %%%% boldface operators
+%%% addto label dotlabel thelabel %%%% FIXME: handling of suffixes?
+%%% addto makelabel labels dotlabels penlabels
+%%% addto arrowhead drawarrow drawdblarrow drawoptions
+%%% length center on off %%%% unary operators in roman
+%%% and cutbefore cutafter %%%% binary operators in roman
+%%% pausing beveled butt mitered rounded squared evenly withdots
+%%% pausing EOF
+%%%%
+%%%% Variables and macros defined only in "mfplain.mp"
+%%%% (for METAFONT compatibility, partly from "plain.mft")
+%%%%
+%%% addto proofrule proofoffset proofrulethickness
+%%% addto makebox makegrid maketicks
+%%% addto italcorr font_size font_slant
+%%% addto font_normal_space font_normal_stretch font_normal_shrink font_quad
+%%% addto font_x_height font_extra_space font_identifier font_coding_scheme
+%%% addto mode_def capsule_def
+%%% true mode_setup
+%%% true imagerules gfcorners
+%%%%
+%%%% Variables and macros defined in "graph.mp", "marith.mp", "sarith.mp".
+%%%%
+%%% addto begingraph %%%% boldface opening
+%%% enddef endgraph %%%% boldface closing
+%%% addto gdraw gfill gdata %%%% boldface operators
+%%% addto glabel gdotlabel augment %%%% FIXME: handling of suffixes?
+%%% addto gdrawarrow gdrawdblarrow gdrawoptions
+%%% addto setcoords setrange
+%%% good auto
+%%% addto itick otick grid autogrid frame
+%%% addto format
+%%% length Mabs Sabs Scvnum Mlog_str %%%% unary operators in roman
+%%% and Madd Msub Mmul Mdiv Mleq %%%% binary operators in roman
+%%% and Sadd Ssub Smul Sdiv Sleq Sneq
+%%% pausing linear log OUT %%%% internals
+%%%%
+%%%% Variables and macros defined in "boxes.mp" and "rboxes.mp".
+%%%%
+%%% addto drawboxes drawboxed drawunboxed boxjoin boxit circleit rboxit
+%%% pausing defaultdx defaultdy
+%%%%
+%%%% Type 3 conventions.
+%%%%
+%%% addto beginchar beginpic glyph_begin
+%%% enddef endchar endpic glyph_end
+%%% addto LK KL KP LP
+%%% addto beginpunkchar beginpunkmathchar beginpunkarithchar
+%%% addto glyph_message glyph_errmessage
+%%% addto pd local_drawoptions
+%%% addto family_name font_name font_version font_matrix is_fixed_pitch
+%%% addto makescaledlabel makepiclabel piclabels picpenlabels pathpiclabels
+%%% addto pathlabel rlabel
+%%% length flex
+%%% addto font_num font_denom font_sup font_sub font_sup_drop font_sub_drop
+%%% addto font_delim font_big_op_spacing font_default_rule_thickness
+%%% addto font_axis_height
+%%% addto stroke lstroke rstroke circ_stroke
+%%% good c %%%% colors
+%%% good postscript_parameter
+%%% good glyph set_kern_steps
+%%% scaled xyscaled yxscaled yxscaledto xyscaledto
+%%% xpart signum tand cotd
+%%% end endfont
+%%% subpath predir postdir
+%%% addto controllabel controllabels makecontrollabel
+%%% addto show_stencils
+%%% addto drawproof fillproof set_tfm_parameter set_missing_tfm_parameters
+%%% addto set_postscript_parameter set_missing_postscript_parameters
+%%% good tfm_parameter
+%%%% glyph.mp
+%%% addto encode reencode new
+%%% good glyph
+%%%%
+%% % LOCAL MFT STYLE for the MKPROOF3 prettyprinter
+%%%%
+%% \input type3.sty

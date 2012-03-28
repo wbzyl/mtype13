@@ -1,0 +1,14 @@
+#
+#
+#
+
+.PHONY : clean vclean veryclean type3.mem 
+
+#type1.mem :
+#	mpost -ini type1.ini
+
+type3.mem : 
+	mpost -ini type3.ini
+
+clean vclean veryclean :
+	rm -f core *~ type?.mem type?.log
