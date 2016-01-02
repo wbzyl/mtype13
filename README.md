@@ -8,7 +8,7 @@ The Type 1 part was written for DOS by JNS team
 (B. Jackowski, J. M. Nowacki, and P. Strzelczyk).
 and is available from
 
-    ftp://bop.eps.gda.pl/pub/metatype1
+    https://www.ctan.org/tex-archive/fonts/utilities/metatype1/
 
 
 ### CHANELOG
